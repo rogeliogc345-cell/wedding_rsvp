@@ -1,4 +1,5 @@
 import { Customer, WeddingEvent } from "@/types/database";
+import { RSVPForm } from "../public/RSVPForm";
 
 interface MediaItem {
     id: string;
@@ -63,6 +64,21 @@ export default function ClassicTemplate({ customer, events, media }: Props) {
                         <p className="text-muted-foreground">{event.location_name}</p>
                     </div>
                 ))}
+            </section>
+
+
+
+            {/* 5. RSVP Section */}
+            <section className="bg-stone-100 py-24 px-6">
+                <div className="max-w-xl mx-auto text-center">
+                    <h2 className="text-4xl font-serif italic mb-4">Kindly Reply</h2>
+                    <p className="text-stone-500 mb-10">
+                        Please let us know if you can join us by filling out the form below.
+                    </p>
+
+                    {/* Pass the customer ID so the RSVP links to this specific wedding */}
+                    <RSVPForm customerId={customer.id} />
+                </div>
             </section>
         </main>
     );

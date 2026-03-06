@@ -6,6 +6,7 @@ import { DesignSettings } from "@/components/admin/DesignSettings";
 import { ManageEvents } from "@/components/admin/ManageEvents";
 import { MediaUpload } from "@/components/admin/MediaUpload";
 import { MediaGallery } from "@/components/admin/MediaGallery";
+import { GuestList } from "@/components/admin/GuestListComponent";
 
 
 export default async function EditPage({ params }: { params: Promise<{ id: string }> }) {
@@ -35,7 +36,7 @@ export default async function EditPage({ params }: { params: Promise<{ id: strin
                     <TabsTrigger value="events">Events</TabsTrigger>
                     <TabsTrigger value="design">Design & Template</TabsTrigger>
                     <TabsTrigger value="media">Media</TabsTrigger>
-                    <TabsTrigger value="example-1">Example 1</TabsTrigger>
+                    <TabsTrigger value="guests">Guest List</TabsTrigger>
                     <TabsTrigger value="example-2">Example 2</TabsTrigger>
                 </TabsList>
 
@@ -56,10 +57,17 @@ export default async function EditPage({ params }: { params: Promise<{ id: strin
                     <MediaGallery media={customer.media} customerId={customer.id} />
 
                 </TabsContent>
-
-                <TabsContent value="example-1" className="mt-6">
-                    <p>Example 1</p>
+                <TabsContent value="guests" className="mt-6">
+                    <div className="space-y-4">
+                        <div className="flex justify-between items-center">
+                            <h3 className="text-lg font-medium">RSVP Responses</h3>
+                            {/* You could add an "Export to CSV" button here later! */}
+                        </div>
+                        <GuestList customerId={customer.id} />
+                    </div>
                 </TabsContent>
+
+
                 <TabsContent value="example-2" className="mt-6">
                     <p>Example 2</p>
                 </TabsContent>
