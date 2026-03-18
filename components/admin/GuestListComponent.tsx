@@ -20,13 +20,13 @@ export function GuestList({ customerId }: { customerId: string }) {
     useEffect(() => {
         async function fetchGuests() {
             const supabase = createClient()
-            const { data, error } = await supabase
+            const { data: guests, error } = await supabase
                 .from("guests")
                 .select("*")
                 .eq("customer_id", customerId)
                 .order("created_at", { ascending: false });
 
-            if (!error) setGuests(data);
+            if (!error) setGuests(guests);
             setLoading(false);
         }
         fetchGuests();
@@ -44,6 +44,7 @@ export function GuestList({ customerId }: { customerId: string }) {
                         <TableHead>Status</TableHead>
                         <TableHead>Email</TableHead>
                         <TableHead>Message</TableHead>
+                        <TableHead>Passcode</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -63,6 +64,9 @@ export function GuestList({ customerId }: { customerId: string }) {
                             </TableCell>
                             <TableCell className="max-w-[200px] truncate italic text-stone-400">
                                 {guest.message || "-"}
+                            </TableCell>
+                            <TableCell className="font-mono font-bold uppercase tracking-widest text-blue-600">
+                                {guest.passcode}
                             </TableCell>
                         </TableRow>
                     ))}

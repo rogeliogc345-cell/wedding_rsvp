@@ -7,6 +7,7 @@ import { ManageEvents } from "@/components/admin/ManageEvents";
 import { MediaUpload } from "@/components/admin/MediaUpload";
 import { MediaGallery } from "@/components/admin/MediaGallery";
 import { GuestList } from "@/components/admin/GuestListComponent";
+import { AddGuestForm } from "@/components/admin/AddGuestForm";
 
 
 export default async function EditPage({ params }: { params: Promise<{ id: string }> }) {
@@ -63,6 +64,7 @@ export default async function EditPage({ params }: { params: Promise<{ id: strin
                             <h3 className="text-lg font-medium">RSVP Responses</h3>
                             {/* You could add an "Export to CSV" button here later! */}
                         </div>
+                        <AddGuestForm customerId={customer.id} />
                         <GuestList customerId={customer.id} />
                     </div>
                 </TabsContent>
