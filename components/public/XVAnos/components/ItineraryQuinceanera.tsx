@@ -1,11 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Clock, Heart, Music, Camera, Utensils, Sparkles } from "lucide-react";
 
 type EventItem = {
   time: string;
   title: string;
   description?: string;
+  icon?: React.ReactNode;
 };
 
 type ItineraryProps = {
@@ -16,7 +18,7 @@ export default function ItineraryQuinceanera ({ events }: ItineraryProps)  {
   return (
     <section className="w-full py-20 px-6 md:px-16 bg-white">
       
-      {/* Title
+    
       <div className="text-center mb-16">
         <h2 className="text-3xl md:text-5xl font-light tracking-wide text-gray-800">
           Itinerario
@@ -48,13 +50,26 @@ export default function ItineraryQuinceanera ({ events }: ItineraryProps)  {
                 
                 {/* Content Card */}
                 <div className="w-[45%]">
-                  <div className="bg-pink-50/60 backdrop-blur-md p-6 rounded-2xl shadow-md border border-pink-100">
+                  <div className="bg-pink-50/60 backdrop-blur-md p-6 rounded-2xl shadow-md border border-pink-100 hover:shadow-lg transition-shadow duration-300">
                     
-                    <p className="text-sm text-pink-400 tracking-widest uppercase">
-                      {event.time}
-                    </p>
+                    {/* Icon and Time */}
+                    <div className="flex items-center gap-3 mb-3">
+                      {event.icon && (
+                        <motion.div
+                          initial={{ scale: 0 }}
+                          whileInView={{ scale: 1 }}
+                          transition={{ delay: 0.2 }}
+                          className="text-pink-400"
+                        >
+                          {event.icon}
+                        </motion.div>
+                      )}
+                      <p className="text-sm text-pink-400 tracking-widest uppercase font-medium">
+                        {event.time}
+                      </p>
+                    </div>
 
-                    <h3 className="mt-2 text-lg md:text-xl font-semibold text-gray-800">
+                    <h3 className="text-lg md:text-xl font-semibold text-gray-800">
                       {event.title}
                     </h3>
 

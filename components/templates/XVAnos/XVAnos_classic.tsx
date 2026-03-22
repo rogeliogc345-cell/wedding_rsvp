@@ -2,7 +2,12 @@ import XVHeroComponent from '@/components/public/XVAnos/components/HeroComponent
 import React from 'react'
 import AboutMe from './AboutMeQuinceañera'
 import ItineraryQuinceanera from '@/components/public/XVAnos/components/ItineraryQuinceanera';
+import { EventLocations as EventLocationQuinceanera } from '@/components/public/XVAnos/components/LocationQuinceanera';
 import { Photo, PhotoGalleryQuinceañera } from '@/components/public/XVAnos/components/photoGallery';
+import { Clock, Music, Utensils, Camera, Sparkles } from "lucide-react";
+import { GiftRegistryMinimal } from '@/components/public/XVAnos/components/GiftsQuinceanera';
+import { GiftRegistryQuinceanera } from '@/components/public/XVAnos/components/GiftQuienceanera1';
+import FooterQuinceanera from '@/components/public/XVAnos/components/Header';
 
 
 
@@ -10,34 +15,34 @@ type EventItem={
   time: string;
   title: string;
   description?: string;
+  icon?: React.ReactNode;
 }
 
 const events: EventItem[] =  [
-          {
-            time: "5:00 PM",
-            title: "Recepción",
-            description: "Bienvenida a los invitados",
-          },
-          {
-            time: "6:00 PM",
-            title: "Ceremonia",
-            description: "Entrada de la quinceañera",
-          },
-          {
-            time: "7:30 PM",
-            title: "Cena",
-            description: "Disfruta de una deliciosa cena",
-          },
-          {
-            time: "9:00 PM",
-            title: "Vals",
-            description: "Baile principal",
-          },
-          {
-            time: "10:00 PM",
-            title: "Fiesta",
-            description: "¡A bailar!",
-          },
+           {
+      time: "6:00 PM",
+      title: "Recepción",
+      description: "Bienvenida de los invitados",
+      icon: <Clock size={30} />
+    },
+    {
+      time: "7:00 PM",
+      title: "Primer Baile",
+      description: "Vals con la Quinceañera",
+      icon: <Music size={30} />
+    },
+    {
+      time: "8:00 PM",
+      title: "Cena",
+      description: "Servicio de alimentos",
+      icon: <Utensils size={30} />
+    },
+    {
+      time: "9:00 PM",
+      title: "Sesión de Fotos",
+      description: "Momentos especiales",
+      icon: <Camera size={30} />
+    }
         ]
 
 
@@ -97,8 +102,12 @@ Gracias por ser parte de este momento tan especial en mi vida. 💖'
 
       <ItineraryQuinceanera events={events} />
       
-
+      <EventLocationQuinceanera />     
       <PhotoGalleryQuinceañera photos={photos}/>
+
+      <GiftRegistryQuinceanera/>
+
+      <FooterQuinceanera/>
 
 
 
