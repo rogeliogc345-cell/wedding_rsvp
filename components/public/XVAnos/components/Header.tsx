@@ -62,7 +62,7 @@ export default function FooterQuinceanera({
           className="grid md:grid-cols-4 gap-8 mb-12"
         >
           {/* Brand Section */}
-          <motion.div variants={itemVariants} className="md:col-span-1">
+          <motion.div  className="md:col-span-1">
             <div className="flex items-center gap-3 mb-4">
               <div className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-rose-500 to-pink-500 rounded-lg">
                 <Heart className="w-5 h-5 text-white" fill="white" />
@@ -80,7 +80,7 @@ export default function FooterQuinceanera({
           </motion.div>
 
           {/* Event Information */}
-          <motion.div variants={itemVariants} className="md:col-span-1">
+          <motion.div  className="md:col-span-1">
             <h3 className="text-sm font-semibold uppercase tracking-widest text-white mb-4">
               Evento
             </h3>
@@ -103,7 +103,7 @@ export default function FooterQuinceanera({
           </motion.div>
 
           {/* Contact Information */}
-          <motion.div variants={itemVariants} className="md:col-span-1">
+          <motion.div  className="md:col-span-1">
             <h3 className="text-sm font-semibold uppercase tracking-widest text-white mb-4">
               Contacto
             </h3>
@@ -126,7 +126,7 @@ export default function FooterQuinceanera({
           </motion.div>
 
           {/* Social Links */}
-          <motion.div variants={itemVariants} className="md:col-span-1">
+          <motion.div  className="md:col-span-1">
             <h3 className="text-sm font-semibold uppercase tracking-widest text-white mb-4">
               Sígueme
             </h3>
@@ -168,7 +168,7 @@ export default function FooterQuinceanera({
 
         {/* Bottom Section */}
         <motion.div
-          variants={itemVariants}
+          
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
