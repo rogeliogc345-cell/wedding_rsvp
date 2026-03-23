@@ -81,7 +81,7 @@ function LocationCard({
           <div className="absolute -top-12 -right-12 w-32 h-32 bg-white/5 rounded-full" />
           <div className="absolute -bottom-6 -left-6 w-24 h-24 bg-white/5 rounded-full" />
           
-          <div className="relative z-10">
+          <div className="relative z-10 text-black">
             <div className="flex items-center justify-between mb-6">
               <div className="w-12 h-12 bg-white/15 backdrop-blur-sm rounded-lg flex items-center justify-center">
                 {location.icon}
@@ -98,8 +98,8 @@ function LocationCard({
               </div>
             </div>
             
-            <h3 className="font-light text-2xl mb-1">{location.name}</h3>
-            <p className=" font-light text-base">{location.venue}</p>
+            <h3 className="font-light text-2xl  text-black mb-1">{location.name}</h3>
+            <p className=" font-light text-base text-black mb-2">{location.venue}</p>
           </div>
         </div>
 
