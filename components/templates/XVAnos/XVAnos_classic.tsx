@@ -1,5 +1,5 @@
 import XVHeroComponent from '@/components/public/XVAnos/components/HeroComponent'
-import React from 'react'
+import React, { Suspense } from 'react'
 import AboutMe from './AboutMeQuinceañera'
 import ItineraryQuinceanera from '@/components/public/XVAnos/components/ItineraryQuinceanera';
 import { EventLocations as EventLocationQuinceanera } from '@/components/public/XVAnos/components/LocationQuinceanera';
@@ -108,7 +108,9 @@ Gracias por ser parte de este momento tan especial en mi vida. 💖'
 
       <GiftRegistryQuinceanera/>
 
-      <RSVPForm/>
+      <Suspense>
+        <RSVPForm customerId='customer_id'/>
+      </Suspense>
 
       <FooterQuinceanera/>
 
