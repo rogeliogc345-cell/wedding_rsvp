@@ -17,7 +17,7 @@ interface FooterProps {
 }
 
 export default function FooterQuinceanera({
-  quinceaneraName = "Hanni",
+  quinceaneraName = "Fernanda",
   eventDate = "20 de Diciembre, 2026",
   email = "info@example.com",
   phone = "+1 (555) 123-4567",

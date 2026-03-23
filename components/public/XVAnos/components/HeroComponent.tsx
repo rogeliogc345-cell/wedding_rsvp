@@ -71,7 +71,7 @@ const XVHeroComponent = () => {
           transition={{ duration: 1 }}
           className="text-4xl md:text-6xl font-light tracking-widest uppercase"
         >
-          Hanni
+          Fernanda
         </motion.h1>
 
         <motion.p

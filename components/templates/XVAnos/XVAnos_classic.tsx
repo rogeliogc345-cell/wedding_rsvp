@@ -90,7 +90,7 @@ const XVAnosClassic = () => {
       <XVHeroComponent />
       <AboutMe
       
-          name='Hanni'
+          name='Fernanda'
           description='Soy una joven soñadora que está comenzando una nueva etapa llena de ilusiones, aprendizajes y momentos inolvidables. Hoy celebro mis quince años con el corazón lleno de gratitud, rodeada de las personas que más amo.
 
 Disfruto los pequeños detalles de la vida, las sonrisas sinceras y cada instante que se convierte en un hermoso recuerdo. Este día marca el inicio de nuevos sueños, metas y aventuras que estoy lista para vivir con alegría y determinación.

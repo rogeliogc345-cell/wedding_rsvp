@@ -144,7 +144,7 @@ function LocationCard({
 
           {/* Action Buttons */}
           <div className="grid grid-cols-2 gap-3">
-            <Button
+            {/* <Button
               onClick={openDirections}
               className={cn(
                 "w-full bg-gradient-to-r text-white shadow-sm hover:shadow-md transition-all duration-300 font-light",
@@ -164,7 +164,7 @@ function LocationCard({
             >
               <Info className="w-4 h-4 mr-2" />
               Detalles
-            </Button>
+            </Button> */}
           </div>
         </div>
       </div>
@@ -294,7 +294,7 @@ export function EventLocations() {
       googleMapsUrl: "https://maps.google.com/?q=19.4326,-99.1332",
       embedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.9234!2d-99.1332!3d19.4326",
       icon: <Church className="w-6 h-6" />,
-      color: "from-rose-500 to-pink-500",
+      color: "bg-pink-100",
       gradient: "bg-gradient-to-br from-rose-50 to-pink-50",
       details: {
         parking: "Estacionamiento disponible en la parte trasera de la iglesia",
@@ -317,7 +317,7 @@ export function EventLocations() {
       googleMapsUrl: "https://maps.google.com/?q=19.2845,-99.1621",
       embedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3765.1234!2d-99.1621!3d19.2845",
       icon: <Music className="w-6 h-6" />,
-      color: "from-rose-300 to-pink-300",
+      color: "bg-pink-100",
       gradient: "bg-gradient-to-br from-rose-50 to-pink-50",
       details: {
         parking: "Valet parking gratuito disponible",
@@ -388,8 +388,7 @@ export function EventLocations() {
                 <div>
                   <h4 className="font-medium text-gray-900 mb-2">Nota importante</h4>
                   <p className="text-gray-600 text-sm leading-relaxed font-light">
-                    Habrá transporte gratuito desde la iglesia hacia el salón de eventos. 
-                    El servicio comenzará 30 minutos después de finalizada la ceremonia.
+                    Estaremos iniciando puntualmente ambas eventos.
                   </p>
                 </div>
               </div>
