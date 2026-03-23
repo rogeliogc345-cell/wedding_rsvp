@@ -17,6 +17,7 @@ export type Guest = {
     email: string | null;
     message: string | null;
     customer_id: string;
+    responded_at?: string | null;
 }
 
 export type FormState = {
@@ -90,6 +91,7 @@ export const findGuestByPasscode = async (prevState: FormState, formData: FormDa
 
 
 export const confirmRSVPAction = async (prevState: FormState, formData: FormData): Promise<FormState> => {
+    console.log('calling RSVP')
     try {
 
         const guestId = formData.get("guestId")?.toString();
@@ -112,6 +114,7 @@ export const confirmRSVPAction = async (prevState: FormState, formData: FormData
                 attending: tickets_confirmed > 0,
                 email,
                 message,
+                responded_at: new Date().toISOString(),
             })
             .eq("id", guestId);
 
@@ -131,7 +134,7 @@ export const confirmRSVPAction = async (prevState: FormState, formData: FormData
         return {
             ...prevState,
             step: 'thanks',
-            guest: prevState.guest ? { ...prevState.guest, tickets_confirmed, has_responded: true, attending: tickets_confirmed > 0, email, message } : null,
+            guest: prevState.guest ? { ...prevState.guest, tickets_confirmed, has_responded: true, attending: tickets_confirmed > 0, email, message, responded_at: new Date().toISOString() } : null,
             error: null,
         }
 

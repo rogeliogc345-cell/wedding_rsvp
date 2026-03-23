@@ -56,8 +56,11 @@ function PasscodeForm({
   });
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+    
+      <Form {...form} >
+     
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8  py-2 px-2">
+       
         <div className="flex justify-center mb-2">
           <div className="p-3 bg-stone-50 rounded-full">
             <Lock className="w-6 h-6 text-stone-400" />
@@ -65,8 +68,8 @@ function PasscodeForm({
         </div>
 
         <div className="text-center mb-6">
-          <h3 className="text-xl font-serif">Enter Your Passcode</h3>
-          <p className="text-sm text-stone-400">Found on your physical invitation</p>
+          <h3 className="text-xl font-serif">Ingresa tu codigo de Ingreso</h3>
+          <p className="text-sm text-stone-400">Compartido en tu invitación</p>
         </div>
 
         <FormField
@@ -95,11 +98,13 @@ function PasscodeForm({
           {form.formState.isSubmitting ? (
             <Loader2 className="animate-spin" />
           ) : (
-            "Unlock Invitation"
+            "Buscar Invitación"
           )}
         </Button>
       </form>
     </Form>
+
+   
   );
 }
 
@@ -125,10 +130,10 @@ function RSVPConfirmForm({
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <div className="space-y-1">
-          <h3 className="text-2xl font-serif italic">Welcome, {guest.name}</h3>
+          <h3 className="text-2xl font-serif italic">Bienvenido {guest.name}</h3>
           <div className="flex items-center gap-2 text-stone-500 text-sm">
             <Ticket className="w-4 h-4" />
-            <span>{guest.tickets_allowed} seats reserved for your party</span>
+            <span>{guest.tickets_allowed} Lugares reservados para ti</span>
           </div>
         </div>
 
@@ -137,7 +142,7 @@ function RSVPConfirmForm({
           name="tickets_confirmed"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>How many guests are attending?</FormLabel>
+              <FormLabel>¿Cuántos invitados asistirán?</FormLabel>
               <FormControl>
                 <select
                   {...field}
@@ -146,7 +151,7 @@ function RSVPConfirmForm({
                 >
                   {[...Array(guest.tickets_allowed + 1)].map((_, i) => (
                     <option key={i} value={i}>
-                      {i === 0 ? "Declining (0)" : `${i} guest${i > 1 ? 's' : ''}`}
+                      {i === 0 ? "No asistiremos (0)" : `${i} invitados${i > 1 ? 's' : ''}`}
                     </option>
                   ))}
                 </select>
@@ -179,11 +184,11 @@ function RSVPConfirmForm({
           name="message"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Message (optional)</FormLabel>
+              <FormLabel>Mensaje (opcional)</FormLabel>
               <FormControl>
                 <Textarea
                   {...field}
-                  placeholder="Dietary requirements or a message for the couple..."
+                  placeholder="Escribe un  mensaje.."
                   className="min-h-[100px]"
                 />
               </FormControl>
@@ -200,7 +205,7 @@ function RSVPConfirmForm({
           {form.formState.isSubmitting ? (
             <Loader2 className="animate-spin" />
           ) : (
-            "Confirm RSVP"
+            "Confirmar RSVP"
           )}
         </Button>
 
@@ -255,9 +260,9 @@ export function RSVPForm({ customerId }: { customerId: string }) {
       <div className="max-w-md mx-auto">
         <div className="text-center p-8 bg-white rounded-2xl shadow-sm border border-stone-100 animate-in fade-in zoom-in duration-300">
           <CheckCircle2 className="w-12 h-12 text-green-500 mx-auto mb-4" />
-          <h3 className="text-2xl font-serif mb-2">Thank You!</h3>
+          <h3 className="text-2xl font-serif mb-2">Gracias!</h3>
           <p className="text-stone-500">
-            Your response has been saved. We can't wait to celebrate!
+            Tu respuesta ha sido guaradada. No podemos esperar para celebrar!
           </p>
         </div>
       </div>

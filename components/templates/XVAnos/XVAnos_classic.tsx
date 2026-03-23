@@ -8,6 +8,7 @@ import { Clock, Music, Utensils, Camera, Sparkles } from "lucide-react";
 import { GiftRegistryMinimal } from '@/components/public/XVAnos/components/GiftsQuinceanera';
 import { GiftRegistryQuinceanera } from '@/components/public/XVAnos/components/GiftQuienceanera1';
 import FooterQuinceanera from '@/components/public/XVAnos/components/Header';
+import { RSVPForm } from '@/components/public/RSVPForm';
 
 
 
@@ -106,6 +107,8 @@ Gracias por ser parte de este momento tan especial en mi vida. 💖'
       <PhotoGalleryQuinceañera photos={photos}/>
 
       <GiftRegistryQuinceanera/>
+
+      <RSVPForm/>
 
       <FooterQuinceanera/>
 
