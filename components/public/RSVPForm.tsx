@@ -130,7 +130,7 @@ function RSVPConfirmForm({
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <div className="space-y-1">
-          <h3 className="text-2xl font-serif italic">Bienvenido {guest.name}</h3>
+          <h3 className="text-2xl font-serif italic pb-2"> {guest.name}</h3>
           <div className="flex items-center gap-2 text-stone-500 text-sm">
             <Ticket className="w-4 h-4" />
             <span>{guest.tickets_allowed} Lugares reservados para ti</span>
@@ -151,7 +151,7 @@ function RSVPConfirmForm({
                 >
                   {[...Array(guest.tickets_allowed + 1)].map((_, i) => (
                     <option key={i} value={i}>
-                      {i === 0 ? "No asistiremos (0)" : `${i} invitados${i > 1 ? 's' : ''}`}
+                      {i === 0 ? "No asistiremos (0)" : `${i} invitado${i > 1 ? 's' : ''}`}
                     </option>
                   ))}
                 </select>

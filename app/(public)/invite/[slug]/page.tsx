@@ -3,6 +3,7 @@ import { createClient } from "@/lib/supabase/server";
 // We will create these components next
 import ClassicTemplate from "@/components/templates/ClassicTemplate";
 import ModernTemplate from "@/components/templates/ModernTemplate";
+import XVAnosClassic from "@/components/templates/XVAnos/XVAnos_classic";
 
 
 export default async function InvitationPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -33,5 +34,6 @@ export default async function InvitationPage({ params }: { params: Promise<{ slu
     const SelectedTemplate = TemplateMap[customer.template_id] || ClassicTemplate;
 
     // 3. Render the template with the data
-    return <SelectedTemplate customer={customer} events={customer.events} media={customer.media} />;
+    // return <SelectedTemplate customer={customer} events={customer.events} media={customer.media} />;
+    return <XVAnosClassic customer={customer} events={customer.events} media={customer.media} />;
 }
