@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { ExternalLink, Plus, Settings } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react'
+import { LogoutButtonAdmin } from '@/components/admin/LogoutButtonAdmin';
 
 export const dynamic = 'force-dynamic';
 
@@ -26,6 +27,7 @@ const dashboard = async () => {
         <div className="p-8">
 
             <AddCustomerForm />
+            <LogoutButtonAdmin />
 
             <div className="flex justify-between items-center mb-8">
                 <h1 className="text-3xl font-bold">Your Invitations</h1>

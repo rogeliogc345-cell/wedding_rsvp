@@ -54,7 +54,7 @@ export const findGuestByPasscode = async (prevState: FormState, formData: FormDa
 
         if (error || !guest) {
             return {
-                ...prevState, error: "Invalid code. Please check your invitation or contact the couple."
+                ...prevState, error: "Codigo Invalido. Checa tu invitación y vuelve a intentarlo."
             }
         }
 
@@ -158,3 +158,74 @@ export const callingHelloWorldAction = async (prevState: any, formData: FormData
 
     return { success: true, message: "saved correctly" }
 }
+
+
+
+
+
+
+//used in the admin guest list component 
+export const getGuestsByCustomerId = async (customerId: string): Promise<Guest[]> => {
+    try {
+        const supabase = await createClient();
+        const { data: guests, error } = await supabase
+            .from("guests")
+            .select("*")
+            .eq("customer_id", customerId)
+            .order("created_at", { ascending: false });
+
+        if (error) {
+            console.error("Error fetching guests:", error);
+            return [];
+        }
+
+        return guests || [];
+    } catch (error) {
+        console.error("Error in getGuestsByCustomerId:", error);
+        return [];
+    }
+};
+
+export type AddGuestState = {
+    error: string | null;
+    success: boolean;
+    guestName?: string;
+};
+
+export const addGuestAction = async (prevState: AddGuestState, formData: FormData): Promise<AddGuestState> => {
+    try {
+        const customerId = formData.get("customerId")?.toString();
+        const name = formData.get("name")?.toString();
+        const ticketsAllowed = parseInt(formData.get("ticketsAllowed")?.toString() || "2", 10);
+        const passcode = formData.get("passcode")?.toString()?.toUpperCase();
+
+        if (!customerId || !name || !passcode) {
+            return { error: "Missing required fields.", success: false };
+        }
+
+        const supabase = await createClient();
+        const { error } = await supabase.from("guests").insert([
+            {
+                customer_id: customerId,
+                name,
+                tickets_allowed: ticketsAllowed,
+                passcode,
+                has_responded: false,
+                attending: false,
+            },
+        ]);
+
+        if (error) {
+            console.error("Error adding guest:", error);
+            return { error: "That passcode or name might already be in use.", success: false };
+        }
+
+        revalidatePath(`/dashboard/edit/${customerId}`);
+
+        return { error: null, success: true, guestName: name };
+
+    } catch (err) {
+        console.error("Exception in addGuestAction:", err);
+        return { error: "An unexpected error occurred. Please try again.", success: false };
+    }
+};

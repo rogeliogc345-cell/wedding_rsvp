@@ -1,26 +1,17 @@
 "use client";
 
-import { useActionState, startTransition } from "react";
-import { useSearchParams } from "next/navigation";
-import { useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useActionState } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
+import { useEffect, useState, useRef } from "react";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Loader2, CheckCircle2, Ticket, Lock } from "lucide-react";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
 
 // Import actions from separate file
 import { findGuestByPasscode, confirmRSVPAction, type FormState, type Guest } from "@/app/(admin)/actions";
+
 
 // ==================== SCHEMAS ====================
 
@@ -41,197 +32,181 @@ type RSVPFormData = z.infer<typeof rsvpSchema>;
 
 // ==================== COMPONENTS ====================
 
-function PasscodeForm({
-  customerId,
-  onSubmit
-}: {
+const PasscodeForm = ({ customerId, state, action, isPending }: {
   customerId: string;
-  onSubmit: (data: PasscodeFormData) => void;
-}) {
-  const form = useForm<PasscodeFormData>({
-    resolver: zodResolver(passcodeSchema) as any,
-    defaultValues: {
-      passcode: "",
-    },
-  });
+  state: any;
+  action: (payload: FormData) => void;
+  isPending: boolean;
+}) => {
+  const [passcode, setPasscode] = useState("");
 
   return (
-    
-      <Form {...form} >
-     
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8  py-2 px-2">
-       
-        <div className="flex justify-center mb-2">
-          <div className="p-3 bg-stone-50 rounded-full">
-            <Lock className="w-6 h-6 text-stone-400" />
-          </div>
-        </div>
+    <form action={action} className="space-y-8 py-2 px-2">
+      <input type="hidden" name="customerId" value={customerId} />
 
-        <div className="text-center mb-6">
-          <h3 className="text-xl font-serif">Ingresa tu codigo de Ingreso</h3>
-          <p className="text-sm text-stone-400">Compartido en tu invitación</p>
+      <div className="flex justify-center mb-2">
+        <div className="p-3 bg-stone-50 rounded-full">
+          <Lock className="w-6 h-6 text-stone-400" />
         </div>
+      </div>
 
-        <FormField
-          control={form.control}
+      <div className="text-center mb-6">
+        <h3 className="text-xl font-serif">Ingresa tu codigo de Ingreso</h3>
+        <p className="text-sm text-stone-400">Compartido en tu invitación</p>
+      </div>
+
+      <div>
+        <Input
           name="passcode"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <Input
-                  {...field}
-                  placeholder="e.g. WED-XYZ"
-                  className="text-center text-lg tracking-widest uppercase font-mono"
-                  autoComplete="off"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+          value={passcode}
+          onChange={(e) => setPasscode(e.target.value.toUpperCase())}
+          placeholder="e.g. WEDXYZ"
+          className="text-center text-lg tracking-widest uppercase font-mono"
+          autoComplete="off"
+          disabled={isPending}
         />
+      </div>
 
-        <Button
-          type="submit"
-          className="w-full h-12 text-lg"
-          disabled={form.formState.isSubmitting}
-        >
-          {form.formState.isSubmitting ? (
-            <Loader2 className="animate-spin" />
-          ) : (
-            "Buscar Invitación"
-          )}
-        </Button>
-      </form>
-    </Form>
-
-   
+      <Button
+        type="submit"
+        className="w-full h-12 text-lg"
+        disabled={isPending || !passcode.trim()}
+      >
+        {isPending ? (
+          <Loader2 className="animate-spin" />
+        ) : (
+          "Buscar Invitación"
+        )}
+      </Button>
+    </form>
   );
 }
 
-function RSVPConfirmForm({
+const RSVPConfirmForm = ({
   guest,
-  onSubmit,
+  state,
+  action,
+  isPending,
   onBack
 }: {
   guest: Guest;
-  onSubmit: (data: RSVPFormData) => void;
+  state: any;
+  action: (payload: FormData) => void;
+  isPending: boolean;
   onBack: () => void;
-}) {
-  const form = useForm<RSVPFormData>({
-    resolver: zodResolver(rsvpSchema) as any,
-    defaultValues: {
-      tickets_confirmed: guest.tickets_allowed,
-      email: guest.email || "",
-      message: guest.message || "",
-    },
-  });
+}) => {
+  const [ticketsConfirmed, setTicketsConfirmed] = useState(guest.tickets_allowed);
+  const [email, setEmail] = useState(guest.email || "");
+  const [message, setMessage] = useState(guest.message || "");
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-        <div className="space-y-1">
-          <h3 className="text-2xl font-serif italic pb-2"> {guest.name}</h3>
-          <div className="flex items-center gap-2 text-stone-500 text-sm">
-            <Ticket className="w-4 h-4" />
-            <span>{guest.tickets_allowed} Lugares reservados para ti</span>
-          </div>
+    <form action={action} className="space-y-6">
+      <input type="hidden" name="guestId" value={guest.id} />
+
+      <div className="space-y-1">
+        <h3 className="text-2xl font-serif italic pb-2">{guest.name}</h3>
+        <div className="flex items-center gap-2 text-stone-500 text-sm">
+          <Ticket className="w-4 h-4" />
+          <span>{guest.tickets_allowed} Lugares reservados para ti</span>
         </div>
+      </div>
 
-        <FormField
-          control={form.control}
+      <div>
+        <label className="text-sm font-medium mb-2 block">¿Cuántos invitados asistirán?</label>
+        <select
           name="tickets_confirmed"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>¿Cuántos invitados asistirán?</FormLabel>
-              <FormControl>
-                <select
-                  {...field}
-                  onChange={(e) => field.onChange(parseInt(e.target.value))}
-                  className="flex h-12 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring"
-                >
-                  {[...Array(guest.tickets_allowed + 1)].map((_, i) => (
-                    <option key={i} value={i}>
-                      {i === 0 ? "No asistiremos (0)" : `${i} invitado${i > 1 ? 's' : ''}`}
-                    </option>
-                  ))}
-                </select>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+          value={ticketsConfirmed}
+          onChange={(e) => setTicketsConfirmed(parseInt(e.target.value))}
+          className="flex h-12 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50 disabled:cursor-not-allowed"
+          disabled={isPending}
+        >
+          {[...Array(guest.tickets_allowed + 1)].map((_, i) => (
+            <option key={i} value={i}>
+              {i === 0 ? "No asistiremos (0)" : `${i} invitado${i > 1 ? 's' : ''}`}
+            </option>
+          ))}
+        </select>
+      </div>
 
-        <FormField
-          control={form.control}
+      <div>
+        <label className="text-sm font-medium mb-2 block">Email address</label>
+        <Input
           name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email address</FormLabel>
-              <FormControl>
-                <Input
-                  {...field}
-                  type="email"
-                  placeholder="your@email.com"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="your@email.com"
+          disabled={isPending}
         />
+      </div>
 
-        <FormField
-          control={form.control}
+      <div>
+        <label className="text-sm font-medium mb-2 block">Mensaje (opcional)</label>
+        <Textarea
           name="message"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Mensaje (opcional)</FormLabel>
-              <FormControl>
-                <Textarea
-                  {...field}
-                  placeholder="Escribe un  mensaje.."
-                  className="min-h-[100px]"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          placeholder="Escribe un mensaje.."
+          className="min-h-[100px]"
+          disabled={isPending}
         />
+      </div>
 
-        <Button
-          type="submit"
-          className="w-full h-12"
-          disabled={form.formState.isSubmitting}
-        >
-          {form.formState.isSubmitting ? (
-            <Loader2 className="animate-spin" />
-          ) : (
-            "Confirmar RSVP"
-          )}
-        </Button>
+      <Button
+        type="submit"
+        className="w-full h-12"
+        disabled={isPending || !email.trim()}
+      >
+        {isPending ? (
+          <Loader2 className="animate-spin" />
+        ) : (
+          "Confirmar RSVP"
+        )}
+      </Button>
 
-        <button
-          type="button"
-          onClick={onBack}
-          className="w-full text-xs text-stone-400 hover:underline"
-        >
-          Not you? Enter a different code
-        </button>
-      </form>
-    </Form>
+      <button
+        type="button"
+        onClick={onBack}
+        disabled={isPending}
+        className="w-full text-xs text-stone-400 hover:underline disabled:opacity-50"
+      >
+        Not you? Enter a different code
+      </button>
+    </form>
   );
 }
 
 // ==================== MAIN COMPONENT ====================
 
 export function RSVPForm({ customerId }: { customerId: string }) {
-  const searchParams = useSearchParams();
+  const [formKey, setFormKey] = useState(0);
 
-  const [searchState, searchAction] = useActionState(
+  return (
+    <RSVPFormInner
+      key={formKey}
+      customerId={customerId}
+      onReset={() => setFormKey((prev) => prev + 1)}
+    />
+  );
+}
+
+function RSVPFormInner({
+  customerId,
+  onReset
+}: {
+  customerId: string;
+  onReset: () => void;
+}) {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const hasAutoFetched = useRef(false);
+
+  const [searchState, searchAction, searchPending] = useActionState(
     findGuestByPasscode,
     { step: 'search' as const, guest: null, error: null }
   );
 
-  const [confirmState, confirmAction] = useActionState(
+  const [confirmState, confirmAction, confirmPending] = useActionState(
     confirmRSVPAction,
     { step: 'confirm' as const, guest: null, error: null }
   );
@@ -239,19 +214,27 @@ export function RSVPForm({ customerId }: { customerId: string }) {
   // Determine current state
   const currentState = confirmState.step !== 'confirm' ? confirmState : searchState;
   const { step, guest, error } = currentState;
+  const isPending = searchPending || confirmPending;
 
   // Magic link auto-fetch
   useEffect(() => {
     const code = searchParams.get("code");
-    if (code) {
+    if (code && !hasAutoFetched.current) {
+      hasAutoFetched.current = true;
       const formData = new FormData();
       formData.append("passcode", code);
       formData.append("customerId", customerId);
-      startTransition(() => {
-        searchAction(formData);
-      });
+      searchAction(formData);
     }
-  }, [searchParams, customerId]);
+  }, [searchParams, customerId, searchAction]);
+
+  const handleBack = () => {
+    // Clear the code parameter from URL so it doesn't auto-fetch again
+    if (searchParams.has("code")) {
+      router.replace(window.location.pathname, { scroll: false });
+    }
+    onReset();
+  };
 
   // ==================== RENDER ====================
 
@@ -262,7 +245,7 @@ export function RSVPForm({ customerId }: { customerId: string }) {
           <CheckCircle2 className="w-12 h-12 text-green-500 mx-auto mb-4" />
           <h3 className="text-2xl font-serif mb-2">Gracias!</h3>
           <p className="text-stone-500">
-            Tu respuesta ha sido guaradada. No podemos esperar para celebrar!
+            Tu respuesta ha sido enviada. No podemos esperar para celebrar!
           </p>
         </div>
       </div>
@@ -275,14 +258,9 @@ export function RSVPForm({ customerId }: { customerId: string }) {
         <div className="p-6 bg-white rounded-2xl shadow-md border border-stone-50">
           <PasscodeForm
             customerId={customerId}
-            onSubmit={(data) => {
-              const formData = new FormData();
-              formData.append("passcode", data.passcode);
-              formData.append("customerId", customerId);
-              startTransition(() => {
-                searchAction(formData);
-              });
-            }}
+            state={searchState}
+            action={searchAction}
+            isPending={searchPending}
           />
           {error && (
             <p className="text-red-500 text-xs text-center mt-4">{error}</p>
@@ -292,19 +270,10 @@ export function RSVPForm({ customerId }: { customerId: string }) {
         <div className="p-6 bg-white rounded-2xl shadow-md border-t-4 border-t-stone-800">
           <RSVPConfirmForm
             guest={guest}
-            onSubmit={(data) => {
-              const formData = new FormData();
-              formData.append("guestId", guest.id);
-              formData.append("tickets_confirmed", data.tickets_confirmed.toString());
-              formData.append("email", data.email);
-              formData.append("message", data.message || "");
-              startTransition(() => {
-                confirmAction(formData);
-              });
-            }}
-            onBack={() => {
-              window.location.reload();
-            }}
+            state={confirmState}
+            action={confirmAction}
+            isPending={confirmPending}
+            onBack={handleBack}
           />
           {error && (
             <p className="text-red-500 text-xs text-center mt-4">{error}</p>

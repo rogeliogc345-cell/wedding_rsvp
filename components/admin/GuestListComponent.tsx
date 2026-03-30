@@ -1,7 +1,3 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { createClient } from "@/lib/supabase/client";
 import {
     Table,
     TableBody,
@@ -12,27 +8,11 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Mail, MessageSquare } from "lucide-react";
+import { getGuestsByCustomerId } from "@/app/(admin)/actions";
 
-export function GuestList({ customerId }: { customerId: string }) {
-    const [guests, setGuests] = useState<any[]>([]);
-    const [loading, setLoading] = useState(true);
+export async function GuestList({ customerId }: { customerId: string }) {
+    const guests = await getGuestsByCustomerId(customerId);
 
-    useEffect(() => {
-        async function fetchGuests() {
-            const supabase = createClient()
-            const { data: guests, error } = await supabase
-                .from("guests")
-                .select("*")
-                .eq("customer_id", customerId)
-                .order("created_at", { ascending: false });
-
-            if (!error) setGuests(guests);
-            setLoading(false);
-        }
-        fetchGuests();
-    }, [customerId]);
-
-    if (loading) return <p>Loading guest list...</p>;
     if (guests.length === 0) return <p className="text-muted-foreground text-center py-10 border rounded-lg">No RSVPs yet.</p>;
 
     return (
@@ -52,9 +32,15 @@ export function GuestList({ customerId }: { customerId: string }) {
                         <TableRow key={guest.id}>
                             <TableCell className="font-medium">{guest.name}</TableCell>
                             <TableCell>
-                                <Badge variant={guest.attending ? "default" : "destructive"}>
-                                    {guest.attending ? "Attending" : "Declined"}
-                                </Badge>
+                                {!guest.has_responded ? (
+                                    <Badge variant="secondary" className="text-stone-500 hover:bg-stone-100 bg-stone-100 border-transparent">
+                                        Not Responded
+                                    </Badge>
+                                ) : (
+                                    <Badge variant={guest.attending ? "default" : "destructive"}>
+                                        {guest.attending ? "Attending" : "Declined"}
+                                    </Badge>
+                                )}
                             </TableCell>
                             <TableCell>
                                 <div className="flex items-center gap-2 text-stone-500">

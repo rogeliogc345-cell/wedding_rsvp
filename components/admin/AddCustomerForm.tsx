@@ -7,6 +7,7 @@ import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { createClient } from "@/lib/supabase/client";
+import { LogoutButtonAdmin } from "./LogoutButtonAdmin";
 
 export function AddCustomerForm() {
     const form = useForm<CustomerFormValues>({
@@ -57,6 +58,7 @@ export function AddCustomerForm() {
                 />
 
                 <Button type="submit">Create Invitation</Button>
+
             </form>
         </Form>
     );
