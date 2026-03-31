@@ -1,7 +1,8 @@
 import { AddCustomerForm } from '@/components/admin/AddCustomerForm'
 import { Button } from '@/components/ui/button'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { createClient } from '@/lib/supabase/server';
+
+import { getCustomers } from '../actions';
 import { Badge } from '@/components/ui/badge';
 import { ExternalLink, Plus, Settings } from 'lucide-react';
 import Link from 'next/link';
@@ -12,13 +13,9 @@ export const dynamic = 'force-dynamic';
 
 const dashboard = async () => {
 
-    const supabase = await createClient();
-    const { data: customers, error } = await supabase
-        .from("customers")
-        .select("*").order("created_at", { ascending: false });
+    const customers = await getCustomers();
 
-
-    if (error) return <div>Failed to load customers</div>
+    if (!customers) return <div>Failed to load customers</div>
 
 
 
@@ -42,6 +39,7 @@ const dashboard = async () => {
                         <TableRow>
                             <TableHead>Couple</TableHead>
                             <TableHead>Status</TableHead>
+                            <TableHead>Date</TableHead>
                             <TableHead>Slug</TableHead>
                             <TableHead className="text-right">Actions</TableHead>
                         </TableRow>
@@ -54,6 +52,9 @@ const dashboard = async () => {
                                     <Badge variant={customer.is_published ? "default" : "secondary"}>
                                         {customer.is_published ? "Live" : "Draft"}
                                     </Badge>
+                                </TableCell>
+                                <TableCell className="text-muted-foreground">
+                                    {customer.event_date ? new Date(customer.event_date).toLocaleDateString() : "TBD"}
                                 </TableCell>
                                 <TableCell className="text-muted-foreground">/{customer.slug}</TableCell>
                                 <TableCell className="text-right space-x-2">

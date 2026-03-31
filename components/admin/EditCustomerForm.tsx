@@ -18,9 +18,10 @@ export function EditCustomerForm({ customer }: { customer: any }) {
     const form = useForm({
         resolver: zodResolver(editCustomerSchema),
         defaultValues: {
-            couple_name: customer.couple_name,
-            slug: customer.slug,
-            is_published: customer.is_published,
+            couple_name: customer.couple_name || "",
+            slug: customer.slug || "",
+            is_published: customer.is_published || false,
+            event_date: customer.event_date || "",
         },
     });
 
@@ -61,6 +62,17 @@ export function EditCustomerForm({ customer }: { customer: any }) {
                             <FormLabel>URL Slug</FormLabel>
                             <FormControl><Input {...field} /></FormControl>
                             <FormDescription>This will be: weddingapp.com/invite/{field.value}</FormDescription>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+                <FormField
+                    control={form.control}
+                    name="event_date"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Event Date</FormLabel>
+                            <FormControl><Input type="date" {...field} value={field.value || ""} /></FormControl>
                             <FormMessage />
                         </FormItem>
                     )}

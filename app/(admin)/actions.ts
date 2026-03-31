@@ -186,6 +186,26 @@ export const getGuestsByCustomerId = async (customerId: string): Promise<Guest[]
     }
 };
 
+export const getCustomers = async () => {
+    try {
+        const supabase = await createClient();
+        const { data: customers, error } = await supabase
+            .from("customers")
+            .select("*")
+            .order("created_at", { ascending: false });
+
+        if (error) {
+            console.error("Error fetching customers:", error);
+            return null;
+        }
+
+        return customers || [];
+    } catch (error) {
+        console.error("Error in getCustomers:", error);
+        return null;
+    }
+};
+
 export type AddGuestState = {
     error: string | null;
     success: boolean;

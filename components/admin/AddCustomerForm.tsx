@@ -12,7 +12,7 @@ import { LogoutButtonAdmin } from "./LogoutButtonAdmin";
 export function AddCustomerForm() {
     const form = useForm<CustomerFormValues>({
         resolver: zodResolver(customerSchema),
-        defaultValues: { couple_name: "", slug: "", template_id: "classic" },
+        defaultValues: { couple_name: "", slug: "", template_id: "classic", event_date: "" },
     });
 
     async function onSubmit(values: CustomerFormValues) {
@@ -39,7 +39,7 @@ export function AddCustomerForm() {
                     name="couple_name"
                     render={({ field }: { field: ControllerRenderProps<CustomerFormValues, "couple_name"> }) => (
                         <FormItem>
-                            <FormLabel>Couple's Names</FormLabel>
+                            <FormLabel>Name</FormLabel>
                             <FormControl><Input placeholder="Alex & Sam" {...field} /></FormControl>
                             <FormMessage />
                         </FormItem>
@@ -50,8 +50,19 @@ export function AddCustomerForm() {
                     name="slug"
                     render={({ field }: { field: ControllerRenderProps<CustomerFormValues, "slug"> }) => (
                         <FormItem>
-                            <FormLabel>Couple's Names</FormLabel>
+                            <FormLabel>Slug</FormLabel>
                             <FormControl><Input placeholder="Add the slug" {...field} /></FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+                <FormField
+                    control={form.control}
+                    name="event_date"
+                    render={({ field }: { field: ControllerRenderProps<CustomerFormValues, "event_date"> }) => (
+                        <FormItem>
+                            <FormLabel>Event Date</FormLabel>
+                            <FormControl><Input type="date" {...field} value={field.value || ""} /></FormControl>
                             <FormMessage />
                         </FormItem>
                     )}
