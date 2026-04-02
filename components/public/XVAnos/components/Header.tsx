@@ -5,8 +5,8 @@ import { Heart, Mail, Phone, MapPin, Calendar, Instagram, MessageCircle } from "
 import Link from "next/link";
 
 interface FooterProps {
-  quinceaneraName?: string;
-  eventDate?: string;
+  quinceaneraName: string;
+  eventDate: string;
   email?: string;
   phone?: string;
   location?: string;
@@ -17,11 +17,11 @@ interface FooterProps {
 }
 
 export default function FooterQuinceanera({
-  quinceaneraName = "Fernanda",
-  eventDate = "20 de Diciembre, 2026",
-  email = "info@example.com",
-  phone = "+1 (555) 123-4567",
-  location = "Salón de Eventos",
+  quinceaneraName,
+  eventDate,
+  email,
+  phone,
+  location,
   socialLinks = {},
 }: FooterProps) {
   const containerVariants = {
@@ -62,7 +62,7 @@ export default function FooterQuinceanera({
           className="grid md:grid-cols-4 gap-8 mb-12"
         >
           {/* Brand Section */}
-          <motion.div  className="md:col-span-1">
+          <motion.div className="md:col-span-1">
             <div className="flex items-center gap-3 mb-4">
               <div className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-rose-500 to-pink-500 rounded-lg">
                 <Heart className="w-5 h-5 text-white" fill="white" />
@@ -80,7 +80,7 @@ export default function FooterQuinceanera({
           </motion.div>
 
           {/* Event Information */}
-          <motion.div  className="md:col-span-1">
+          <motion.div className="md:col-span-1">
             <h3 className="text-sm font-semibold uppercase tracking-widest text-white mb-4">
               Evento
             </h3>
@@ -103,7 +103,7 @@ export default function FooterQuinceanera({
           </motion.div>
 
           {/* Contact Information */}
-          <motion.div  className="md:col-span-1">
+          <motion.div className="md:col-span-1">
             <h3 className="text-sm font-semibold uppercase tracking-widest text-white mb-4">
               Contacto
             </h3>
@@ -126,7 +126,7 @@ export default function FooterQuinceanera({
           </motion.div>
 
           {/* Social Links */}
-          <motion.div  className="md:col-span-1">
+          <motion.div className="md:col-span-1">
             <h3 className="text-sm font-semibold uppercase tracking-widest text-white mb-4">
               Sígueme
             </h3>
@@ -168,7 +168,7 @@ export default function FooterQuinceanera({
 
         {/* Bottom Section */}
         <motion.div
-          
+
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}

@@ -11,10 +11,9 @@ import { GiftRegistryQuinceanera } from '@/components/public/XVAnos/components/G
 import FooterQuinceanera from '@/components/public/XVAnos/components/Header';
 import { RSVPForm } from '@/components/public/RSVPForm';
 import { Customer } from '@/types/database';
+import { WelcomeDialog } from '@/components/public/XVAnos/components/WelcomeDialog';
 
-
-
-type EventItem={
+type EventItem = {
   time: string;
   title: string;
   description?: string;
@@ -24,84 +23,96 @@ type EventItem={
 
 
 interface MediaItem {
-    id: string;
-    file_url: string;
-    file_type: "image" | "audio";
-    is_hero: boolean;
+  id: string;
+  file_url: string;
+  file_type: "image" | "audio";
+  is_hero: boolean;
 }
 
 
 
 interface XVAnosClassicProps {
-  customer:Customer;
-  events:EventItem[];
-  media:  MediaItem[];
+  customer: Customer;
+  events: EventItem[];
+  media: MediaItem[];
 
 }
 
 
 
 
-const eventos: EventItem[] =  [
-           {
-      time: "6:00 PM",
-      title: "Recepción",
-      description: "Bienvenida de los invitados",
-      icon: <Clock size={30} />
-    },
-    {
-      time: "7:00 PM",
-      title: "Primer Baile",
-      description: "Vals con la Quinceañera",
-      icon: <Music size={30} />
-    },
-    {
-      time: "8:00 PM",
-      title: "Cena",
-      description: "Servicio de alimentos",
-      icon: <Utensils size={30} />
-    },
-    {
-      time: "9:00 PM",
-      title: "Sesión de Fotos",
-      description: "Momentos especiales",
-      icon: <Camera size={30} />
-    }
-        ]
+const eventos: EventItem[] = [
+  {
+    time: "6:00 PM",
+    title: "Recepción",
+    description: "Bienvenida de los invitados",
+    icon: <Clock size={30} />
+  },
+  {
+    time: "7:00 PM",
+    title: "Primer Baile",
+    description: "Vals con la Quinceañera",
+    icon: <Music size={30} />
+  },
+  {
+    time: "8:00 PM",
+    title: "Cena",
+    description: "Servicio de alimentos",
+    icon: <Utensils size={30} />
+  },
+  {
+    time: "9:00 PM",
+    title: "Sesión de Fotos",
+    description: "Momentos especiales",
+    icon: <Camera size={30} />
+  }
+]
 
 
 
-const photos:Photo[] = [
+const photos: Photo[] = [
   {
     id: "1",
-    src: "/XVAnos_1.png",
+    src: "/hanni/hanni_1.jpeg",
     alt: "Foto de la quinceañera con su familia y amigos",
     aspectRatio: 4 / 3,
 
-  
+
   },
-  
+
   {
     id: "2",
-    src: "/XVAnos_2.png",
+    src: "/hanni/hanni_2.jpeg",
     alt: "Foto de la quinceañera con su vestido de gala",
     aspectRatio: 4 / 3,
   },
   {
     id: "3",
-    src: "/XVAnos_3.png",
+    src: "/hanni/hanni_4.jpeg",
     alt: "Foto de la quinceañera con sus amigas",
     aspectRatio: 4 / 3,
   },
   {
     id: "4",
-    src: "/XVAnos_4.png",
+    src: "/hanni/hanni_6.jpeg",
     alt: "Foto de la quinceañera con su familia",
     aspectRatio: 4 / 3,
   },
   {
     id: "5",
-    src: "/XVAnos_5.jpg",
+    src: "/hanni/hanni_9.jpeg",
+    alt: "Foto de la quinceañera con su vestido de gala",
+    aspectRatio: 5 / 4,
+  },
+  {
+    id: "6",
+    src: "/hanni/hanni_10.jpeg",
+    alt: "Foto de la quinceañera con su vestido de gala",
+    aspectRatio: 5 / 4,
+  },
+  {
+    id: "7",
+    src: "/hanni/hanni_11.jpeg",
     alt: "Foto de la quinceañera con su vestido de gala",
     aspectRatio: 5 / 4,
   }
@@ -110,36 +121,45 @@ const photos:Photo[] = [
 
 
 
-const XVAnosClassic = ({customer, events, media}: XVAnosClassicProps) => {
+const XVAnosClassic = ({ customer, events, media }: XVAnosClassicProps) => {
 
-   const { primary_color, font_family } = customer.template_config;
-      // Filter media by type
-      // const photos = media?.filter((m: any) => m.file_type === 'image');
-      const song = media?.find((m: any) => m.file_type === 'audio');
-      const audioRef = useRef<HTMLAudioElement>(null)
-      const [isPlaying, setIsPlaying] = useState(false)
-  
-        const toggleMusic = () => {
-      if (!audioRef.current) return
-  
-      if (isPlaying) {
-        audioRef.current.pause()
-      } else {
-        audioRef.current.play()
-      }
-  
-      setIsPlaying(!isPlaying)
+  const { primary_color, font_family } = customer.template_config;
+  // Filter media by type
+  // const photos = media?.filter((m: any) => m.file_type === 'image');
+  const song = media?.find((m: any) => m.file_type === 'audio');
+  const audioRef = useRef<HTMLAudioElement>(null)
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [showWelcome, setShowWelcome] = useState(true)
+
+  const toggleMusic = () => {
+    if (!audioRef.current) return
+
+    if (isPlaying) {
+      audioRef.current.pause()
+    } else {
+      audioRef.current.play()
     }
-  
-      console.log(photos);
-      console.log(song);
-  
 
+    setIsPlaying(!isPlaying)
+  }
+
+  const handleOpenInvitation = () => {
+    setShowWelcome(false)
+    if (audioRef.current) {
+      audioRef.current.play().catch(console.error)
+      setIsPlaying(true)
+    }
+  }
 
   return (
     <div className='w-full  flex flex-col items-center justify-center'>
+      <WelcomeDialog 
+        name={customer.couple_name} 
+        show={showWelcome} 
+        onOpen={handleOpenInvitation} 
+      />
 
-        {song && (
+      {song && (
         <>
           {/* Audio oculto */}
           <audio ref={audioRef} src={song.file_url} loop />
@@ -158,30 +178,30 @@ const XVAnosClassic = ({customer, events, media}: XVAnosClassicProps) => {
   transition-all duration-300
   hover:scale-110 hover:shadow-2xl
 "
-            
-            // "
-            //   fixed bottom-6 right-6 z-50
-            //   w-16 h-16 rounded-full
-            //    backdrop-blur-lg
-            //   border 
-            //   shadow-xl
-            //   flex items-center justify-center
-            //   transition-all duration-100
-            //   hover:scale-110 hover:bg-white/50 bg-rose-200/40 border-rose-300/40
-            // "
+
+          // "
+          //   fixed bottom-6 right-6 z-50
+          //   w-16 h-16 rounded-full
+          //    backdrop-blur-lg
+          //   border 
+          //   shadow-xl
+          //   flex items-center justify-center
+          //   transition-all duration-100
+          //   hover:scale-110 hover:bg-white/50 bg-rose-200/40 border-rose-300/40
+          // "
           >
             {isPlaying ? (
-                <>
+              <>
                 <Music4 className="w-6 h-6 text-gray-800" />
-                 
 
 
-                </>
-              
+
+              </>
+
 
             ) : (
               <HeartHandshake className="w-6 h-6 text-gray-800 ml-1" />
-              
+
             )}
           </button>
 
@@ -193,36 +213,36 @@ const XVAnosClassic = ({customer, events, media}: XVAnosClassicProps) => {
       )}
 
 
-    
-      <XVHeroComponent />
+
+      <XVHeroComponent name={customer.couple_name} />
       <AboutMe
-      
-          name='Fernanda'
-          description='Soy una joven soñadora que está comenzando una nueva etapa llena de ilusiones, aprendizajes y momentos inolvidables. Hoy celebro mis quince años con el corazón lleno de gratitud, rodeada de las personas que más amo.
+
+        name={customer.couple_name}
+        description='Soy una joven soñadora que está comenzando una nueva etapa llena de ilusiones, aprendizajes y momentos inolvidables. Hoy celebro mis quince años con el corazón lleno de gratitud, rodeada de las personas que más amo.
 
 Disfruto los pequeños detalles de la vida, las sonrisas sinceras y cada instante que se convierte en un hermoso recuerdo. Este día marca el inicio de nuevos sueños, metas y aventuras que estoy lista para vivir con alegría y determinación.
 
 Gracias por ser parte de este momento tan especial en mi vida. 💖'
-    image='/XVAnos_4.png'
-      
+        image='/hanni/hanni_7.jpeg'
+
       />
 
       <ItineraryQuinceanera events={eventos} />
-      
-      <EventLocationQuinceanera />     
-      <PhotoGalleryQuinceañera photos={photos}/>
 
-      <GiftRegistryQuinceanera/>
+      <EventLocationQuinceanera />
+      <PhotoGalleryQuinceañera photos={photos} />
+
+      <GiftRegistryQuinceanera />
 
       <Suspense>
-        <RSVPForm customerId={customer.id}/>
+        <RSVPForm customerId={customer.id} />
       </Suspense>
 
-      <FooterQuinceanera/>
+      <FooterQuinceanera quinceaneraName={customer.couple_name} eventDate={customer.event_date} />
 
 
 
- 
+
 
 
     </div>

@@ -1,6 +1,7 @@
 export interface Customer {
     id: string;
     couple_name: string;
+    event_date: string;
     slug: string;
     template_id: string;
     template_config: {

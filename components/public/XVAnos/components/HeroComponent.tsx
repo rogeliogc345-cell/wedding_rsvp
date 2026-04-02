@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import Image from 'next/image';
 
 
-  type Countdown = {
+type Countdown = {
   days: number;
   hours: number;
   minutes: number;
@@ -27,7 +27,7 @@ function getTimeLeft(): Countdown {
     seconds: Math.floor((difference / 1000) % 60),
   };
 }
-const XVHeroComponent = () => {
+const XVHeroComponent = ({ name }: { name: string }) => {
   const [timeLeft, setTimeLeft] = useState<Countdown | null>(null);
   const [isHydrated, setIsHydrated] = useState(false);
 
@@ -43,20 +43,21 @@ const XVHeroComponent = () => {
     return () => clearInterval(timer);
   }, []);
 
-  
+
 
 
   return (
-    <section className="relative h-screen w-full flex flex-col items-center justify-center text-white">
-    {/* Background Image */}
+    <section className="relative h-screen w-full flex flex-col items-center justify-center text-white bg-pink-200">
+      {/* Background Image */}
       <Image
-        src="/XVAnos_5.jpg"
+        src="/hanni/hanni_hero.jpeg"
         alt="Wedding background"
         fill
         priority
-       
-      
-        className="object-cover"
+        sizes='100vw'
+
+
+        className="object-cover object-center w-full h-full "
       />
 
       {/* Overlay */}
@@ -71,7 +72,7 @@ const XVHeroComponent = () => {
           transition={{ duration: 1 }}
           className="text-4xl md:text-6xl font-light tracking-widest uppercase"
         >
-          Fernanda
+          {name}
         </motion.h1>
 
         <motion.p
@@ -116,7 +117,7 @@ const XVHeroComponent = () => {
         )}
       </div>
     </section>
-    
+
   )
 }
 
