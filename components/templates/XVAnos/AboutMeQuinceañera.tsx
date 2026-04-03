@@ -8,13 +8,13 @@ type AboutMeProps = {
   description: string;
   image: string;
 };
-
+//bg-gradient-to-b from-white to-pink-50
 export default function AboutMe({ name, description, image }: AboutMeProps) {
   return (
-    <section className="relative w-full py-20 px-6 md:px-16 bg-gradient-to-b from-white to-pink-50">
-      
+    <section className="relative w-full py-20 px-6 md:px-16  bg-[#F9DFDF]">
+
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
-        
+
         {/* Image */}
         <motion.div
           initial={{ opacity: 0, x: -40 }}

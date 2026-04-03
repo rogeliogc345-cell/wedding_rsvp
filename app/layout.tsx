@@ -26,7 +26,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className="light" style={{colorScheme:'light'}}>
+    <html lang="en" suppressHydrationWarning className="light" style={{ colorScheme: 'light' }}>
+      <head>
+        <link rel="stylesheet" href="https://use.typekit.net/olk5fko.css"></link>
+
+      </head>
+
+
       <body className={`${geistSans.className} antialiased`}>
         <ThemeProvider
           attribute="class"

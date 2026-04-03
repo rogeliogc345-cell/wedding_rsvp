@@ -48,7 +48,7 @@ export function PhotoGalleryQuinceañera({ photos }: PhotoGalleryProps) {
   // Keyboard navigation
   const handleKeyDown = (e: KeyboardEvent) => {
     if (selectedIndex === null) return;
-    
+
     if (e.key === "Escape") closeLightbox();
     if (e.key === "ArrowRight") goToNext();
     if (e.key === "ArrowLeft") goToPrevious();
@@ -62,7 +62,7 @@ export function PhotoGalleryQuinceañera({ photos }: PhotoGalleryProps) {
   return (
     <>
       {/* Gallery Section */}
-      <section className="w-full py-16 md:py-24 lg:py-32">
+      <section className="w-full py-16 md:py-24 lg:py-32 ">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -78,64 +78,64 @@ export function PhotoGalleryQuinceañera({ photos }: PhotoGalleryProps) {
 
         {/* Masonry Grid */}
         <div className="columns-1 md:columns-2 lg:columns-3 gap-6 md:gap-8 px-4 sm:px-6 lg:px-8">
-        {photos.map((photo, index) => (
-          <motion.div
-            key={photo.id}
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.5, delay: index * 0.08 }}
-            className="break-inside-avoid mb-6 group relative cursor-pointer"
-            onClick={() => openLightbox(index)}
-          >
-            <div className="relative overflow-hidden rounded-xl bg-gray-100 dark:bg-gray-800 shadow-lg hover:shadow-2xl transition-shadow duration-500">
-              {/* Loading skeleton */}
-              {!imageLoadStates[photo.id] && (
-                <div className="absolute inset-0 bg-gradient-to-br from-gray-200 via-gray-100 to-gray-200 dark:from-gray-700 dark:via-gray-800 dark:to-gray-700 animate-pulse" />
-              )}
-              
-              <Image
-                src={photo.src}
-                alt={photo.alt}
-                width={800}
-                height={800 / photo.aspectRatio}
-                className={cn(
-                  "w-full h-auto transition-transform duration-500",
-                  "group-hover:scale-105",
-                  !imageLoadStates[photo.id] && "opacity-0"
+          {photos.map((photo, index) => (
+            <motion.div
+              key={photo.id}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: index * 0.08 }}
+              className="break-inside-avoid mb-6 group relative cursor-pointer"
+              onClick={() => openLightbox(index)}
+            >
+              <div className="relative overflow-hidden rounded-xl bg-gray-100 dark:bg-gray-800 shadow-lg hover:shadow-2xl transition-shadow duration-500">
+                {/* Loading skeleton */}
+                {!imageLoadStates[photo.id] && (
+                  <div className="absolute inset-0 bg-gradient-to-br from-gray-200 via-gray-100 to-gray-200 dark:from-gray-700 dark:via-gray-800 dark:to-gray-700 animate-pulse" />
                 )}
-                onLoad={() => {
-                  setImageLoadStates(prev => ({ ...prev, [photo.id]: true }));
-                }}
-                quality={90}
-                priority={index < 3}
-              />
 
-              {/* Hover overlay */}
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/45 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
-                <motion.div
-                  initial={{ scale: 0.8 }}
-                  animate={{ scale: 1 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <Maximize2 
-                    className="text-white drop-shadow-lg" 
-                    size={36}
-                    strokeWidth={2}
-                  />
-                </motion.div>
-              </div>
+                <Image
+                  src={photo.src}
+                  alt={photo.alt}
+                  width={800}
+                  height={800 / photo.aspectRatio}
+                  className={cn(
+                    "w-full h-auto transition-transform duration-500",
+                    "group-hover:scale-105",
+                    !imageLoadStates[photo.id] && "opacity-0"
+                  )}
+                  onLoad={() => {
+                    setImageLoadStates(prev => ({ ...prev, [photo.id]: true }));
+                  }}
+                  quality={90}
+                  priority={index < 3}
+                />
 
-              {/* Title overlay */}
-              {photo.title && (
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <p className="text-white font-medium text-sm md:text-base tracking-wide">{photo.title}</p>
+                {/* Hover overlay */}
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/45 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                  <motion.div
+                    initial={{ scale: 0.8 }}
+                    animate={{ scale: 1 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <Maximize2
+                      className="text-white drop-shadow-lg"
+                      size={36}
+                      strokeWidth={2}
+                    />
+                  </motion.div>
                 </div>
-              )}
-            </div>
-          </motion.div>
-        ))}
-      </div>
+
+                {/* Title overlay */}
+                {photo.title && (
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <p className="text-white font-medium text-sm md:text-base tracking-wide">{photo.title}</p>
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </section>
 
       {/* Lightbox Modal */}

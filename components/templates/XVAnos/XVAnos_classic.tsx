@@ -43,26 +43,26 @@ interface XVAnosClassicProps {
 
 const eventos: EventItem[] = [
   {
-    time: "6:00 PM",
-    title: "Recepción",
-    description: "Bienvenida de los invitados",
+    time: "4:00 PM",
+    title: "Ceremonia",
+    description: "Dando Gracias a Dios por mi vida",
     icon: <Clock size={30} />
   },
   {
-    time: "7:00 PM",
-    title: "Primer Baile",
-    description: "Vals con la Quinceañera",
+    time: "5:00 PM",
+    title: "Recepción",
+    description: "Lugar de la recepción",
     icon: <Music size={30} />
   },
   {
-    time: "8:00 PM",
+    time: "5:30 PM",
     title: "Cena",
     description: "Servicio de alimentos",
     icon: <Utensils size={30} />
   },
   {
     time: "9:00 PM",
-    title: "Sesión de Fotos",
+    title: "Sesi",
     description: "Momentos especiales",
     icon: <Camera size={30} />
   }
@@ -129,7 +129,6 @@ const XVAnosClassic = ({ customer, events, media }: XVAnosClassicProps) => {
   const song = media?.find((m: any) => m.file_type === 'audio');
   const audioRef = useRef<HTMLAudioElement>(null)
   const [isPlaying, setIsPlaying] = useState(false)
-  const [showWelcome, setShowWelcome] = useState(true)
 
   const toggleMusic = () => {
     if (!audioRef.current) return
@@ -143,21 +142,13 @@ const XVAnosClassic = ({ customer, events, media }: XVAnosClassicProps) => {
     setIsPlaying(!isPlaying)
   }
 
-  const handleOpenInvitation = () => {
-    setShowWelcome(false)
-    if (audioRef.current) {
-      audioRef.current.play().catch(console.error)
-      setIsPlaying(true)
-    }
-  }
+  console.log(photos);
+  console.log(song);
+
+
 
   return (
     <div className='w-full  flex flex-col items-center justify-center'>
-      <WelcomeDialog 
-        name={customer.couple_name} 
-        show={showWelcome} 
-        onOpen={handleOpenInvitation} 
-      />
 
       {song && (
         <>
@@ -218,12 +209,12 @@ const XVAnosClassic = ({ customer, events, media }: XVAnosClassicProps) => {
       <AboutMe
 
         name={customer.couple_name}
-        description='Soy una joven soñadora que está comenzando una nueva etapa llena de ilusiones, aprendizajes y momentos inolvidables. Hoy celebro mis quince años con el corazón lleno de gratitud, rodeada de las personas que más amo.
+        description='Mi nombre es Sagia Mahanaim Díaz Aguilar, y soy una persona que disfruta mucho los deportes, especialmente el tenis, el fútbol y el voleibol, que son mis favoritos, también  me gusta mucho la moda y amo pasar tiempo con mi familia, porque disfruto cada momento con ellos.
 
-Disfruto los pequeños detalles de la vida, las sonrisas sinceras y cada instante que se convierte en un hermoso recuerdo. Este día marca el inicio de nuevos sueños, metas y aventuras que estoy lista para vivir con alegría y determinación.
+Sobre todo, soy una persona que ama a Dios y estoy muy agradecida con Él, por mi vida, por permitirme llegar a este momento tan especial y porque cada día deseo enamorarme más de Él y parecerme más a Él.
 
-Gracias por ser parte de este momento tan especial en mi vida. 💖'
-        image='/hanni/hanni_7.jpeg'
+Gracias por acompañarme en este día tan importante para mí. 🤍'
+        image='/hanni/hanni_rosa.png'
 
       />
 

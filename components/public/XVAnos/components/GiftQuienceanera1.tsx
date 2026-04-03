@@ -92,15 +92,16 @@ export function GiftRegistryQuinceanera() {
       window.open(option.link, "_blank");
     }
   };
+  //bg-gradient-to-b from-white
 
   return (
     <>
-      <section className="relative min-h-screen bg-gradient-to-b from-white via-gray-50/50 to-white py-24 px-24 overflow-hidden bg-black rounded-2xl mb-3
-       mx-auto w-full max-w-7xl">
+      <section className="relative min-h-screen  via-gray-50/50 to-white py-24 px-24 overflow-hidden bg-black  mb-3
+       mx-auto w-full max-w-7xl bg-[url('/hanni/fondo_moños2.png')] bg-cover bg-center ">
         {/* Decorative elements - subtle */}
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-rose-100/10 rounded-full blur-3xl" />
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-pink-100/10 rounded-full blur-3xl" />
-        
+
         <div className="relative max-w-5xl mx-auto">
           {/* Header */}
           <motion.div
@@ -141,7 +142,7 @@ export function GiftRegistryQuinceanera() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 onClick={() => handleOptionClick(option)}
                 className={cn(
-                  "group relative bg-pink-100 rounded-xl px-6 py-4 shadow-md hover:shadow-lg",
+                  "group relative bg-[#F9DFDF] rounded-xl px-6 py-4 shadow-md hover:shadow-lg",
                   "transition-all duration-300 hover:-translate-y-1",
                   "border border-gray-100 hover:border-rose-100"
                 )}

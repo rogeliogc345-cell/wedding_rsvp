@@ -11,7 +11,7 @@ type Countdown = {
   seconds: number;
 };
 
-const targetDate = new Date("2026-12-20T18:00:00");
+const targetDate = new Date("2026-04-25T18:16:00");
 
 function getTimeLeft(): Countdown {
   const difference = +targetDate - +new Date();
@@ -50,7 +50,7 @@ const XVHeroComponent = ({ name }: { name: string }) => {
     <section className="relative h-screen w-full flex flex-col items-center justify-center text-white bg-pink-200">
       {/* Background Image */}
       <Image
-        src="/hanni/hanni_hero.jpeg"
+        src="/hanni/hanni_rosa.png"
         alt="Wedding background"
         fill
         priority
@@ -70,7 +70,7 @@ const XVHeroComponent = ({ name }: { name: string }) => {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="text-4xl md:text-6xl font-light tracking-widest uppercase"
+          className=" font-parisienneSans  text-6xl font-normal  font-cursive md:text-6xl font-light tracking-widest uppercase"
         >
           {name}
         </motion.h1>
@@ -79,7 +79,7 @@ const XVHeroComponent = ({ name }: { name: string }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
-          className="mt-4 text-sm md:text-lg tracking-[0.3em] uppercase text-gray-200"
+          className="font-gothic font-semibold tracking-[0.4em] uppercase text-xs text-white/80 mt-4 text-sm md:text-lg tracking-[0.3em] uppercase text-gray-200"
         >
           Mis XV años.
         </motion.p>

@@ -47,7 +47,7 @@ export default function FooterQuinceanera({
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="w-full bg-gradient-to-t from-gray-900 via-gray-800 to-gray-900 text-white relative overflow-hidden">
+    <footer className="w-full bg-black text-black relative overflow-hidden mt-3">
       {/* Decorative background elements */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-rose-500/10 rounded-full blur-3xl opacity-50" />
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-pink-500/10 rounded-full blur-3xl opacity-50" />

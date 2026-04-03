@@ -2,10 +2,10 @@
 
 import { useState, useCallback, useMemo } from "react";
 import { motion } from "framer-motion";
-import { 
-  MapPin, 
-  Navigation, 
-  Clock, 
+import {
+  MapPin,
+  Navigation,
+  Clock,
   Calendar,
   Church,
   Music,
@@ -50,12 +50,12 @@ type EventLocation = {
 };
 
 // Location Card Component
-function LocationCard({ 
-  location, 
-  index, 
-  onShowDetails 
-}: { 
-  location: EventLocation; 
+function LocationCard({
+  location,
+  index,
+  onShowDetails
+}: {
+  location: EventLocation;
   index: number;
   onShowDetails: (location: EventLocation) => void;
 }) {
@@ -74,13 +74,13 @@ function LocationCard({
       <div className="bg-white rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-rose-100 overflow-hidden">
         {/* Card Header */}
         <div className={cn(
-          "p-8 bg-gradient-to-br relative overflow-hidden",
-          location.color
+          "p-8 bg-gradient-to-br relative overflow-hidden bg-[#F9DFDF]",
+          // location.color
         )}>
           {/* Subtle decorative circles */}
           <div className="absolute -top-12 -right-12 w-32 h-32 bg-white/5 rounded-full" />
           <div className="absolute -bottom-6 -left-6 w-24 h-24 bg-white/5 rounded-full" />
-          
+
           <div className="relative z-10 text-black">
             <div className="flex items-center justify-between mb-6">
               <div className="w-12 h-12 bg-white/15 backdrop-blur-sm rounded-lg flex items-center justify-center">
@@ -97,7 +97,7 @@ function LocationCard({
                 </div>
               </div>
             </div>
-            
+
             <h3 className="font-light text-2xl  text-black mb-1">{location.name}</h3>
             <p className=" font-light text-base text-black mb-2">{location.venue}</p>
           </div>
@@ -173,12 +173,12 @@ function LocationCard({
 }
 
 // Details Modal Component
-function LocationDetailsModal({ 
-  location, 
-  open, 
-  onOpenChange 
-}: { 
-  location: EventLocation | null; 
+function LocationDetailsModal({
+  location,
+  open,
+  onOpenChange
+}: {
+  location: EventLocation | null;
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }) {
@@ -287,12 +287,12 @@ export function EventLocations() {
       id: "ceremony",
       type: "ceremony",
       name: "Ceremonia Religiosa",
-      venue: "Parroquia de San Miguel Arcángel",
-      address: "Av. Constitución 123, Centro Histórico, Ciudad de México, 06000",
+      venue: "Comunión Cristiana Alfa & Omega, Asambleas de Dios.",
+      address: "Av. Eduardo Molina 1793 Nueva Atzacoalco, Gustavo A. Madero, 07420 Ciudad de México",
       time: "4:00 PM",
-      date: "Sábado, 12 de Septiembre 2026",
-      googleMapsUrl: "https://maps.google.com/?q=19.4326,-99.1332",
-      embedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.9234!2d-99.1332!3d19.4326",
+      date: "Sábado, 25  de Abril de 2026",
+      googleMapsUrl: "https://maps.app.goo.gl/a6RaX56WznkDCzhb8?g_st=ipc",
+      embedUrl: "https://maps.app.goo.gl/a6RaX56WznkDCzhb8?g_st=ipc",
       icon: <Church className="w-6 h-6" />,
       color: "bg-pink-100",
       gradient: "bg-gradient-to-br from-rose-50 to-pink-50",
@@ -310,10 +310,10 @@ export function EventLocations() {
       id: "reception",
       type: "reception",
       name: "Recepción",
-      venue: "Jardín Hacienda Los Laureles",
-      address: "Km 28.5 Carretera México-Cuernavaca, Tlalpan, 14380",
-      time: "7:00 PM",
-      date: "Sábado, 12 de Septiembre 2026",
+      venue: "Comunión Cristiana Alfa & Omega, Asambleas de Dios.",
+      address: "Av. Eduardo Molina 1793 Nueva Atzacoalco, Gustavo A. Madero, 07420 Ciudad de México",
+      time: "5:00 PM",
+      date: "Sábado, 25  de Abril de 2026",
       googleMapsUrl: "https://maps.google.com/?q=19.2845,-99.1621",
       embedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3765.1234!2d-99.1621!3d19.2845",
       icon: <Music className="w-6 h-6" />,
@@ -338,11 +338,11 @@ export function EventLocations() {
 
   return (
     <>
-      <section className="relative min-h-screen bg-gradient-to-b from-white via-gray-50/50 to-white py-24 px-6 overflow-hidden">
+      <section className="relative min-h-screen bg-gradient-to-b from-white via-gray-50/50 to-white py-24 px-6 overflow-hidden ">
         {/* Subtle decorative background */}
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-rose-100/10 rounded-full blur-3xl" />
         <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-pink-100/10 rounded-full blur-3xl" />
-        
+
         <div className="relative max-w-6xl mx-auto">
           {/* Header */}
           <motion.div
@@ -380,7 +380,7 @@ export function EventLocations() {
             transition={{ duration: 0.5 }}
             className="max-w-2xl mx-auto"
           >
-            <div className="bg-white rounded-lg p-6 shadow-sm border border-rose-100 hover:shadow-md transition-all duration-300">
+            {/* <div className="bg-white rounded-lg p-6 shadow-sm border border-rose-100 hover:shadow-md transition-all duration-300">
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 bg-rose-100 rounded-lg flex items-center justify-center flex-shrink-0">
                   <Info className="w-5 h-5 text-rose-600" />
@@ -392,7 +392,7 @@ export function EventLocations() {
                   </p>
                 </div>
               </div>
-            </div>
+            </div> */}
           </motion.div>
         </div>
       </section>

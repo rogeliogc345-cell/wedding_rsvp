@@ -47,7 +47,7 @@ export default function Footer({
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="w-full bg-gradient-to-t from-gray-900 via-gray-800 to-gray-900 text-white relative overflow-hidden">
+    <footer className="w-full text-white relative overflow-hidden">
       {/* Decorative background elements */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-rose-500/10 rounded-full blur-3xl opacity-50" />
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-pink-500/10 rounded-full blur-3xl opacity-50" />
@@ -62,7 +62,7 @@ export default function Footer({
           className="grid md:grid-cols-4 gap-8 mb-12"
         >
           {/* Brand Section */}
-          <motion.div  className="md:col-span-1">
+          <motion.div className="md:col-span-1">
             <div className="flex items-center gap-3 mb-4">
               <div className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-rose-500 to-pink-500 rounded-lg">
                 <Heart className="w-5 h-5 text-white" fill="white" />
@@ -80,7 +80,7 @@ export default function Footer({
           </motion.div>
 
           {/* Event Information */}
-          <motion.div  className="md:col-span-1">
+          <motion.div className="md:col-span-1">
             <h3 className="text-sm font-semibold uppercase tracking-widest text-white mb-4">
               Evento
             </h3>
@@ -103,7 +103,7 @@ export default function Footer({
           </motion.div>
 
           {/* Contact Information */}
-          <motion.div  className="md:col-span-1">
+          <motion.div className="md:col-span-1">
             <h3 className="text-sm font-semibold uppercase tracking-widest text-white mb-4">
               Contacto
             </h3>
@@ -126,7 +126,7 @@ export default function Footer({
           </motion.div>
 
           {/* Social Links */}
-          <motion.div  className="md:col-span-1">
+          <motion.div className="md:col-span-1">
             <h3 className="text-sm font-semibold uppercase tracking-widest text-white mb-4">
               Sígueme
             </h3>
@@ -168,7 +168,7 @@ export default function Footer({
 
         {/* Bottom Section */}
         <motion.div
-          
+
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}

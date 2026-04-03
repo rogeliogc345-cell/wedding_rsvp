@@ -10,6 +10,23 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        wedding: ["domlovesmary-pro", "serif"],
+        gothic: ['"wedding-gothic-atf-wide"', 'sans-serif'],
+        // Sans family
+        parisienneSans: ['"la-parisienne-sans"', 'sans-serif'],
+
+        // Script styles (decorative)
+        parisienneScript: ['"la-parisienne-script-regular"', 'cursive'],
+        parisienneScriptCasual: ['"la-parisienne-script-casual"', 'cursive'],
+
+        // Serif styles (elegant)
+        parisienneSerif: ['"la-parisienne-serif"', 'serif'],
+        parisienneSerifInline: ['"la-parisienne-serif-inline"', 'serif'],
+
+        savoir: ['"savoir-faire-jf"', 'sans-serif'],
+
+      },
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",

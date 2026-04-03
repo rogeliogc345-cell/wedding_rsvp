@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Clock, Heart, Music, Camera, Utensils, Sparkles } from "lucide-react";
+import { Clock, Heart, Music, Camera, Utensils, Sparkles, Ribbon, Gift } from "lucide-react";
 
 type EventItem = {
   time: string;
@@ -14,21 +14,23 @@ type ItineraryProps = {
   events: EventItem[];
 };
 
-export default function ItineraryQuinceanera ({ events }: ItineraryProps)  {
+export default function ItineraryQuinceanera({ events }: ItineraryProps) {
   return (
-    <section className="w-full py-20 px-6 md:px-16 bg-white">
-      
-    
+    <section className="w-full py-20 px-6 md:px-16 bg- bg-[url('/hanni/fondo_moños.png')] bg-cover bg-center ">
+
+
       <div className="text-center mb-16">
-        <h2 className="text-3xl md:text-5xl font-light tracking-wide text-gray-800">
+        <h2 className="text-3xl md:text-5xl font-light tracking-wide text-gray-800 flex justify-center items-center gap-4">
+          <Gift className="w-8 h-8 md:w-10 md:h-10 text-pink-400" />
           Itinerario
+          <Gift className="w-8 h-8 md:w-10 md:h-10 text-pink-400" />
         </h2>
         <div className="mt-4 w-20 h-[2px] bg-pink-400 mx-auto" />
       </div>
 
       {/* Timeline */}
       <div className="relative max-w-4xl mx-auto">
-        
+
         {/* Vertical Line */}
         <div className="absolute left-1/2 top-0 h-full w-[2px] bg-pink-200 -translate-x-1/2" />
 
@@ -43,15 +45,14 @@ export default function ItineraryQuinceanera ({ events }: ItineraryProps)  {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6 }}
                 viewport={{ once: true }}
-                className={`relative flex items-center justify-between ${
-                  isLeft ? "flex-row" : "flex-row-reverse"
-                }`}
+                className={`relative flex items-center justify-between ${isLeft ? "flex-row" : "flex-row-reverse"
+                  }`}
               >
-                
+
                 {/* Content Card */}
                 <div className="w-[45%]">
-                  <div className="bg-pink-50/60 backdrop-blur-md p-6 rounded-2xl shadow-md border border-pink-100 hover:shadow-lg transition-shadow duration-300">
-                    
+                  <div className="bg-[#F9DFDF] backdrop-blur-md p-6 rounded-2xl shadow-md border border-pink-100 hover:shadow-lg transition-shadow duration-300">
+
                     {/* Icon and Time */}
                     <div className="flex items-center gap-3 mb-3">
                       {event.icon && (
@@ -90,7 +91,7 @@ export default function ItineraryQuinceanera ({ events }: ItineraryProps)  {
             );
           })}
         </div>
-      </div> 
+      </div>
     </section>
   );
 }
