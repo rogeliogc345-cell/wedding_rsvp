@@ -47,7 +47,7 @@ export default function FooterQuinceanera({
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="w-full bg-black text-black relative overflow-hidden mt-3">
+    <footer className="w-full bg-black text-white relative overflow-hidden">
       {/* Decorative background elements */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-rose-500/10 rounded-full blur-3xl opacity-50" />
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-pink-500/10 rounded-full blur-3xl opacity-50" />
@@ -79,7 +79,7 @@ export default function FooterQuinceanera({
             </p>
           </motion.div>
 
-          {/* Event Information */}
+          {/* Event Information
           <motion.div className="md:col-span-1">
             <h3 className="text-sm font-semibold uppercase tracking-widest text-white mb-4">
               Evento
@@ -100,10 +100,10 @@ export default function FooterQuinceanera({
                 </div>
               </div>
             </div>
-          </motion.div>
+          </motion.div> */}
 
           {/* Contact Information */}
-          <motion.div className="md:col-span-1">
+          {/* <motion.div className="md:col-span-1">
             <h3 className="text-sm font-semibold uppercase tracking-widest text-white mb-4">
               Contacto
             </h3>
@@ -123,7 +123,7 @@ export default function FooterQuinceanera({
                 <span className="text-sm font-light group-hover:underline">{phone}</span>
               </a>
             </div>
-          </motion.div>
+          </motion.div> */}
 
           {/* Social Links */}
           <motion.div className="md:col-span-1">

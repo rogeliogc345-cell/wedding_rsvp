@@ -74,7 +74,7 @@ function LocationCard({
       <div className="bg-white rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-rose-100 overflow-hidden">
         {/* Card Header */}
         <div className={cn(
-          "p-8 bg-gradient-to-br relative overflow-hidden bg-[url('/hanni/fondo_location.jpeg')] bg-top",
+          "p-8 bg-gradient-to-br relative overflow-hidden bg-[url('/hanni/fondo_location.jpeg')] bg-top bg-black",
           // location.color
         )}>
           {/* Subtle decorative circles */}
@@ -104,7 +104,7 @@ function LocationCard({
         </div>
 
         {/* Card Body */}
-        <div className="p-8">
+        <div className="p-8 bg-[url('/hanni/fondo_location.jpeg')] bg-center">
           {/* Address */}
           <div className="flex items-start gap-3 mb-6">
             <MapPin className="w-5 h-5 text-rose-400 mt-0.5 flex-shrink-0" />
@@ -145,7 +145,7 @@ function LocationCard({
               </div>
             )}
             {location.details.dressCode && (
-              <div className="flex items-center gap-2 px-3 py-1.5 bg-pink-50 text-pink-700 rounded-full text-xs font-light">
+              <div className="flex items-center gap-2 px-3 py-1.5 bg-pink-50 text-[#E2852E] rounded-full text-xs font-light">
                 <Info className="w-3.5 h-3.5" />
                 <span>{location.details.dressCode}</span>
               </div>
@@ -153,7 +153,7 @@ function LocationCard({
           </div> */}
 
           {/* Action Buttons */}
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 gap-3 ">
             {/* <Button
               onClick={openDirections}
               className={cn(
@@ -256,13 +256,13 @@ function LocationDetailsModal({
           {/* Notes */}
           {location.details.notes && location.details.notes.length > 0 && (
             <div className="p-4 bg-pink-50 rounded-lg border border-pink-100">
-              <p className="text-xs text-pink-700 uppercase tracking-wide font-medium mb-3">
+              <p className="text-xs text-[#E2852E] uppercase tracking-wide font-medium mb-3">
                 Información adicional
               </p>
               <ul className="space-y-2">
                 {location.details.notes.map((note, index) => (
-                  <li key={index} className="flex items-start gap-2 text-sm text-pink-900 font-light">
-                    <span className="text-pink-400 mt-0.5 flex-shrink-0">•</span>
+                  <li key={index} className="flex items-start gap-2 text-sm text-[#E2852E] font-light">
+                    <span className="text-[#E2852E] mt-0.5 flex-shrink-0">•</span>
                     <span>{note}</span>
                   </li>
                 ))}
@@ -326,7 +326,7 @@ export function EventLocations() {
 
   return (
     <>
-      <section className="relative min-h-screen bg-gradient-to-b from-white via-gray-50/50 to-white py-24 px-6 overflow-hidden ">
+      <section className="relative min-h-screen via-gray-50/50 to-white py-24 px-6 overflow-hidden bg-[url('/hanni/fondo_20.jpeg')] bg-center ">
         {/* Subtle decorative background */}
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-rose-100/10 rounded-full blur-3xl" />
         <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-pink-100/10 rounded-full blur-3xl" />

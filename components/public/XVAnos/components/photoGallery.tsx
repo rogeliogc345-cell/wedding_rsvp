@@ -62,7 +62,7 @@ export function PhotoGalleryQuinceañera({ photos }: PhotoGalleryProps) {
   return (
     <>
       {/* Gallery Section */}
-      <section className="w-full py-16 md:py-24 lg:py-32 ">
+      <section className="w-full py-16 md:py-24 lg:py-32 bg-[url('/hanni/fondo_11.jpeg')] bg-center ">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

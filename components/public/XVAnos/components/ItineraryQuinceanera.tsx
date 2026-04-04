@@ -16,16 +16,16 @@ type ItineraryProps = {
 
 export default function ItineraryQuinceanera({ events }: ItineraryProps) {
   return (
-    <section className="w-full py-20 px-6 md:px-16 bg- bg-[url('/hanni/fondo_moños_10 .jpeg')] bg-cover bg-center ">
+    <section className="w-full py-20 px-6 md:px-16 bg- bg-[url('/hanni/fondo_moños_10.jpeg')] bg-cover bg-center ">
 
 
       <div className="text-center mb-16">
         <h2 className="font-savoir  text-6xl md:text-5xl font-light tracking-wide text-gray-800 flex justify-center items-center gap-4">
-          <Gift className="w-8 h-8 md:w-10 md:h-10 text-pink-400" />
+          <Gift className="w-8 h-8 md:w-10 md:h-10 text-[#E2852E]" />
           Itinerario
-          <Gift className="w-8 h-8 md:w-10 md:h-10 text-pink-400" />
+          <Gift className="w-8 h-8 md:w-10 md:h-10 text-[#E2852E]" />
         </h2>
-        <div className="mt-4 w-20 h-[2px] bg-pink-400 mx-auto" />
+        <div className="mt-4 w-20 h-[2px] bg-[#E2852E] mx-auto" />
       </div>
 
       {/* Timeline */}
@@ -60,12 +60,12 @@ export default function ItineraryQuinceanera({ events }: ItineraryProps) {
                           initial={{ scale: 0 }}
                           whileInView={{ scale: 1 }}
                           transition={{ delay: 0.2 }}
-                          className="text-pink-400"
+                          className="text-[#E2852E]"
                         >
                           {event.icon}
                         </motion.div>
                       )}
-                      <p className="text-sm text-pink-400 tracking-widest uppercase font-medium">
+                      <p className="text-sm text-[#E2852E] tracking-widest uppercase font-medium">
                         {event.time}
                       </p>
                     </div>

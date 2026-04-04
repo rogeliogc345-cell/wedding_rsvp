@@ -74,7 +74,7 @@ const eventos: EventItem[] = [
 const photos: Photo[] = [
   {
     id: "1",
-    src: "/hanni/hanni_1.jpeg",
+    src: "/hanni/hanni_100.jpeg",
     alt: "Foto de la quinceañera con su familia y amigos",
     aspectRatio: 4 / 3,
 
@@ -83,40 +83,35 @@ const photos: Photo[] = [
 
   {
     id: "2",
-    src: "/hanni/hanni_2.jpeg",
+    src: "/hanni/hanni_101.jpeg",
     alt: "Foto de la quinceañera con su vestido de gala",
     aspectRatio: 4 / 3,
   },
   {
     id: "3",
-    src: "/hanni/hanni_4.jpeg",
+    src: "/hanni/hanni_102.jpeg",
     alt: "Foto de la quinceañera con sus amigas",
     aspectRatio: 4 / 3,
   },
   {
     id: "4",
-    src: "/hanni/hanni_6.jpeg",
+    src: "/hanni/hanni_103.jpeg",
     alt: "Foto de la quinceañera con su familia",
     aspectRatio: 4 / 3,
   },
   {
     id: "5",
-    src: "/hanni/hanni_9.jpeg",
+    src: "/hanni/hanni_104.jpeg",
     alt: "Foto de la quinceañera con su vestido de gala",
     aspectRatio: 5 / 4,
   },
   {
     id: "6",
-    src: "/hanni/hanni_10.jpeg",
+    src: "/hanni/hanni_105.jpeg",
     alt: "Foto de la quinceañera con su vestido de gala",
     aspectRatio: 5 / 4,
   },
-  {
-    id: "7",
-    src: "/hanni/hanni_11.jpeg",
-    alt: "Foto de la quinceañera con su vestido de gala",
-    aspectRatio: 5 / 4,
-  }
+
 ]
 
 

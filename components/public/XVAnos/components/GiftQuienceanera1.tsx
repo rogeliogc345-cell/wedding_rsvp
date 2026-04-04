@@ -96,7 +96,7 @@ export function GiftRegistryQuinceanera() {
 
   return (
     <>
-      <section className="relative min-h-screen  via-gray-50/50 to-white py-24 px-24 overflow-hidden bg-black  mb-3
+      <section className="relative min-h-screen  via-gray-50/50 to-white py-24 px-24 overflow-hidden bg-black
        mx-auto w-full max-w-7xl bg-[url('/hanni/fondo_10.jpeg')] bg-cover bg-center ">
         {/* Decorative elements - subtle */}
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-rose-100/10 rounded-full blur-3xl" />
@@ -111,13 +111,13 @@ export function GiftRegistryQuinceanera() {
             className="text-center mb-20"
           >
             <h2 className=" font-savoir text-5xl font-light text-3xl md:text-5xl lg:text-6xl text-gray-900 mb-6 tracking-wide">
-              Si quieres regalarme algo!
+              Si deseas regalarme algo!
             </h2>
             <div className="w-16 h-1 bg-gradient-to-r from-transparent via-rose-300 to-transparent mx-auto mb-8" />
             <p className="text-gray-600 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed font-light">
-              Te dejamos algunas sugerencias.
+              Te dejo una idea.
               <br />
-              <span className="text-rose-600 font-medium">Tu presencia es el mejor regalo de todos.</span>
+              <span className="font-bold ">Tu presencia es el mejor regalo de todos.</span>
             </p>
           </motion.div>
 
