@@ -12,6 +12,7 @@ import FooterQuinceanera from '@/components/public/XVAnos/components/Header';
 import { RSVPForm } from '@/components/public/RSVPForm';
 import { Customer } from '@/types/database';
 import { WelcomeDialog } from '@/components/public/XVAnos/components/WelcomeDialog';
+import HanniSobresDinero from '@/components/public/XVAnos/components/HanniSobresDinero';
 
 type EventItem = {
   time: string;
@@ -74,7 +75,7 @@ const eventos: EventItem[] = [
 const photos: Photo[] = [
   {
     id: "1",
-    src: "/hanni/hanni_100.jpeg",
+    src: "/hanni/hani2.jpeg",
     alt: "Foto de la quinceañera con su familia y amigos",
     aspectRatio: 4 / 3,
 
@@ -83,34 +84,48 @@ const photos: Photo[] = [
 
   {
     id: "2",
-    src: "/hanni/hanni_101.jpeg",
+    src: "/hanni/hani3.jpeg",
     alt: "Foto de la quinceañera con su vestido de gala",
     aspectRatio: 4 / 3,
   },
   {
     id: "3",
-    src: "/hanni/hanni_102.jpeg",
+    src: "/hanni/hani4.jpeg",
     alt: "Foto de la quinceañera con sus amigas",
     aspectRatio: 4 / 3,
   },
   {
     id: "4",
-    src: "/hanni/hanni_103.jpeg",
+    src: "/hanni/hani5.jpeg",
     alt: "Foto de la quinceañera con su familia",
     aspectRatio: 4 / 3,
   },
   {
     id: "5",
-    src: "/hanni/hanni_104.jpeg",
+    src: "/hanni/hani6.jpeg",
     alt: "Foto de la quinceañera con su vestido de gala",
     aspectRatio: 5 / 4,
   },
   {
     id: "6",
-    src: "/hanni/hanni_105.jpeg",
+    src: "/hanni/hani7.jpeg",
     alt: "Foto de la quinceañera con su vestido de gala",
     aspectRatio: 5 / 4,
   },
+  {
+    id: "7",
+    src: "/hanni/hani8.jpeg",
+    alt: "Foto de la quinceañera con su vestido de gala",
+    aspectRatio: 5 / 4,
+  },
+  {
+    id: "8",
+    src: "/hanni/hani20.jpeg",
+    alt: "Foto de la quinceañera con su vestido de gala",
+    aspectRatio: 5 / 4,
+
+  },
+
 
 ]
 
@@ -219,13 +234,14 @@ Gracias por acompañarme en este día tan importante para mí. 🤍'
       <EventLocationQuinceanera />
       <PhotoGalleryQuinceañera photos={photos} />
 
-      <GiftRegistryQuinceanera />
+      {/* <GiftRegistryQuinceanera /> */}
+      <HanniSobresDinero />
 
       {/* <Suspense>
         <RSVPForm customerId={customer.id} />
       </Suspense> */}
 
-      <FooterQuinceanera quinceaneraName={customer.couple_name} eventDate={customer.event_date} />
+      {/* <FooterQuinceanera quinceaneraName={customer.couple_name} eventDate={customer.event_date} /> */}
 
 
 

@@ -6,13 +6,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight, Maximize2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-// Photo type
 export type Photo = {
   id: string;
   src: string;
   alt: string;
   title?: string;
   aspectRatio: number; // width / height
+  className?: string;
 };
 
 interface PhotoGalleryProps {
@@ -102,7 +102,8 @@ export function PhotoGalleryQuinceañera({ photos }: PhotoGalleryProps) {
                   className={cn(
                     "w-full h-auto transition-transform duration-500",
                     "group-hover:scale-105",
-                    !imageLoadStates[photo.id] && "opacity-0"
+                    !imageLoadStates[photo.id] && "opacity-0",
+                    photo.className
                   )}
                   onLoad={() => {
                     setImageLoadStates(prev => ({ ...prev, [photo.id]: true }));
@@ -220,7 +221,7 @@ export function PhotoGalleryQuinceañera({ photos }: PhotoGalleryProps) {
                     alt={photos[selectedIndex].alt}
                     width={1920}
                     height={1920 / photos[selectedIndex].aspectRatio}
-                    className="w-full h-auto max-h-[80vh] object-contain rounded-xl shadow-2xl"
+                    className={cn("w-full h-auto max-h-[80vh] object-contain rounded-xl shadow-2xl", photos[selectedIndex].className)}
                     quality={95}
                     priority
                   />
