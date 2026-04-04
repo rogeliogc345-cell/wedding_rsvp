@@ -79,7 +79,7 @@ const XVHeroComponent = ({ name }: { name: string }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
-          className="font-gothic font-semibold tracking-[0.4em] uppercase text-xs text-white/80 mt-4 text-sm md:text-lg tracking-[0.3em] uppercase text-gray-200"
+          className=" tracking-[0.4em] uppercase text-xs text-white/80 mt-4 text-sm md:text-lg tracking-[0.3em] uppercase text-gray-200"
         >
           Mis XV años.
         </motion.p>

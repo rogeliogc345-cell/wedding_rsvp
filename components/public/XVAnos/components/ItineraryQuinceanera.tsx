@@ -16,11 +16,11 @@ type ItineraryProps = {
 
 export default function ItineraryQuinceanera({ events }: ItineraryProps) {
   return (
-    <section className="w-full py-20 px-6 md:px-16 bg- bg-[url('/hanni/fondo_moños.png')] bg-cover bg-center ">
+    <section className="w-full py-20 px-6 md:px-16 bg- bg-[url('/hanni/fondo_moños_10 .jpeg')] bg-cover bg-center ">
 
 
       <div className="text-center mb-16">
-        <h2 className="text-3xl md:text-5xl font-light tracking-wide text-gray-800 flex justify-center items-center gap-4">
+        <h2 className="font-savoir  text-6xl md:text-5xl font-light tracking-wide text-gray-800 flex justify-center items-center gap-4">
           <Gift className="w-8 h-8 md:w-10 md:h-10 text-pink-400" />
           Itinerario
           <Gift className="w-8 h-8 md:w-10 md:h-10 text-pink-400" />
@@ -50,8 +50,8 @@ export default function ItineraryQuinceanera({ events }: ItineraryProps) {
               >
 
                 {/* Content Card */}
-                <div className="w-[45%]">
-                  <div className="bg-[#F9DFDF] backdrop-blur-md p-6 rounded-2xl shadow-md border border-pink-100 hover:shadow-lg transition-shadow duration-300">
+                <div className="w-[45%] ">
+                  <div className="bg-[url('/hanni/fondo_location.jpeg')] bg-top backdrop-blur-md p-6 rounded-2xl shadow-md border border-pink-100 hover:shadow-lg transition-shadow duration-300">
 
                     {/* Icon and Time */}
                     <div className="flex items-center gap-3 mb-3">

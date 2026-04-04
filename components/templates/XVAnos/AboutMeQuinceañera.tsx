@@ -40,7 +40,7 @@ export default function AboutMe({ name, description, image }: AboutMeProps) {
           viewport={{ once: true }}
           className="text-center md:text-left"
         >
-          <h2 className="text-3xl md:text-5xl font-light tracking-wide text-gray-800">
+          <h2 className="font-savoir text-5xl md:text-5xl font-light tracking-wide text-gray-800">
             Sobre mí
           </h2>
 

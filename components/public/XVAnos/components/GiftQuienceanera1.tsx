@@ -110,7 +110,7 @@ export function GiftRegistryQuinceanera() {
             transition={{ duration: 0.6 }}
             className="text-center mb-20"
           >
-            <h2 className="font-light text-3xl md:text-5xl lg:text-6xl text-gray-900 mb-6 tracking-wide">
+            <h2 className=" font-savoir text-5xl font-light text-3xl md:text-5xl lg:text-6xl text-gray-900 mb-6 tracking-wide">
               Si quieres regalarme algo!
             </h2>
             <div className="w-16 h-1 bg-gradient-to-r from-transparent via-rose-300 to-transparent mx-auto mb-8" />

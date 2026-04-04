@@ -70,7 +70,7 @@ export function PhotoGalleryQuinceañera({ photos }: PhotoGalleryProps) {
           transition={{ duration: 0.6 }}
           className="text-center mb-12 md:mb-16"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-light tracking-wide text-gray-900 dark:text-white mb-2">
+          <h2 className="font-savoir text-5xl md:text-4xl lg:text-5xl font-light tracking-wide text-gray-900 dark:text-white mb-2">
             Momentos Especiales
           </h2>
           <div className="w-16 h-1 bg-gradient-to-r from-transparent via-gray-900 dark:via-white to-transparent mx-auto" />
