@@ -71,7 +71,7 @@ function LocationCard({
       transition={{ duration: 0.5, delay: index * ANIMATION_CONFIG.staggerDelay }}
       className="group relative"
     >
-      <div className="bg-white rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-rose-100 overflow-hidden">
+      <div className=" bg-white rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-rose-100 overflow-hidden">
         {/* Card Header */}
         <div className={cn(
           "p-8 bg-gradient-to-br relative overflow-hidden bg-[url('/hanni/fondo_location.jpeg')] bg-top bg-black",
@@ -326,7 +326,7 @@ export function EventLocations() {
 
   return (
     <>
-      <section className="relative min-h-screen via-gray-50/50 to-white py-24 px-6 overflow-hidden bg-[url('/hanni/fondo_20.jpeg')] bg-center ">
+      <section className="flex relative min-h-screen via-gray-50/50 to-white py-24 px-6 overflow-hidden bg-[url('/hanni/fondo_20.jpeg')] bg-cover w-full bg-center ">
         {/* Subtle decorative background */}
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-rose-100/10 rounded-full blur-3xl" />
         <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-pink-100/10 rounded-full blur-3xl" />
@@ -344,19 +344,20 @@ export function EventLocations() {
             </h2>
             <div className="w-16 h-1 bg-gradient-to-r from-transparent via-rose-300 to-transparent mx-auto mb-8" />
             <p className="text-gray-600 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed font-light">
-              Acompáñanos en estos momentos especiales
+              Acompáñanos en este día tan especial!
             </p>
           </motion.div>
 
           {/* Location Cards Grid */}
-          <div className="grid md:grid-cols-2 gap-8 mb-16">
+          <div className="flex flex-col items-center gap-8 mb-16">
             {locations.map((location, index) => (
-              <LocationCard
-                key={location.id}
-                location={location}
-                index={index}
-                onShowDetails={handleShowDetails}
-              />
+              <div key={location.id} className="w-full max-w-xl">
+                <LocationCard
+                  location={location}
+                  index={index}
+                  onShowDetails={handleShowDetails}
+                />
+              </div>
             ))}
           </div>
 
