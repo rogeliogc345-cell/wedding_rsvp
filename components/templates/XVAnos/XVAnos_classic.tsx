@@ -5,7 +5,7 @@ import AboutMe from './AboutMeQuinceañera'
 import ItineraryQuinceanera from '@/components/public/XVAnos/components/ItineraryQuinceanera';
 import { EventLocations as EventLocationQuinceanera } from '@/components/public/XVAnos/components/LocationQuinceanera';
 import { Photo, PhotoGalleryQuinceañera } from '@/components/public/XVAnos/components/photoGallery';
-import { Clock, Music, Utensils, Camera, Sparkles, Music4, HeartHandshake } from "lucide-react";
+import { Clock, Music, Utensils, Camera, Sparkles, Music4, HeartHandshake, Flower } from "lucide-react";
 import { GiftRegistryMinimal } from '@/components/public/XVAnos/components/GiftsQuinceanera';
 import { GiftRegistryQuinceanera } from '@/components/public/XVAnos/components/GiftQuienceanera1';
 import FooterQuinceanera from '@/components/public/XVAnos/components/Header';
@@ -43,6 +43,12 @@ interface XVAnosClassicProps {
 
 const eventos: EventItem[] = [
   {
+    time: "3:30 PM",
+    title: "Recepción",
+    description: "Lugar de la recepción",
+    icon: <Flower size={30} />
+  },
+  {
     time: "4:00 PM",
     title: "Ceremonia",
     description: "Dando Gracias a Dios por mi vida",
@@ -50,20 +56,15 @@ const eventos: EventItem[] = [
   },
   {
     time: "5:00 PM",
-    title: "Recepción",
-    description: "Lugar de la recepción",
-    icon: <Music size={30} />
-  },
-  {
-    time: "5:30 PM",
     title: "Cena",
-    description: "Servicio de alimentos",
+    description: "Disfrutemos de una deliciosa cena.",
     icon: <Utensils size={30} />
   },
+
   {
-    time: "9:00 PM",
-    title: "Sesi",
-    description: "Momentos especiales",
+    time: "6:00 PM",
+    title: "Momentos Especiales",
+    description: "Creando recuerdos inolvidables.",
     icon: <Camera size={30} />
   }
 ]
@@ -225,9 +226,9 @@ Gracias por acompañarme en este día tan importante para mí. 🤍'
 
       <GiftRegistryQuinceanera />
 
-      <Suspense>
+      {/* <Suspense>
         <RSVPForm customerId={customer.id} />
-      </Suspense>
+      </Suspense> */}
 
       <FooterQuinceanera quinceaneraName={customer.couple_name} eventDate={customer.event_date} />
 

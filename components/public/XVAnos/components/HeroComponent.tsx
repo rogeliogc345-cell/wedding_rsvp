@@ -50,7 +50,7 @@ const XVHeroComponent = ({ name }: { name: string }) => {
     <section className="relative h-screen w-full flex flex-col items-center justify-center text-white bg-pink-200">
       {/* Background Image */}
       <Image
-        src="/hanni/hanni_rosa.png"
+        src="/hanni/hanni_hero_1.jpeg"
         alt="Wedding background"
         fill
         priority

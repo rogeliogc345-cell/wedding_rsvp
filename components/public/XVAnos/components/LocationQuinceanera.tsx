@@ -74,7 +74,7 @@ function LocationCard({
       <div className="bg-white rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-rose-100 overflow-hidden">
         {/* Card Header */}
         <div className={cn(
-          "p-8 bg-gradient-to-br relative overflow-hidden bg-[#F9DFDF]",
+          "p-8 bg-gradient-to-br relative overflow-hidden bg-[url('/hanni/fondo_location.jpeg')] bg-top",
           // location.color
         )}>
           {/* Subtle decorative circles */}
@@ -112,7 +112,7 @@ function LocationCard({
           </div>
 
           {/* Map Preview */}
-          {location.embedUrl && (
+          {/* {location.embedUrl && (
             <div className="mb-6 rounded-lg overflow-hidden shadow-sm h-40 bg-gray-100">
               <iframe
                 src={location.embedUrl}
@@ -124,10 +124,20 @@ function LocationCard({
                 referrerPolicy="no-referrer-when-downgrade"
               />
             </div>
-          )}
+          )} */}
 
-          {/* Quick Info Pills */}
-          <div className="flex flex-wrap gap-2 mb-6">
+          <a
+            href="https://maps.app.goo.gl/Lv2YwZAW4uzhvbJQA"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary underline"
+          >
+            Ir a ubicación 📍
+          </a>
+
+
+
+          {/* <div className="flex flex-wrap gap-2 mb-6">
             {location.details.parking && (
               <div className="flex items-center gap-2 px-3 py-1.5 bg-rose-50 text-rose-700 rounded-full text-xs font-light">
                 <Car className="w-3.5 h-3.5" />
@@ -140,7 +150,7 @@ function LocationCard({
                 <span>{location.details.dressCode}</span>
               </div>
             )}
-          </div>
+          </div> */}
 
           {/* Action Buttons */}
           <div className="grid grid-cols-2 gap-3">
@@ -286,13 +296,13 @@ export function EventLocations() {
     {
       id: "ceremony",
       type: "ceremony",
-      name: "Ceremonia Religiosa",
+      name: "Ceremonia & Recepción",
       venue: "Comunión Cristiana Alfa & Omega, Asambleas de Dios.",
       address: "Av. Eduardo Molina 1793 Nueva Atzacoalco, Gustavo A. Madero, 07420 Ciudad de México",
       time: "4:00 PM",
       date: "Sábado, 25  de Abril de 2026",
-      googleMapsUrl: "https://maps.app.goo.gl/a6RaX56WznkDCzhb8?g_st=ipc",
-      embedUrl: "https://maps.app.goo.gl/a6RaX56WznkDCzhb8?g_st=ipc",
+      googleMapsUrl: "https://maps.app.goo.gl/Lv2YwZAW4uzhvbJQA",
+      embedUrl: "https://maps.app.goo.gl/Lv2YwZAW4uzhvbJQA",
       icon: <Church className="w-6 h-6" />,
       color: "bg-pink-100",
       gradient: "bg-gradient-to-br from-rose-50 to-pink-50",
@@ -306,29 +316,7 @@ export function EventLocations() {
         ]
       }
     },
-    {
-      id: "reception",
-      type: "reception",
-      name: "Recepción",
-      venue: "Comunión Cristiana Alfa & Omega, Asambleas de Dios.",
-      address: "Av. Eduardo Molina 1793 Nueva Atzacoalco, Gustavo A. Madero, 07420 Ciudad de México",
-      time: "5:00 PM",
-      date: "Sábado, 25  de Abril de 2026",
-      googleMapsUrl: "https://maps.google.com/?q=19.2845,-99.1621",
-      embedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3765.1234!2d-99.1621!3d19.2845",
-      icon: <Music className="w-6 h-6" />,
-      color: "bg-pink-100",
-      gradient: "bg-gradient-to-br from-rose-50 to-pink-50",
-      details: {
-        parking: "Valet parking gratuito disponible",
-        dressCode: "Formal / Cocktail",
-        notes: [
-          "Cena y barra libre incluidas",
-          "Pista de baile al aire libre",
-          "Servicio de taxi disponible al finalizar el evento"
-        ]
-      }
-    }
+
   ], []);
 
   const handleShowDetails = useCallback((location: EventLocation) => {

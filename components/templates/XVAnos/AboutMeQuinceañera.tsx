@@ -11,9 +11,9 @@ type AboutMeProps = {
 //bg-gradient-to-b from-white to-pink-50
 export default function AboutMe({ name, description, image }: AboutMeProps) {
   return (
-    <section className="relative w-full py-20 px-6 md:px-16  bg-[#F9DFDF]">
+    <section className="relative w-full py-20 px-6 md:px-16  bg-[url('/hanni/fondo_11.jpeg')] bg-[position:50%_20%] bg-cover  ">
 
-      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+      <div className="max-w-6xl mx-auto grid md:grid-colsXVbg-[#F9DFDF]-2 gap-10 items-center">
 
         {/* Image */}
         <motion.div

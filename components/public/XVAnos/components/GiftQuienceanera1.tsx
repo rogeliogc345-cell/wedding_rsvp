@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Gift, Store, DollarSign, Mail, X, Copy, Check, ChevronDown } from "lucide-react";
+import { Gift, Store, DollarSign, Mail, X, Copy, Check, ChevronDown, MailCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -27,7 +27,7 @@ type GiftOption = {
 type BankDetails = {
   bankName: string;
   accountName: string;
-  accountNumber: string;
+  accountNumbe?: string;
   swiftCode?: string;
   clabe?: string;
 };
@@ -39,28 +39,28 @@ export function GiftRegistryQuinceanera() {
   const [copiedField, setCopiedField] = useState<string | null>(null);
 
   const giftOptions: GiftOption[] = [
-    {
-      id: "liverpool",
-      icon: <Store className="w-6 h-6" />,
-      title: "Liverpool",
-      subtitle: "Mesa de regalos",
-      link: "https://mesaderegalos.liverpool.com.mx/milistaderegalos/...",
-      color: "from-pink-500 to-rose-500",
-      gradient: "bg-gradient-to-br from-pink-50 to-rose-50",
-    },
-    {
-      id: "palacio",
-      icon: <Gift className="w-6 h-6" />,
-      title: "Palacio de Hierro",
-      subtitle: "Mesa de regalos",
-      link: "https://www.elpalaciodehierro.com/mesa-de-regalos/...",
-      color: "from-pink-500 to-rose-500",
-      gradient: "bg-gradient-to-br from-rose-50 to-pink-50",
-    },
+    // {
+    //   id: "liverpool",
+    //   icon: <Store className="w-6 h-6" />,
+    //   title: "Liverpool",
+    //   subtitle: "Mesa de regalos",
+    //   link: "https://mesaderegalos.liverpool.com.mx/milistaderegalos/...",
+    //   color: "from-pink-500 to-rose-500",
+    //   gradient: "bg-gradient-to-br from-pink-50 to-rose-50",
+    // },
+    // {
+    //   id: "palacio",
+    //   icon: <Gift className="w-6 h-6" />,
+    //   title: "Palacio de Hierro",
+    //   subtitle: "Mesa de regalos",
+    //   link: "https://www.elpalaciodehierro.com/mesa-de-regalos/...",
+    //   color: "from-pink-500 to-rose-500",
+    //   gradient: "bg-gradient-to-br from-rose-50 to-pink-50",
+    // },
     {
       id: "cash",
-      icon: <DollarSign className="w-6 h-6" />,
-      title: "Sobre de efectivo",
+      icon: <Mail className="w-6 h-6" />,
+      title: "Lluvia de sobres.",
       subtitle: "Transferencia bancaria",
       color: "from-pink-500 to-rose-500",
       gradient: "bg-gradient-to-br from-rose-50 to-pink-50",
@@ -68,11 +68,11 @@ export function GiftRegistryQuinceanera() {
   ];
 
   const bankDetails: BankDetails = {
-    bankName: "BBVA México",
-    accountName: "Juan Pérez García",
-    accountNumber: "0123 4567 8901 2345",
-    clabe: "012345678901234567",
-    swiftCode: "BCMRMXMMPYM",
+    bankName: "Banamex",
+    accountName: "Martha Liliana Aguilar Muñoz.",
+    // accountNumber: "0123 4567 8901 2345",
+    clabe: "002180701119430267",
+    // swiftCode: "BCMRMXMMPYM",
   };
 
   const copyToClipboard = async (text: string, field: string) => {
@@ -97,7 +97,7 @@ export function GiftRegistryQuinceanera() {
   return (
     <>
       <section className="relative min-h-screen  via-gray-50/50 to-white py-24 px-24 overflow-hidden bg-black  mb-3
-       mx-auto w-full max-w-7xl bg-[url('/hanni/fondo_moños2.png')] bg-cover bg-center ">
+       mx-auto w-full max-w-7xl bg-[url('/hanni/fondo_10.jpeg')] bg-cover bg-center ">
         {/* Decorative elements - subtle */}
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-rose-100/10 rounded-full blur-3xl" />
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-pink-100/10 rounded-full blur-3xl" />
@@ -144,12 +144,13 @@ export function GiftRegistryQuinceanera() {
                 className={cn(
                   "group relative bg-[#F9DFDF] rounded-xl px-6 py-4 shadow-md hover:shadow-lg",
                   "transition-all duration-300 hover:-translate-y-1",
-                  "border border-gray-100 hover:border-rose-100"
+                  "border border-gray-100 hover:border-rose-100 bg-[url('/hanni/fondo_location.jpeg')] bg-cover bg-top",
+
                 )}
               >
                 {/* Subtle background on hover */}
                 <div className={cn(
-                  "absolute inset-0 rounded-xl opacity-0 group-hover:opacity-40 transition-opacity duration-300",
+                  "absolute inset-0 rounded-xl opacity-0 group-hover:opacity-40 transition-opacity duration-300 ",
                   option.gradient
                 )} />
 
@@ -204,7 +205,7 @@ export function GiftRegistryQuinceanera() {
               <div className="w-8 h-8 bg-gradient-to-br from-rose-500 to-pink-500 rounded-md flex items-center justify-center group-hover:scale-105 transition-transform">
                 <DollarSign className="w-4 h-4 text-white" />
               </div>
-              <span className="text-gray-700 font-medium group-hover:text-rose-700 transition-colors">
+              <span className="text-gray-700 font-medium group-hover:text-rose-700 transition-colors ">
                 Ver datos bancarios
               </span>
             </button>
@@ -238,7 +239,7 @@ export function GiftRegistryQuinceanera() {
             </div>
 
             {/* Account Number */}
-            <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
+            {/* <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
               <div className="flex items-center justify-between">
                 <div className="flex-1">
                   <p className="text-xs text-gray-500 mb-2 uppercase tracking-wider font-medium">
@@ -261,7 +262,7 @@ export function GiftRegistryQuinceanera() {
                   )}
                 </Button>
               </div>
-            </div>
+            </div> */}
 
             {/* CLABE */}
             {bankDetails.clabe && (
