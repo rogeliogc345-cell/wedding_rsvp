@@ -297,7 +297,7 @@ export function EventLocations() {
       id: "ceremony",
       type: "ceremony",
       name: "Ceremonia & Recepción",
-      venue: "Comunión Cristiana Alfa & Omega, Asambleas de Dios.",
+      venue: "Comunión Cristiana Alfa & Omega.",
       address: "Av. Eduardo Molina 1793 Nueva Atzacoalco, Gustavo A. Madero, 07420 Ciudad de México",
       time: "4:00 PM",
       date: "Sábado, 25  de Abril de 2026",

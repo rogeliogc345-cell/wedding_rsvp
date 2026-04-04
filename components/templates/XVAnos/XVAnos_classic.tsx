@@ -13,6 +13,8 @@ import { RSVPForm } from '@/components/public/RSVPForm';
 import { Customer } from '@/types/database';
 import { WelcomeDialog } from '@/components/public/XVAnos/components/WelcomeDialog';
 import HanniSobresDinero from '@/components/public/XVAnos/components/HanniSobresDinero';
+import Image from 'next/image';
+
 
 type EventItem = {
   time: string;
@@ -90,7 +92,7 @@ const photos: Photo[] = [
   },
   {
     id: "3",
-    src: "/hanni/hani4.jpeg",
+    src: "/hanni/hani8.jpeg",
     alt: "Foto de la quinceañera con sus amigas",
     aspectRatio: 4 / 3,
   },
@@ -112,12 +114,7 @@ const photos: Photo[] = [
     alt: "Foto de la quinceañera con su vestido de gala",
     aspectRatio: 5 / 4,
   },
-  {
-    id: "7",
-    src: "/hanni/hani8.jpeg",
-    alt: "Foto de la quinceañera con su vestido de gala",
-    aspectRatio: 5 / 4,
-  },
+
   {
     id: "8",
     src: "/hanni/hani20.jpeg",
@@ -234,14 +231,66 @@ Gracias por acompañarme en este día tan importante para mí. 🤍'
       <EventLocationQuinceanera />
       <PhotoGalleryQuinceañera photos={photos} />
 
-      {/* <GiftRegistryQuinceanera /> */}
+
       <HanniSobresDinero />
+      <GiftRegistryQuinceanera />
 
       {/* <Suspense>
         <RSVPForm customerId={customer.id} />
       </Suspense> */}
 
       {/* <FooterQuinceanera quinceaneraName={customer.couple_name} eventDate={customer.event_date} /> */}
+
+
+
+      {/* Confirmación — card style */}
+      <section className="relative w-full py-20 px-4 bg-[url('/hanni/fondo_10.jpeg')] bg-cover bg-top">
+        <div className="absolute inset-0 bg-white/10" />
+        <div className="relative max-w-xl mx-auto flex flex-col items-center gap-8">
+          <div className="text-center mb-4">
+            <h2 className="font-savoir text-4xl md:text-5xl font-light text-gray-900 tracking-wide mb-3">
+
+            </h2>
+            <div className="w-16 h-1 bg-gradient-to-r from-transparent via-rose-300 to-transparent mx-auto" />
+          </div>
+          <div className="w-full rounded-2xl overflow-hidden shadow-xl border border-white/60">
+            <Image
+              src="/hanni/confirmacion.jpeg"
+              alt="Confirmación de asistencia"
+              width={1600}
+              height={1200}
+              className="w-full h-auto"
+              priority
+            />
+          </div>
+        </div>
+      </section>
+
+
+      {/* Hashtag — card style */}
+      <section className="relative w-full py-20 px-4 bg-[url('/hanni/fondo_10.jpeg')] bg-cover bg-center">
+        <div className="absolute inset-0 bg-white/10" />
+        <div className="relative max-w-xl mx-auto flex flex-col items-center gap-8">
+          <div className="text-center mb-4">
+            <h2 className="font-savoir text-4xl md:text-5xl font-light text-gray-900 tracking-wide mb-3">
+              #HanniXV
+            </h2>
+            <div className="w-16 h-1 bg-gradient-to-r from-transparent via-rose-300 to-transparent mx-auto" />
+          </div>
+          <div className="w-full rounded-2xl overflow-hidden shadow-xl border border-white/60">
+            <Image
+              src="/hanni/imagenes/hashtag.jpeg"
+              alt="Hashtag de la quinceañera"
+              width={1600}
+              height={1200}
+              className="w-full h-auto"
+              priority
+            />
+          </div>
+        </div>
+      </section>
+
+
 
 
 

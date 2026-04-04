@@ -96,7 +96,7 @@ export function GiftRegistryQuinceanera() {
 
   return (
     <>
-      <section className="relative min-h-screen  via-gray-50/50 to-white py-24 px-24 overflow-hidden bg-black
+      <section className="relative   via-gray-50/50 to-white py-24 px-24 overflow-hidden bg-black
        mx-auto w-full max-w-7xl bg-[url('/hanni/fondo_10.jpeg')] bg-cover bg-center ">
         {/* Decorative elements - subtle */}
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-rose-100/10 rounded-full blur-3xl" />
@@ -110,7 +110,7 @@ export function GiftRegistryQuinceanera() {
             transition={{ duration: 0.6 }}
             className="text-center mb-20"
           >
-            <h2 className=" font-savoir text-5xl font-light text-3xl md:text-5xl lg:text-6xl text-gray-900 mb-6 tracking-wide">
+            {/* <h2 className=" font-savoir text-5xl font-light text-3xl md:text-5xl lg:text-6xl text-gray-900 mb-6 tracking-wide">
               Si deseas regalarme algo!
             </h2>
             <div className="w-16 h-1 bg-gradient-to-r from-transparent via-rose-300 to-transparent mx-auto mb-8" />
@@ -118,7 +118,7 @@ export function GiftRegistryQuinceanera() {
               Te dejo una idea.
               <br />
               <span className="font-bold ">Tu presencia es el mejor regalo de todos.</span>
-            </p>
+            </p> */}
           </motion.div>
 
           {/* Decorative accent line */}
@@ -131,8 +131,8 @@ export function GiftRegistryQuinceanera() {
             <div className="h-px w-24 bg-gradient-to-r from-transparent via-rose-200 to-transparent" />
           </motion.div>
 
-          {/* Gift Options Grid */}
-          <div className="grid md:grid-cols-3 gap-6 mb-12">
+          {/* Gift Options */}
+          <div className="flex justify-center mb-12">
             {giftOptions.map((option, index) => (
               <motion.button
                 key={option.id}
@@ -142,10 +142,9 @@ export function GiftRegistryQuinceanera() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 onClick={() => handleOptionClick(option)}
                 className={cn(
-                  "group relative bg-[#F9DFDF] rounded-xl px-6 py-4 shadow-md hover:shadow-lg",
+                  "group relative bg-[#F9DFDF] rounded-xl px-6 py-4 shadow-md hover:shadow-lg w-full max-w-sm",
                   "transition-all duration-300 hover:-translate-y-1",
-                  "border border-gray-100 hover:border-rose-100 bg-[url('/hanni/fondo_location.jpeg')] bg-cover bg-top",
-
+                  "border border-gray-100 hover:border-rose-100 bg-[url('/hanni/fondo_location.jpeg')] bg-cover bg-top "
                 )}
               >
                 {/* Subtle background on hover */}
