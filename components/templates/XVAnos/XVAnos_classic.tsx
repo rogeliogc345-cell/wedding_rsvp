@@ -222,7 +222,7 @@ const XVAnosClassic = ({ customer, events, media }: XVAnosClassicProps) => {
 Sobre todo, soy una persona que ama a Dios y estoy muy agradecida con Él, por mi vida, por permitirme llegar a este momento tan especial y porque cada día deseo enamorarme más de Él y parecerme más a Él.
 
 Gracias por acompañarme en este día tan importante para mí. 🤍'
-        image='/hanni/hanni_rosa.png'
+        image='/hanni/hani8.jpeg'
 
       />
 
