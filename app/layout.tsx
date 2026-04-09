@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Geist, Space_Grotesk, Syne } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import "./globals.css";
 import { Toaster } from "sonner";
@@ -20,6 +20,16 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
+
+const syne = Syne({
+  subsets: ["latin"],
+  variable: '--font-syne'
+});
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: '--font-space-grotesk'
+});
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -33,7 +43,7 @@ export default function RootLayout({
       </head>
 
 
-      <body className={`${geistSans.className} antialiased`}>
+      <body className={`${syne.variable} ${spaceGrotesk.variable} font-sans antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

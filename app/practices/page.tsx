@@ -7,6 +7,8 @@ import { callingHelloWorldAction } from '../(admin)/actions'
 import { useActionState, startTransition, useEffect } from 'react'
 import { toast } from 'sonner'
 import { motion } from 'framer-motion'
+import PhoneMockup from '@/components/mockup/PhoneMockup'
+import Portfolio from '@/components/public/XVAnos/components/Portfolio'
 
 const schema = z.object({
     name: z.string().min(1, 'Name is required'),
@@ -61,51 +63,21 @@ export default function PracticePage() {
 
     }
     return (
-        <div className="p-8 flex justify-center ">
-            <motion.form
-                initial={{ opacity: 0, y: 30 }}
-                animate={{
-                    opacity: 1, y: 0,
-                    borderColor: errors.name ? "#ef4444" : "#d1d5db"
+        <div>
 
-                }}
-                transition={{ duration: 0.4 }}
-                onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-3'>
-                <motion.input
-                    animate={errors.name ? { x: [-5, 5, -5, 5, 0] } : {}}
-                    transition={{ duration: 0.3 }}
-
-                    className='p-2 border border-stone-300 rounded' type="text"
-                    {...register("name", { required: 'Name is required' })} placeholder='enter name' />
-                {errors.name && <motion.p
-                    initial={{ opacity: 0, y: -5 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -5 }}
-                    transition={{ duration: 0.4 }}
-
-                    className='text-red-500'>{errors.name.message}</motion.p>}
-                <input className='p-2 border border-stone-300 rounded' type="email"
-                    {...register("email", { required: 'Email is required' })} placeholder='enter email' />
-                {errors.email && <p className='text-red-500'>{errors.email.message}</p>}
-                <input className='p-2 border border-stone-300 rounded' type="password"
-                    {...register("password", { required: 'Password is required' })} placeholder='enter password' />
-                {errors.password && <p className='text-red-500'>{errors.password.message}</p>}
-
-
-
-
-
-
-                <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    disabled={pending}
-                    className='p-2 border border-stone-300 rounded' type="submit">{pending ? (<span className='animate-spin h-5 w-5 rounded-full'></span>) : ('Submit')}</motion.button>
-            </motion.form>
-
-
-            <h1>Hello</h1>
+            <Portfolio url="http://localhost:3000/invite/hani-quince-celebracion"
+                title="XV años Elegancia"
+                description="Invitaciones interactivas con confirmación RSVP en tiempo real, mapas integrados y cuenta regresiva." />
+            <Portfolio url="http://localhost:3000/quince/demo1"
+                title="Elegancia Digital"
+                description="Invitaciones interactivas con confirmación RSVP en tiempo real, mapas integrados y cuenta regresiva." />
+            <Portfolio url="http://localhost:3000/invite/hani-quince-celebracion"
+                title="Elegancia Digital"
+                description="Invitaciones interactivas con confirmación RSVP en tiempo real, mapas integrados y cuenta regresiva." />
 
         </div>
-    );
+
+
+
+    )
 }
