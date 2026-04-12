@@ -12,7 +12,7 @@ export function AboutSectionDemoUno() {
                         Conoce a
                     </p>
                     <h2
-                        className="text-xl md:text-8xl text-primary font-wedding"
+                        className="text-6xl  md:text-8xl text-primary font-wedding"
 
                     >
                         La Quinceañera

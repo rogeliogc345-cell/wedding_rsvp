@@ -10,7 +10,7 @@ import { RSVPDemo2 } from "@/components/public/XVAnos/components/XVAnosDemoTwoo/
 
 export default function XVPageDemo2() {
   return (
-    <main className="min-h-screen ">
+    <main className="min-h-screen theme-xvGreen">
       <HeroDemo2 />
       <CountdownDemo2 />
       <EventDetailsDemo2 />

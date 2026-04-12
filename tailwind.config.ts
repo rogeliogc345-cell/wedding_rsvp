@@ -28,6 +28,12 @@ export default {
 
       },
       colors: {
+        xvgreen: {
+          text: "oklch(0.85 0.21 128)",
+          background: "oklch(0.12 0 0)",
+          border: "oklch(0.25 0 0)",
+          ring: "oklch(0.85 0.21 128)",
+        },
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {

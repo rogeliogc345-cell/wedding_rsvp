@@ -25,7 +25,7 @@ export function EventDetailsDemo2() {
   ]
 
   return (
-    <section className="py-24 px-4 bg-card">
+    <section className="py-24 px-4 bg-black">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -33,8 +33,8 @@ export function EventDetailsDemo2() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-sm tracking-[0.3em] text-primary mb-4">DETALLES</h2>
-          <p className="text-4xl md:text-5xl font-serif text-foreground">El Gran Día</p>
+          <h2 className="text-sm tracking-[0.3em] text-xvgreen-text mb-4">DETALLES</h2>
+          <p className="text-4xl md:text-5xl font-serif text-white">El Gran Día</p>
         </motion.div>
 
         {/* Date banner */}
@@ -46,8 +46,8 @@ export function EventDetailsDemo2() {
         >
           <div className="hidden md:block h-px flex-1 bg-border" />
           <div className="flex items-center gap-6 px-8 py-4 border border-primary/30 rounded-full">
-            <Calendar className="w-5 h-5 text-primary" />
-            <span className="text-lg tracking-wider text-foreground">Sábado 21 de Junio, 2025</span>
+            <Calendar className="w-5 h-5 text-primary text-xvgreen-text" />
+            <span className="text-lg tracking-wider text-white">Sábado 21 de Junio, 2025</span>
           </div>
           <div className="hidden md:block h-px flex-1 bg-border" />
         </motion.div>
@@ -63,29 +63,29 @@ export function EventDetailsDemo2() {
               transition={{ delay: index * 0.2 }}
               className="group relative"
             >
-              <div className="relative bg-background border border-border rounded-2xl p-8 md:p-12 overflow-hidden transition-all duration-500 hover:border-primary/50">
+              <div className="relative bg-black border border-border rounded-2xl p-8 md:p-12 overflow-hidden transition-all duration-500 hover:border-primary/50">
                 {/* Background decoration */}
                 <div className="absolute -right-8 -top-8 w-32 h-32 rounded-full bg-primary/5 blur-2xl group-hover:bg-primary/10 transition-colors" />
 
                 <div className="relative z-10">
                   {/* Icon */}
                   <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-primary/10 border border-primary/20 mb-6">
-                    <event.icon className="w-7 h-7 text-primary" />
+                    <event.icon className="w-7 h-7 text-primary text-xvgreen-text" />
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-2xl font-serif font-bold text-foreground mb-6">{event.title}</h3>
+                  <h3 className="text-2xl font-serif font-bold text-foreground mb-6 text-white">{event.title}</h3>
 
                   {/* Details */}
                   <div className="space-y-4 mb-8">
                     <div className="flex items-center gap-3 text-muted-foreground">
-                      <Clock className="w-4 h-4 text-primary" />
+                      <Clock className="w-4 h-4 text-primary text-xvgreen-text" />
                       <span>{event.time}</span>
                     </div>
                     <div className="flex items-start gap-3 text-muted-foreground">
-                      <MapPin className="w-4 h-4 text-primary mt-1" />
+                      <MapPin className="w-4 h-4 text-xvgreen-text mt-1" />
                       <div>
-                        <p className="text-foreground font-medium">{event.location}</p>
+                        <p className="text-white font-medium">{event.location}</p>
                         <p className="text-sm">{event.address}</p>
                       </div>
                     </div>
@@ -93,8 +93,8 @@ export function EventDetailsDemo2() {
 
                   {/* Map button */}
                   <Button
-                    variant="outline"
-                    className="border-primary/30 text-primary hover:bg-primary hover:text-primary-foreground transition-all"
+
+                    className="bg-black border-xvgreen-border text-xvgreen-text hover:bg-primary hover:text-primary-foreground transition-all"
                     onClick={() => window.open(event.mapUrl, "_blank")}
                   >
                     Ver en Mapa

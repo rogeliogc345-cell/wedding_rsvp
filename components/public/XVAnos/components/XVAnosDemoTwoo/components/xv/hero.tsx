@@ -5,7 +5,7 @@ import { Sparkles } from "lucide-react"
 
 export function HeroDemo2() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className=" relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
       {/* Animated background grid */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(180,230,70,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(180,230,70,0.03)_1px,transparent_1px)] bg-[size:60px_60px]" />
 
@@ -35,7 +35,7 @@ export function HeroDemo2() {
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      <div className="relative z-10 text-center px-4">
+      <div className="relative z-10 flex flex-col items-center w-full text-center px-4 ">
         {/* Top tag */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -44,7 +44,7 @@ export function HeroDemo2() {
           className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/5 mb-8"
         >
           <Sparkles className="w-4 h-4 text-primary" />
-          <span className="text-sm text-primary tracking-widest uppercase">Mis XV Años</span>
+          <span className="text-sm text-primary tracking-widest uppercase   text-xvgreen-text">Mis XV Años</span>
         </motion.div>
 
         {/* Main name - huge typography */}
@@ -52,9 +52,9 @@ export function HeroDemo2() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="font-serif text-[12vw] md:text-[10vw] lg:text-[8vw] font-bold leading-none tracking-tighter text-foreground"
+          className="font-serif text-[12vw] md:text-[10vw] lg:text-[8vw] font-bold leading-none tracking-tighter text-foreground text-center"
         >
-          <span className="block">VALENTINA</span>
+          <span className="block text-white">VALENTINA</span>
         </motion.h1>
 
         {/* Decorative line */}
@@ -62,7 +62,7 @@ export function HeroDemo2() {
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ duration: 1, delay: 0.5 }}
-          className="w-32 h-0.5 bg-primary mx-auto my-8"
+          className="w-32 h-0.5 bg-primary mx-auto my-8 bg-xvgreen-text"
         />
 
         {/* Date highlight */}
@@ -73,7 +73,7 @@ export function HeroDemo2() {
           className="space-y-2"
         >
           <p className="text-muted-foreground text-lg tracking-wide">Te invito a celebrar conmigo</p>
-          <p className="text-primary text-4xl md:text-5xl font-serif font-bold">21.06.2025</p>
+          <p className="text-primary text-4xl md:text-5xl font-serif font-bold text-xvgreen-text">21.06.2025</p>
         </motion.div>
 
         {/* Scroll indicator */}

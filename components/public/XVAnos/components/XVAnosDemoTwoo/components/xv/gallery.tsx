@@ -20,7 +20,7 @@ export function GalleryDemo2() {
   return (
     <section className="py-24 px-4 relative overflow-hidden">
       {/* Background accent */}
-      <div className="absolute top-0 left-0 w-1/2 h-full bg-primary/[0.02]" />
+      <div className="absolute top-0 left-0 w-1/2 h-full bg-black/[0.02]" />
 
       <div className="max-w-7xl mx-auto relative z-10">
         <motion.div
@@ -45,7 +45,7 @@ export function GalleryDemo2() {
               className={`${photo.span} relative group cursor-pointer overflow-hidden rounded-xl`}
               onClick={() => setSelectedImage(photo.src)}
             >
-              <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
+              <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
               <div className="absolute inset-0 border-2 border-transparent group-hover:border-primary/50 rounded-xl transition-colors duration-300 z-20" />
 
               <Image
