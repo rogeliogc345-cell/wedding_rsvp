@@ -5,7 +5,7 @@ import { Instagram, Music, Heart } from "lucide-react"
 
 export function FooterDemo2() {
   return (
-    <footer className="py-16 px-4 border-t border-border">
+    <footer className="py-16 px-4 border-t border-border bg-black">
       <div className="max-w-4xl mx-auto text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -13,12 +13,12 @@ export function FooterDemo2() {
           viewport={{ once: true }}
         >
           {/* Large name */}
-          <h2 className="text-6xl md:text-8xl font-serif font-bold text-foreground mb-8">
+          <h2 className="text-6xl md:text-8xl font-serif font-bold text-white mb-8">
             XV
           </h2>
 
           {/* Hashtag */}
-          <p className="text-primary text-lg tracking-wider mb-8">#MisXVValentina</p>
+          <p className="text-primary text-lg tracking-wider mb-8 text-xvgreen-text">#MisXVValentina</p>
 
           {/* Social links */}
           <div className="flex items-center justify-center gap-6 mb-12">
@@ -26,7 +26,7 @@ export function FooterDemo2() {
               href="https://instagram.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-12 h-12 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-colors"
+              className="w-12 h-12 rounded-full  flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-colors"
             >
               <Instagram className="w-5 h-5" />
             </a>
@@ -34,7 +34,7 @@ export function FooterDemo2() {
               href="https://spotify.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-12 h-12 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-colors"
+              className="w-12 h-12 rounded-full flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-colors"
             >
               <Music className="w-5 h-5" />
             </a>
@@ -48,7 +48,7 @@ export function FooterDemo2() {
           {/* Made with love */}
           <div className="flex items-center justify-center gap-2 text-muted-foreground text-xs">
             <span>Hecho con</span>
-            <Heart className="w-3 h-3 text-primary fill-primary" />
+            <Heart className="w-3 h-3 text-primary fill-primary text-xvgreen-text" />
             <span>para Valentina</span>
           </div>
         </motion.div>

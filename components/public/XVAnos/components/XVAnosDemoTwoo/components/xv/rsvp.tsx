@@ -20,7 +20,7 @@ export function RSVPDemo2() {
   }
 
   return (
-    <section className="py-24 px-4 relative overflow-hidden">
+    <section className="py-24 px-4 relative overflow-hidden bg-black">
       {/* Background pattern */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(180,230,70,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(180,230,70,0.02)_1px,transparent_1px)] bg-[size:40px_40px]" />
 
@@ -31,8 +31,8 @@ export function RSVPDemo2() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-sm tracking-[0.3em] text-primary mb-4">CONFIRMA TU ASISTENCIA</h2>
-          <p className="text-4xl md:text-5xl font-serif text-foreground mb-4">RSVP</p>
+          <h2 className="text-sm tracking-[0.3em] text-xvgreen-text mb-4">CONFIRMA TU ASISTENCIA</h2>
+          <p className="text-4xl md:text-5xl font-serif text-white mb-4">RSVP</p>
           <p className="text-muted-foreground">Por favor confirma antes del 1 de Junio</p>
         </motion.div>
 
@@ -42,17 +42,17 @@ export function RSVPDemo2() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             onSubmit={handleSubmit}
-            className="bg-card border border-border rounded-2xl p-8 md:p-12"
+            className="bg-black  rounded-2xl p-8 md:p-12"
           >
             <FieldGroup>
-              <div className="grid md:grid-cols-2 gap-6">
+              <div className="grid md:grid-cols-2 gap-6 text-white">
                 <Field>
                   <FieldLabel htmlFor="name">Nombre Completo</FieldLabel>
                   <Input
                     id="name"
                     placeholder="Tu nombre"
                     required
-                    className="bg-background border-border focus:border-primary"
+                    className="bg-black focus:border-primary"
                   />
                 </Field>
 
@@ -63,12 +63,12 @@ export function RSVPDemo2() {
                     type="email"
                     placeholder="tu@email.com"
                     required
-                    className="bg-background border-border focus:border-primary"
+                    className=" focus:border-primary"
                   />
                 </Field>
               </div>
 
-              <Field>
+              <Field className="text-white">
                 <FieldLabel htmlFor="guests">Número de Invitados</FieldLabel>
                 <Input
                   id="guests"
@@ -77,7 +77,7 @@ export function RSVPDemo2() {
                   max="5"
                   placeholder="1"
                   required
-                  className="bg-background border-border focus:border-primary"
+                  className="focus:border-primary text-white"
                 />
               </Field>
 
@@ -89,14 +89,14 @@ export function RSVPDemo2() {
                   className="flex gap-6 pt-2"
                 >
                   <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="yes" id="yes" className="border-primary text-primary" />
-                    <Label htmlFor="yes" className="text-foreground cursor-pointer">
+                    <RadioGroupItem value="yes" id="yes" className="border text-xvgreen-text" />
+                    <Label htmlFor="yes" className="  text-white cursor-pointer">
                       {"¡Sí, ahí estaré!"}
                     </Label>
                   </div>
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="no" id="no" className="border-border" />
-                    <Label htmlFor="no" className="text-muted-foreground cursor-pointer">
+                    <Label htmlFor="no" className="text-muted cursor-pointer">
                       No podré asistir
                     </Label>
                   </div>
@@ -109,7 +109,7 @@ export function RSVPDemo2() {
                   id="message"
                   placeholder="Escribe un mensaje para la quinceañera..."
                   rows={4}
-                  className="bg-background border-border focus:border-primary resize-none"
+                  className="bg-black border-border focus:border-primary resize-none"
                 />
               </Field>
             </FieldGroup>
@@ -117,7 +117,7 @@ export function RSVPDemo2() {
             <Button
               type="submit"
               size="lg"
-              className="w-full mt-8 bg-primary text-primary-foreground hover:bg-primary/90 transition-all"
+              className="w-full mt-8 bg-xvgreen-text text-black hover:bg-primary/90 transition-all"
             >
               <Send className="w-4 h-4 mr-2" />
               Enviar Confirmación

@@ -18,7 +18,7 @@ export function GalleryDemo2() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
 
   return (
-    <section className="py-24 px-4 relative overflow-hidden">
+    <section className="py-24 px-4 relative overflow-hidden bg-black">
       {/* Background accent */}
       <div className="absolute top-0 left-0 w-1/2 h-full bg-black/[0.02]" />
 
@@ -29,8 +29,8 @@ export function GalleryDemo2() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-sm tracking-[0.3em] text-primary mb-4">GALERÍA</h2>
-          <p className="text-4xl md:text-5xl font-serif text-foreground">Momentos Especiales</p>
+          <h2 className="text-sm tracking-[0.3em] text-xvgreen-text mb-4">GALERÍA</h2>
+          <p className="text-4xl md:text-5xl font-serif text-white">Momentos Especiales</p>
         </motion.div>
 
         {/* Bento Grid */}

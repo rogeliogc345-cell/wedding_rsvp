@@ -48,7 +48,7 @@ export function CountdownSectionDemoUno() {
     ]
 
     return (
-        <section className="py-10 px-4  bg-pink-100 ">
+        <section className="py-10 px-4   bg-[url('/xv/fondo_demo1_hero.png')] bg-cover bg-center bg-no-repeat bg-fixed">
             <div className="max-w-4xl mx-auto text-center">
                 <p className="text-sm tracking-[0.3em] text-muted-foreground uppercase mb-4">
                     Faltan
@@ -81,7 +81,7 @@ export function CountdownSectionDemoUno() {
                 </div>
 
                 {/* Decorative divider */}
-                <div className="mt-16 flex items-center justify-center gap-4 bg-pink-100">
+                <div className="mt-16 flex items-center justify-center gap-4 ">
                     <div className="w-24 h-px bg-gradient-to-r from-transparent to-gold/50" />
                     <svg className="w-6 h-6 text-gold" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2Z" />

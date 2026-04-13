@@ -17,7 +17,7 @@ export function DressCodeDemo2() {
   ]
 
   return (
-    <section className="py-24 px-4 bg-card relative overflow-hidden">
+    <section className="py-24 px-4 relative overflow-hidden bg-black">
       {/* Decorative elements */}
       <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-primary/5 blur-3xl" />
       <div className="absolute bottom-0 left-0 w-48 h-48 rounded-full bg-primary/5 blur-3xl" />
@@ -29,8 +29,8 @@ export function DressCodeDemo2() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-sm tracking-[0.3em] text-primary mb-4">CÓDIGO DE VESTIMENTA</h2>
-          <p className="text-4xl md:text-5xl font-serif text-foreground">Formal Elegante</p>
+          <h2 className="text-sm tracking-[0.3em] text-primary mb-4 text-xvgreen-text">CÓDIGO DE VESTIMENTA</h2>
+          <p className="text-4xl md:text-5xl font-serif text-white">Formal Elegante</p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-8">
@@ -39,13 +39,13 @@ export function DressCodeDemo2() {
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="bg-background border border-border rounded-2xl p-8"
+            className="bg-black border-border rounded-2xl p-8"
           >
             <div className="flex items-center gap-3 mb-6">
               <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                <Shirt className="w-5 h-5 text-primary" />
+                <Shirt className="w-5 h-5 text-primary text-xvgreen-text" />
               </div>
-              <h3 className="text-xl font-serif font-bold text-foreground">Colores Sugeridos</h3>
+              <h3 className="text-xl font-serif font-bold text-foreground text-white">Colores Sugeridos</h3>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
@@ -56,7 +56,7 @@ export function DressCodeDemo2() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="flex items-center gap-3 p-3 rounded-lg border border-border hover:border-primary/30 transition-colors"
+                  className="flex items-center gap-3 p-3 rounded-lg  hover:border-primary/30 transition-colors"
                 >
                   <div
                     className="w-8 h-8 rounded-full border border-border"
@@ -73,13 +73,13 @@ export function DressCodeDemo2() {
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="bg-background border border-border rounded-2xl p-8"
+            className="bg-black  border-border rounded-2xl p-8"
           >
             <div className="flex items-center gap-3 mb-6">
               <div className="w-10 h-10 rounded-lg bg-destructive/10 flex items-center justify-center">
                 <Ban className="w-5 h-5 text-destructive" />
               </div>
-              <h3 className="text-xl font-serif font-bold text-foreground">Evitar Estos Colores</h3>
+              <h3 className="text-xl font-serif font-bold text-white">Evitar Estos Colores</h3>
             </div>
 
             <p className="text-muted-foreground text-sm mb-6">
