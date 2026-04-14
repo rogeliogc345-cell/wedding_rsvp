@@ -106,20 +106,7 @@ export function HashtagSection() {
                     </div>
                 </div>
 
-                {/* Photo tips */}
-                <div className="mt-12 grid md:grid-cols-3 gap-6">
-                    {[
-                        { icon: "📸", title: "Captura el Momento", desc: "Fotos del vals, la cena, y la fiesta" },
-                        { icon: "🎉", title: "Comparte en Vivo", desc: "Stories y posts durante el evento" },
-                        { icon: "💕", title: "Usa el Hashtag", desc: "Para que todos veamos tus fotos" },
-                    ].map((tip) => (
-                        <div key={tip.title} className="bg-card/50 rounded-2xl p-6 border border-border">
-                            <span className="text-3xl">{tip.icon}</span>
-                            <h3 className="mt-3 font-semibold text-foreground">{tip.title}</h3>
-                            <p className="mt-1 text-sm text-muted-foreground">{tip.desc}</p>
-                        </div>
-                    ))}
-                </div>
+
             </div>
         </section>
     )

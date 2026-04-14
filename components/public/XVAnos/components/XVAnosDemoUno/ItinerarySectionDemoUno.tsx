@@ -43,7 +43,7 @@ const itineraryItems = [
 
 export function ItinerarySectionDemoUno() {
     return (
-        <section id="itinerary" className="py-20 px-4  bg-[url('/hanni/fondo_moños.png')] bg-contains bg-top">
+        <section id="itinerary" className="py-20 px-4  bg-[url('/hanni/fondo_moños.png')] bg-contains bg-top bg-fixed">
             <div className="max-w-4xl mx-auto">
                 {/* Section header */}
                 <div className="text-center mb-16">
@@ -79,11 +79,11 @@ export function ItinerarySectionDemoUno() {
                                 <div className="bg-card p-6 rounded-2xl shadow-lg border border-border hover:shadow-xl transition-shadow">
                                     <span
                                         className="text-2xl text-gold"
-                                        style={{ fontFamily: 'var(--font-great-vibes)' }}
+
                                     >
                                         {item.time}
                                     </span>
-                                    <h3 className="text-xl font-semibold text-foreground mt-2">
+                                    <h3 className="text-3xl font-semibold text-foreground mt-2 font-wedding ">
                                         {item.title}
                                     </h3>
                                     <p className="text-muted-foreground mt-1">
