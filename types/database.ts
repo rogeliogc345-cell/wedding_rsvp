@@ -10,6 +10,7 @@ export interface Customer {
         show_rsvp_form: boolean;
     };
     is_published: boolean;
+    category: "wedding" | "XV";
 }
 
 export interface WeddingEvent {

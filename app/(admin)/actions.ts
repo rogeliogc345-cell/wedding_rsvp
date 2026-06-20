@@ -2,6 +2,7 @@
 
 import { createClient } from "@/lib/supabase/server";
 import { revalidatePath } from "next/cache";
+import { customerSchema } from "@/lib/validation";
 
 
 //----------------TYPES----------------//
@@ -247,5 +248,110 @@ export const addGuestAction = async (prevState: AddGuestState, formData: FormDat
     } catch (err) {
         console.error("Exception in addGuestAction:", err);
         return { error: "An unexpected error occurred. Please try again.", success: false };
+    }
+};
+
+export type CreateCustomerState = {
+    error: string | null;
+    success: boolean;
+    fieldErrors?: Partial<Record<string, string[]>>;
+};
+
+export const CreateCustomerEventAction = async (
+    prevState: CreateCustomerState,
+    formData: FormData
+): Promise<CreateCustomerState> => {
+    const raw = {
+        couple_name: formData.get("couple_name")?.toString() ?? "",
+        slug: formData.get("slug")?.toString() ?? "",
+        template_id: formData.get("template_id")?.toString() ?? "classic",
+        event_date: formData.get("event_date")?.toString() ?? "",
+        category: formData.get("category")?.toString() ?? "wedding",
+    };
+
+    const parsed = customerSchema.safeParse(raw);
+
+    if (!parsed.success) {
+        return {
+            error: "Please fix the errors below.",
+            success: false,
+            fieldErrors: parsed.error.flatten().fieldErrors,
+        };
+    }
+
+    try {
+        const supabase = await createClient();
+        const user = (await supabase.auth.getUser()).data.user;
+
+        if (!user) {
+            return { error: "User not authenticated.", success: false };
+        }
+
+        const { error } = await supabase
+            .from("customers")
+            .insert([{ ...parsed.data, user_id: user.id }]);
+
+        if (error) {
+            console.error("Error creating customer:", error.message);
+            return { error: error.message, success: false };
+        }
+
+        revalidatePath("/dashboard");
+        return { error: null, success: true };
+    } catch (err: any) {
+        console.error("Exception in CreateCustomerEventAction:", err);
+        return { error: err.message || "An unexpected error occurred.", success: false };
+    }
+};
+
+// ── Edit / update customer ──────────────────────────────────────────────────
+export type UpdateCustomerState = {
+    error: string | null;
+    success: boolean;
+    fieldErrors?: Partial<Record<string, string[]>>;
+};
+
+export const UpdateCustomerAction = async (
+    customerId: string,
+    prevState: UpdateCustomerState,
+    formData: FormData
+): Promise<UpdateCustomerState> => {
+    const raw = {
+        couple_name: formData.get("couple_name")?.toString() ?? "",
+        slug: formData.get("slug")?.toString() ?? "",
+        is_published: formData.get("is_published") === "true",
+        event_date: formData.get("event_date")?.toString() ?? "",
+        category: formData.get("category")?.toString() ?? "wedding",
+    };
+
+    const { editCustomerSchema } = await import("@/lib/validation");
+    const parsed = editCustomerSchema.safeParse(raw);
+
+    if (!parsed.success) {
+        return {
+            error: "Please fix the errors below.",
+            success: false,
+            fieldErrors: parsed.error.flatten().fieldErrors,
+        };
+    }
+
+    try {
+        const supabase = await createClient();
+        const { error } = await supabase
+            .from("customers")
+            .update(parsed.data)
+            .eq("id", customerId);
+
+        if (error) {
+            console.error("Error updating customer:", error.message);
+            return { error: error.message, success: false };
+        }
+
+        revalidatePath("/dashboard");
+        revalidatePath(`/dashboard/edit/${customerId}`);
+        return { error: null, success: true };
+    } catch (err: any) {
+        console.error("Exception in UpdateCustomerAction:", err);
+        return { error: err.message || "An unexpected error occurred.", success: false };
     }
 };

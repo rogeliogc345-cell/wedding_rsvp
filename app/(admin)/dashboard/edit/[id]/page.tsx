@@ -34,7 +34,7 @@ export default async function EditPage({ params }: { params: Promise<{ id: strin
             <Tabs defaultValue="general" className="w-full">
                 <TabsList className="grid w-full grid-cols-4">
                     <TabsTrigger value="general">General Info</TabsTrigger>
-                    <TabsTrigger value="events">Events</TabsTrigger>
+                    <TabsTrigger value="events">Customer's Activities</TabsTrigger>
                     <TabsTrigger value="design">Design & Template</TabsTrigger>
                     <TabsTrigger value="media">Media</TabsTrigger>
                     <TabsTrigger value="guests">Guest List</TabsTrigger>

@@ -5,6 +5,7 @@ export const customerSchema = z.object({
     slug: z.string().min(3, "Slug must be at least 3 characters").regex(/^[a-z0-9-]+$/, "Slugs can only contain lowercase letters, numbers, and hyphens"),
     template_id: z.string().optional(),
     event_date: z.string().optional(),
+    category: z.enum(["wedding", "XV"]),
 });
 
 export const editCustomerSchema = z.object({
@@ -12,6 +13,7 @@ export const editCustomerSchema = z.object({
     slug: z.string().min(3, "Slug must be at least 3 characters").regex(/^[a-z0-9-]+$/, "Slugs can only contain lowercase letters, numbers, and hyphens"),
     is_published: z.boolean(),
     event_date: z.string().optional(),
+    category: z.enum(["wedding", "XV"]),
 });
 
 

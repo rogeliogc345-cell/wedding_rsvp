@@ -11,6 +11,28 @@ import { LogoutButtonAdmin } from '@/components/admin/LogoutButtonAdmin';
 
 export const dynamic = 'force-dynamic';
 
+// ── Category badge — pure Server Component, no 'use client' needed ──────────
+function CategoryBadge({ category }: { category: string | null }) {
+    if (!category) return <span className="text-muted-foreground text-xs">—</span>;
+
+    const styles: Record<string, string> = {
+        wedding: "bg-pink-100 text-pink-800 dark:bg-pink-900/40 dark:text-pink-300",
+        XV: "bg-purple-100 text-purple-800 dark:bg-purple-900/40 dark:text-purple-300",
+    };
+
+    const label: Record<string, string> = {
+        wedding: "Wedding",
+        XV: "XV",
+    };
+
+    return (
+        <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${styles[category] ?? "bg-muted text-muted-foreground"
+            }`}>
+            {label[category] ?? category}
+        </span>
+    );
+}
+
 const dashboard = async () => {
 
     const customers = await getCustomers();
@@ -23,15 +45,12 @@ const dashboard = async () => {
     return (
         <div className="p-8">
 
+            <h1 className='text-4xl font-bold mb-8 '>Dashboard</h1>
+
             <AddCustomerForm />
             <LogoutButtonAdmin />
 
-            <div className="flex justify-between items-center mb-8">
-                <h1 className="text-3xl font-bold">Your Invitations</h1>
-                <Link href="/dashboard/new">
-                    <Button><Plus className="mr-2 h-4 w-4" /> New Invitation</Button>
-                </Link>
-            </div>
+
 
             <div className="border rounded-lg">
                 <Table>
@@ -39,9 +58,10 @@ const dashboard = async () => {
                         <TableRow>
                             <TableHead>Couple</TableHead>
                             <TableHead>Status</TableHead>
+                            <TableHead>Category</TableHead>
                             <TableHead>Date</TableHead>
                             <TableHead>Slug</TableHead>
-                            <TableHead className="text-right">Actions</TableHead>
+                            <TableHead className="text-right">Edit</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -52,6 +72,9 @@ const dashboard = async () => {
                                     <Badge variant={customer.is_published ? "default" : "secondary"}>
                                         {customer.is_published ? "Live" : "Draft"}
                                     </Badge>
+                                </TableCell>
+                                <TableCell>
+                                    <CategoryBadge category={customer.category} />
                                 </TableCell>
                                 <TableCell className="text-muted-foreground">
                                     {customer.event_date ? new Date(customer.event_date).toLocaleDateString() : "TBD"}
