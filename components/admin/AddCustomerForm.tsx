@@ -63,7 +63,7 @@ export function AddCustomerForm() {
         defaultValues: {
             couple_name: "",
             slug: "",
-            template_id: "classic",
+            template: "classic",
             event_date: "",
             category: "wedding",
         },
@@ -77,6 +77,8 @@ export function AddCustomerForm() {
 
     // Watch couple_name to drive the auto-slug
     const coupleName = useWatch({ control: form.control, name: "couple_name" });
+    // Watch category to conditionally show/hide the template picker
+    const selectedCategory = useWatch({ control: form.control, name: "category" });
 
     useEffect(() => {
         if (!slugManuallyEdited.current) {
@@ -85,6 +87,13 @@ export function AddCustomerForm() {
             form.setValue("slug", slug, { shouldValidate: false });
         }
     }, [coupleName, form]);
+
+    // When category changes away from XV, clear the template value
+    useEffect(() => {
+        if (selectedCategory !== "XV") {
+            form.setValue("template", "classic");
+        }
+    }, [selectedCategory, form]);
 
     // Reset the form (and the manual-edit flag) on success
     useEffect(() => {
@@ -114,8 +123,7 @@ export function AddCustomerForm() {
                     </div>
                 )}
 
-                {/* Hidden template_id */}
-                <input type="hidden" name="template_id" value="classic" />
+
 
                 {/* ── Couple name ────────────────────────────────────────── */}
                 <FormField
@@ -187,6 +195,30 @@ export function AddCustomerForm() {
                         </FormItem>
                     )}
                 />
+
+                {/* ── Template (XV only) ─────────────────────────────────── */}
+                {selectedCategory === "XV" && (
+                    <FormField
+                        control={form.control}
+                        name="template"
+                        render={({ field }: { field: ControllerRenderProps<CustomerFormValues, "template"> }) => (
+                            <FormItem>
+                                <FormLabel>Template</FormLabel>
+                                <FormControl>
+                                    <select
+                                        {...field}
+                                        className="flex h-9 w-full rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+                                    >
+                                        <option value="classic">Classic</option>
+                                        <option value="clasicBlue">Classic Blue</option>
+                                        <option value="modern">Modern</option>
+                                    </select>
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                )}
 
                 {/* ── Event date ─────────────────────────────────────────── */}
                 <FormField

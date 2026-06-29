@@ -1,10 +1,10 @@
 import React from 'react'
 import XVAnosDemoUnoTemplate from '@/components/templates/XVAnos/XVAnosDemoUno'
 
-const XvDemos = () => {
+const XVClassicTemplate = () => {
     return (
         <XVAnosDemoUnoTemplate />
     )
 }
 
-export default XvDemos
+export default XVClassicTemplate

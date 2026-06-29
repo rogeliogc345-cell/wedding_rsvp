@@ -1,54 +1,85 @@
 "use client";
 
-import { useState } from "react";
-import { createClient } from "@/lib/supabase/client";
+import { useActionState } from "react";
+import { addEventAction, deleteEventAction, type EventActionState } from "@/app/(admin)/actions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Trash2, CalendarPlus } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { Trash2, CalendarPlus, AlertCircle, Loader2 } from "lucide-react";
+import { useTransition } from "react";
+
+const initialState: EventActionState = {
+    error: null,
+    success: false,
+};
 
 export function ManageEvents({ customerId, initialEvents }: { customerId: string, initialEvents: any[] }) {
-    const router = useRouter();
-    const [loading, setLoading] = useState(false);
-    const [newEvent, setNewEvent] = useState({
-        event_name: "",
-        event_date: "",
-        event_time: "",
-        location_name: ""
-    });
+    const [state, formAction, isPending] = useActionState(
+        (prevState: EventActionState, formData: FormData) => addEventAction(customerId, prevState, formData),
+        initialState
+    );
+    const [deleteTransition, startDeleteTransition] = useTransition();
 
-    async function addEvent() {
-        const supabase = createClient();
-        setLoading(true);
-        const { error } = await supabase
-            .from("events")
-            .insert([{ ...newEvent, customer_id: customerId }]);
-
-        if (!error) {
-            setNewEvent({ event_name: "", event_date: "", event_time: "", location_name: "" });
-            router.refresh(); // To show the new event in the list
-        }
-        setLoading(false);
-    }
-
-    async function deleteEvent(id: string) {
-        const supabase = createClient();
-        const { error } = await supabase.from("events").delete().eq("id", id);
-        if (!error) router.refresh();
-    }
+    const handleDelete = (eventId: string) => {
+        startDeleteTransition(async () => {
+            await deleteEventAction(customerId, eventId);
+        });
+    };
 
     return (
         <div className="space-y-8">
             {/* 1. Add Event Form */}
-            <div className="grid grid-cols-2 gap-4 border p-4 rounded-lg bg-slate-50">
-                <Input placeholder="Event (e.g. Ceremony)" value={newEvent.event_name} onChange={e => setNewEvent({ ...newEvent, event_name: e.target.value })} />
-                <Input placeholder="Location" value={newEvent.location_name} onChange={e => setNewEvent({ ...newEvent, location_name: e.target.value })} />
-                <Input type="date" value={newEvent.event_date} onChange={e => setNewEvent({ ...newEvent, event_date: e.target.value })} />
-                <Input type="time" value={newEvent.event_time} onChange={e => setNewEvent({ ...newEvent, event_time: e.target.value })} />
-                <Button className="col-span-2" onClick={addEvent} disabled={loading}>
-                    <CalendarPlus className="mr-2 h-4 w-4" /> Add Event to Schedule
+            <form action={formAction} className="grid grid-cols-2 gap-4 border p-4 rounded-lg bg-slate-50">
+                <Input 
+                    placeholder="Event (e.g. Ceremony)" 
+                    name="event_name"
+                    required
+                    disabled={isPending}
+                />
+                <Input 
+                    placeholder="Location" 
+                    name="location_name"
+                    required
+                    disabled={isPending}
+                />
+                <Input 
+                    type="date" 
+                    name="event_date"
+                    required
+                    disabled={isPending}
+                />
+                <Input 
+                    type="time" 
+                    name="event_time"
+                    required
+                    disabled={isPending}
+                />
+                {state.error && (
+                    <div className="col-span-2 flex items-center gap-2 text-sm text-destructive">
+                        <AlertCircle className="h-4 w-4" />
+                        {state.error}
+                    </div>
+                )}
+                {state.success && (
+                    <div className="col-span-2 text-sm text-green-600">
+                        Event added successfully!
+                    </div>
+                )}
+                <Button 
+                    type="submit"
+                    className="col-span-2" 
+                    disabled={isPending}
+                >
+                    {isPending ? (
+                        <>
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Adding...
+                        </>
+                    ) : (
+                        <>
+                            <CalendarPlus className="mr-2 h-4 w-4" /> Add Event to Schedule
+                        </>
+                    )}
                 </Button>
-            </div>
+            </form>
 
             {/* 2. List of Existing Events */}
             <div className="space-y-4">
@@ -58,8 +89,17 @@ export function ManageEvents({ customerId, initialEvents }: { customerId: string
                             <p className="font-bold">{event.event_name}</p>
                             <p className="text-sm text-muted-foreground">{event.event_date} at {event.event_time} — {event.location_name}</p>
                         </div>
-                        <Button variant="ghost" size="icon" onClick={() => deleteEvent(event.id)}>
-                            <Trash2 className="h-4 w-4 text-destructive" />
+                        <Button 
+                            variant="ghost" 
+                            size="icon" 
+                            onClick={() => handleDelete(event.id)}
+                            disabled={deleteTransition}
+                        >
+                            {deleteTransition ? (
+                                <Loader2 className="h-4 w-4 text-destructive animate-spin" />
+                            ) : (
+                                <Trash2 className="h-4 w-4 text-destructive" />
+                            )}
                         </Button>
                     </div>
                 ))}

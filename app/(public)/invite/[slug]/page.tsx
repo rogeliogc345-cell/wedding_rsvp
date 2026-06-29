@@ -1,9 +1,27 @@
 import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-// We will create these components next
-import ClassicTemplate from "@/components/templates/ClassicTemplate";
-import ModernTemplate from "@/components/templates/ModernTemplate";
-import XVAnosClassic from "@/components/templates/XVAnos/XVAnos_classic";
+import WeddingTemplate from "@/components/templates/WeddingTemplate";
+import XVClassicTemplate from "@/app/quince/classic/page";
+import XVClassicBlueTemplate from "@/app/quince/classicBlue/page";
+import XVModernTemplate from "@/app/quince/modern/page";
+
+
+
+
+
+
+const TEMPLATE_MAP = {
+    XV: {
+        classic: XVClassicTemplate,
+        classicBlue: XVClassicBlueTemplate,
+        clasicBlue: XVClassicBlueTemplate,
+        modern: XVModernTemplate,
+    }
+};
+
+
+
+
 
 
 export default async function InvitationPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -25,15 +43,29 @@ export default async function InvitationPage({ params }: { params: Promise<{ slu
         notFound(); // Shows the 404 page
     }
 
-    // 2. Logic to pick the template
-    const TemplateMap: Record<string, any> = {
-        classic: ClassicTemplate,
-        modern: ModernTemplate,
-    };
 
-    const SelectedTemplate = TemplateMap[customer.template_id] || ClassicTemplate;
 
-    // 3. Render the template with the data
-    // return <SelectedTemplate customer={customer} events={customer.events} media={customer.media} />;
-    return <XVAnosClassic customer={customer} events={customer.events} media={customer.media} />;
+
+
+
+
+
+    // 2. Logic to pick the template based on category
+
+
+
+
+
+
+
+    if (customer.category === "XV") {
+        const rawTemplate = customer.template ?? customer.template_id ?? "classic";
+        const normalizedTemplate = rawTemplate === "classicBlue" ? "clasicBlue" : rawTemplate;
+        const TemplateComponent = TEMPLATE_MAP.XV[normalizedTemplate as keyof typeof TEMPLATE_MAP.XV] ?? XVClassicTemplate;
+
+        return <TemplateComponent />;
+    }
+
+    // Default to ModernTemplate for Wedding (and as a fallback)
+    return <WeddingTemplate customer={customer} events={customer.events} />;
 }

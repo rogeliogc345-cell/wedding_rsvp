@@ -11,6 +11,7 @@ export interface Customer {
     };
     is_published: boolean;
     category: "wedding" | "XV";
+    template?: "classic" | "clasicBlue" | "modern";
 }
 
 export interface WeddingEvent {

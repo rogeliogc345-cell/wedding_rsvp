@@ -2,10 +2,15 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
     images: {
-
-        qualities: [75, 90], // ← Agrega esto
+        remotePatterns: [
+            {
+                protocol: "https",
+                hostname: "gspjaeugjvrmbrjuwocr.supabase.co",
+                pathname: "/storage/v1/object/public/**",
+            },
+        ],
+        qualities: [75, 90],
     },
-
 };
 
 export default nextConfig;

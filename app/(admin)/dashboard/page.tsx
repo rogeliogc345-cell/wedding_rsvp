@@ -81,11 +81,17 @@ const dashboard = async () => {
                                 </TableCell>
                                 <TableCell className="text-muted-foreground">/{customer.slug}</TableCell>
                                 <TableCell className="text-right space-x-2">
-                                    <Button variant="outline" size="sm" asChild>
-                                        <Link href={`/invite/${customer.slug}`} target="_blank">
+                                    {customer.is_published ? (
+                                        <Button variant="outline" size="sm" asChild>
+                                            <Link href={`/invite/${customer.slug}`} target="_blank">
+                                                <ExternalLink className="h-4 w-4" />
+                                            </Link>
+                                        </Button>
+                                    ) : (
+                                        <Button variant="outline" size="sm" disabled>
                                             <ExternalLink className="h-4 w-4" />
-                                        </Link>
-                                    </Button>
+                                        </Button>
+                                    )}
                                     <Button size="sm" asChild>
                                         <Link href={`/dashboard/edit/${customer.id}`}>
                                             <Settings className="h-4 w-4" />

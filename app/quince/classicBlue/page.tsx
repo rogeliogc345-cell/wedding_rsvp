@@ -8,7 +8,7 @@ import { PhotoGallery } from './components/Demo3-photo-gallery'
 import { RSVPForm } from './components/Demo3-rsvp-form'
 import { Footer } from './components/Demo3-footer'
 
-const Demo3 = () => {
+const XVClassicBlueTemplate = () => {
     return (
         <main className='min-h-screen bg-background'>
             <SparkleEffect />
@@ -23,4 +23,4 @@ const Demo3 = () => {
     )
 }
 
-export default Demo3
+export default XVClassicBlueTemplate

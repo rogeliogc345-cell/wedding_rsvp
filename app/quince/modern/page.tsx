@@ -8,7 +8,7 @@ import { RSVPDemo2 } from "@/components/public/XVAnos/components/XVAnosDemoTwoo/
 
 
 
-export default function XVPageDemo2() {
+export default function XVModernTemplate() {
   return (
     <main className="min-h-screen theme-xvGreen">
       <HeroDemo2 />

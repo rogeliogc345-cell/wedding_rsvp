@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useActionState, useEffect } from "react";
 import { useFormStatus } from "react-dom";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { editCustomerSchema } from "@/lib/validation";
 import {
@@ -57,6 +57,7 @@ export function EditCustomerForm({ customer }: { customer: any }) {
             couple_name: customer.couple_name ?? "",
             slug: customer.slug ?? "",
             is_published: customer.is_published ?? false,
+            template: customer.template ?? customer.template_id ?? "classic",
             event_date: customer.event_date ?? "",
             category: customer.category ?? "wedding",
         },
@@ -67,6 +68,16 @@ export function EditCustomerForm({ customer }: { customer: any }) {
 
     // Keep the is_published hidden input in sync with the Switch
     const isPublished = form.watch("is_published");
+
+    // Watch category to conditionally show/hide the XV template picker
+    const selectedCategory = useWatch({ control: form.control, name: "category" });
+
+    // When category changes away from XV, reset template to classic
+    useEffect(() => {
+        if (selectedCategory !== "XV") {
+            form.setValue("template", "classic");
+        }
+    }, [selectedCategory, form]);
 
     // Clear success banner after a few seconds (optional nice touch)
     useEffect(() => {
@@ -161,6 +172,30 @@ export function EditCustomerForm({ customer }: { customer: any }) {
                         </FormItem>
                     )}
                 />
+
+                {/* ── Template (XV only) ─────────────────────────────────── */}
+                {selectedCategory === "XV" && (
+                    <FormField
+                        control={form.control}
+                        name="template"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Template</FormLabel>
+                                <FormControl>
+                                    <select
+                                        {...field}
+                                        className="flex h-9 w-full rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+                                    >
+                                        <option value="classic">Classic</option>
+                                        <option value="clasicBlue">Classic Blue</option>
+                                        <option value="modern">Modern</option>
+                                    </select>
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                )}
 
                 {/* ── Event date ─────────────────────────────────────────── */}
                 <FormField

@@ -4,7 +4,7 @@ import { useState, useActionState, useEffect, useRef } from "react";
 import { generatePasscode } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { RefreshCw, UserPlus } from "lucide-react";
+import { RefreshCw, UserPlus, Loader2 } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { addGuestAction, AddGuestState } from "@/app/(admin)/actions";
 
@@ -101,7 +101,15 @@ export function AddGuestForm({ customerId }: { customerId: string }) {
             </div>
 
             <Button type="submit" className="w-full" disabled={isPending || !passcode}>
-                {isPending ? "Adding..." : <><UserPlus className="mr-2 h-4 w-4" /> Add to Guest List</>}
+                {isPending ? (
+                    <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Adding...
+                    </>
+                ) : (
+                    <>
+                        <UserPlus className="mr-2 h-4 w-4" /> Add to Guest List
+                    </>
+                )}
             </Button>
         </form>
     );
