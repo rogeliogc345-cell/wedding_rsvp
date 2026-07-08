@@ -21,4 +21,7 @@ export interface WeddingEvent {
     event_date: string;
     event_time: string;
     location_name: string;
+    icon?: string;
+    address?: string | null;
+    google_maps_url?: string | null;
 }

@@ -3,7 +3,7 @@
 import { motion } from "framer-motion"
 import { Sparkles } from "lucide-react"
 
-export function HeroDemo2() {
+export function HeroDemo2({ name, eventDate }: { name: string, eventDate: string }) {
   return (
     <section className=" relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
       {/* Animated background grid */}
@@ -54,7 +54,7 @@ export function HeroDemo2() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="font-serif text-[12vw] md:text-[10vw] lg:text-[8vw] font-bold leading-none tracking-tighter text-foreground text-center"
         >
-          <span className="block text-white">VALENTINA</span>
+          <span className="block text-white" >{name}</span>
         </motion.h1>
 
         {/* Decorative line */}
@@ -73,7 +73,7 @@ export function HeroDemo2() {
           className="space-y-2"
         >
           <p className="text-muted-foreground text-lg tracking-wide">Te invito a celebrar conmigo</p>
-          <p className="text-primary text-4xl md:text-5xl font-serif font-bold text-xvgreen-text">21.06.2025</p>
+          <p className="text-primary text-4xl md:text-5xl font-serif font-bold text-xvgreen-text">{eventDate}</p>
         </motion.div>
 
         {/* Scroll indicator */}

@@ -1,9 +1,10 @@
 import React from 'react'
 import XVAnosDemoUnoTemplate from '@/components/templates/XVAnos/XVAnosDemoUno'
 
-const XVClassicTemplate = () => {
+const XVClassicTemplate = ({ customer }: { customer: any }) => {
+    
     return (
-        <XVAnosDemoUnoTemplate />
+        <XVAnosDemoUnoTemplate customer={customer}  />
     )
 }
 

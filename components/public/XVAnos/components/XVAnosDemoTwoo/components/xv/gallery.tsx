@@ -5,18 +5,12 @@ import { useState } from "react"
 import Image from "next/image"
 import { X } from "lucide-react"
 
-const photos = [
-  { id: 1, src: "/images/XVAnos_1.png", alt: "Quinceañera photo 1", span: "col-span-2 row-span-2" },
-  { id: 2, src: "/images/XVAnos_2.png", alt: "Quinceañera photo 2", span: "col-span-1 row-span-1" },
-  { id: 3, src: "/images/XVAnos_3.png", alt: "Quinceañera photo 3", span: "col-span-1 row-span-1" },
-  { id: 4, src: "/images/XVAnos_4.png", alt: "Quinceañera photo 4", span: "col-span-1 row-span-2" },
-  { id: 5, src: "/images/XVAnos_5.jpg", alt: "Quinceañera photo 5", span: "col-span-2 row-span-1" },
-  { id: 6, src: "/images/XVAnos_6.jpg", alt: "Quinceañera photo 6", span: "col-span-1 row-span-1" },
-]
 
-export function GalleryDemo2() {
+
+export function GalleryDemo2({ customerId, media }: { customerId: string, media: any[] }) {
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
 
+  console.log("media", media)
   return (
     <section className="py-24 px-4 relative overflow-hidden bg-black">
       {/* Background accent */}
@@ -35,22 +29,22 @@ export function GalleryDemo2() {
 
         {/* Bento Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 auto-rows-[150px] md:auto-rows-[200px]">
-          {photos.map((photo, index) => (
+          {media?.map((photo: any, index: number) => (
             <motion.div
               key={photo.id}
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className={`${photo.span} relative group cursor-pointer overflow-hidden rounded-xl`}
-              onClick={() => setSelectedImage(photo.src)}
+              className={`col-span-1 row-span-1 relative group cursor-pointer overflow-hidden rounded-xl`}
+              onClick={() => setSelectedImage(photo.file_url)}
             >
               <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
               <div className="absolute inset-0 border-2 border-transparent group-hover:border-primary/50 rounded-xl transition-colors duration-300 z-20" />
 
               <Image
-                src={photo.src}
-                alt={photo.alt}
+                src={photo.file_url}
+                alt={`Quinceañera photo ${index + 1}`}
                 fill
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
               />

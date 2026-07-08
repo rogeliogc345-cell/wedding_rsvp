@@ -1,14 +1,9 @@
 import { notFound } from "next/navigation";
-import { createClient } from "@/lib/supabase/server";
+import { getInvitationBySlug } from "@/app/(admin)/actions";
 import WeddingTemplate from "@/components/templates/WeddingTemplate";
 import XVClassicTemplate from "@/app/quince/classic/page";
 import XVClassicBlueTemplate from "@/app/quince/classicBlue/page";
 import XVModernTemplate from "@/app/quince/modern/page";
-
-
-
-
-
 
 const TEMPLATE_MAP = {
     XV: {
@@ -19,25 +14,12 @@ const TEMPLATE_MAP = {
     }
 };
 
-
-
-
-
-
 export default async function InvitationPage({ params }: { params: Promise<{ slug: string }> }) {
 
     const { slug } = await params;
-    const supabase = await createClient();
-    // 1. Fetch data for this specific slug
-    const { data: customer, error } = await supabase
-        .from("customers")
-        .select("*, events(*), media(*)")
-        .eq("slug", slug)
-        .single();
-
-    if (error) {
-        throw new Error("Error fetching customer");
-    }
+    
+    // Fetch data using the server action
+    const customer = await getInvitationBySlug(slug);
 
     if (!customer || !customer.is_published) {
         notFound(); // Shows the 404 page
@@ -63,7 +45,7 @@ export default async function InvitationPage({ params }: { params: Promise<{ slu
         const normalizedTemplate = rawTemplate === "classicBlue" ? "clasicBlue" : rawTemplate;
         const TemplateComponent = TEMPLATE_MAP.XV[normalizedTemplate as keyof typeof TEMPLATE_MAP.XV] ?? XVClassicTemplate;
 
-        return <TemplateComponent />;
+        return <TemplateComponent customer={customer} />;
     }
 
     // Default to ModernTemplate for Wedding (and as a fallback)

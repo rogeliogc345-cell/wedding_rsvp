@@ -3,26 +3,11 @@
 import { motion } from "framer-motion"
 import { Calendar, Clock, MapPin, Church, PartyPopper } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { getEventIcon } from "@/lib/icons"
 
-export function EventDetailsDemo2() {
-  const events = [
-    {
-      icon: Church,
-      title: "CEREMONIA",
-      time: "5:00 PM",
-      location: "Parroquia San José",
-      address: "Av. Principal #123, Centro",
-      mapUrl: "https://maps.google.com",
-    },
-    {
-      icon: PartyPopper,
-      title: "RECEPCIÓN",
-      time: "7:00 PM",
-      location: "Salón Imperial",
-      address: "Blvd. Las Flores #456",
-      mapUrl: "https://maps.google.com",
-    },
-  ]
+export function EventDetailsDemo2({ events }: { events: any[] }) {
+  console.log(events)
+
 
   return (
     <section className="py-24 px-4 bg-black">
@@ -47,45 +32,47 @@ export function EventDetailsDemo2() {
           <div className="hidden md:block h-px flex-1 bg-border" />
           <div className="flex items-center gap-6 px-8 py-4 border border-primary/30 rounded-full">
             <Calendar className="w-5 h-5 text-primary text-xvgreen-text" />
-            <span className="text-lg tracking-wider text-white">Sábado 21 de Junio, 2025</span>
+            <span className="text-lg tracking-wider text-white">Jueves 30 de Julio, 2026</span>
           </div>
           <div className="hidden md:block h-px flex-1 bg-border" />
         </motion.div>
 
         {/* Events grid */}
         <div className="grid md:grid-cols-2 gap-8">
-          {events.map((event, index) => (
-            <motion.div
-              key={event.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.2 }}
-              className="group relative"
-            >
-              <div className="relative bg-black border border-border rounded-2xl p-8 md:p-12 overflow-hidden transition-all duration-500 hover:border-primary/50">
-                {/* Background decoration */}
-                <div className="absolute -right-8 -top-8 w-32 h-32 rounded-full bg-primary/5 blur-2xl group-hover:bg-primary/10 transition-colors" />
+          {events.map((event, index) => {
+            const IconComponent = getEventIcon(event.icon);
+            return (
+              <motion.div
+                key={event.title || event.event_name}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.2 }}
+                className="group relative"
+              >
+                <div className="relative bg-black border border-border rounded-2xl p-8 md:p-12 overflow-hidden transition-all duration-500 hover:border-primary/50">
+                  {/* Background decoration */}
+                  <div className="absolute -right-8 -top-8 w-32 h-32 rounded-full bg-primary/5 blur-2xl group-hover:bg-primary/10 transition-colors" />
 
-                <div className="relative z-10">
-                  {/* Icon */}
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-primary/10 border border-primary/20 mb-6">
-                    <event.icon className="w-7 h-7 text-primary text-xvgreen-text" />
-                  </div>
+                  <div className="relative z-10">
+                    {/* Icon */}
+                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-primary/10 border border-primary/20 mb-6">
+                      <IconComponent className="w-7 h-7 text-primary text-xvgreen-text" />
+                    </div>
 
                   {/* Title */}
-                  <h3 className="text-2xl font-serif font-bold text-foreground mb-6 text-white">{event.title}</h3>
+                  <h3 className="text-2xl font-serif font-bold text-foreground mb-6 text-white">{event.event_name}</h3>
 
                   {/* Details */}
                   <div className="space-y-4 mb-8">
                     <div className="flex items-center gap-3 text-muted-foreground">
                       <Clock className="w-4 h-4 text-primary text-xvgreen-text" />
-                      <span>{event.time}</span>
+                      <span>{event.event_time} - {event.event_date}</span>
                     </div>
                     <div className="flex items-start gap-3 text-muted-foreground">
                       <MapPin className="w-4 h-4 text-xvgreen-text mt-1" />
                       <div>
-                        <p className="text-white font-medium">{event.location}</p>
+                        <p className="text-white font-medium">{event.location_name}</p>
                         <p className="text-sm">{event.address}</p>
                       </div>
                     </div>
@@ -95,14 +82,15 @@ export function EventDetailsDemo2() {
                   <Button
 
                     className="bg-black border-xvgreen-border text-xvgreen-text hover:bg-primary hover:text-primary-foreground transition-all"
-                    onClick={() => window.open(event.mapUrl, "_blank")}
+                    onClick={() => window.open(event.google_maps_url, "_blank")}
                   >
                     Ver en Mapa
                   </Button>
                 </div>
               </div>
             </motion.div>
-          ))}
+          )
+        })}
         </div>
       </div>
     </section>

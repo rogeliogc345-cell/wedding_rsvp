@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useEffect } from "react";
+import { useActionState, useEffect, startTransition } from "react";
 import { uploadMediaAction, type UploadMediaState } from "@/app/(admin)/actions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -11,6 +11,57 @@ const initialState: UploadMediaState = {
     error: null,
     success: false,
 };
+
+function compressImage(file: File, maxWidth = 1920, maxHeight = 1920, quality = 0.82): Promise<Blob> {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = (event) => {
+            const img = new Image();
+            img.src = event.target?.result as string;
+            img.onload = () => {
+                const canvas = document.createElement("canvas");
+                let width = img.width;
+                let height = img.height;
+
+                // Only resize if the image exceeds the maximum dimensions
+                if (width > maxWidth || height > maxHeight) {
+                    if (width > height) {
+                        height = Math.round((height * maxWidth) / width);
+                        width = maxWidth;
+                    } else {
+                        width = Math.round((width * maxHeight) / height);
+                        height = maxHeight;
+                    }
+                }
+
+                canvas.width = width;
+                canvas.height = height;
+
+                const ctx = canvas.getContext("2d");
+                if (!ctx) {
+                    reject(new Error("Could not get canvas 2d context"));
+                    return;
+                }
+
+                ctx.drawImage(img, 0, 0, width, height);
+                canvas.toBlob(
+                    (blob) => {
+                        if (blob) {
+                            resolve(blob);
+                        } else {
+                            reject(new Error("Canvas compression returned null blob"));
+                        }
+                    },
+                    "image/jpeg",
+                    quality
+                );
+            };
+            img.onerror = (err) => reject(err);
+        };
+        reader.onerror = (err) => reject(err);
+    });
+}
 
 type UploadZoneProps = {
     title: string;
@@ -35,15 +86,40 @@ function UploadZone({
     state,
     action,
 }: UploadZoneProps) {
-    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files?.[0];
+    const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+        const input = event.currentTarget;
+        const file = input.files?.[0];
 
         if (!file) {
             return;
         }
 
-        event.currentTarget.form?.requestSubmit();
-        event.currentTarget.value = "";
+        const formData = new FormData();
+        formData.append("customerId", customerId);
+        formData.append("fileType", fileType);
+
+        if (fileType === "image") {
+            try {
+                // Compress the image before uploading
+                const compressedBlob = await compressImage(file);
+                // Convert back to a file object to keep the name and correct content-type
+                const compressedFile = new File([compressedBlob], file.name.replace(/\.[^/.]+$/, "") + ".jpg", {
+                    type: "image/jpeg",
+                    lastModified: Date.now(),
+                });
+                formData.append("file", compressedFile);
+            } catch (err) {
+                console.error("Client-side image compression failed. Falling back to raw file upload.", err);
+                formData.append("file", file);
+            }
+        } else {
+            formData.append("file", file);
+        }
+
+        startTransition(() => {
+            action(formData);
+        });
+        input.value = "";
     };
 
     return (
@@ -56,9 +132,7 @@ function UploadZone({
             <p className="text-sm font-medium">{title}</p>
             <p className="text-sm text-muted-foreground mt-1 mb-4">{description}</p>
 
-            <form action={action} className="w-full space-y-3">
-                <input type="hidden" name="customerId" value={customerId} />
-                <input type="hidden" name="fileType" value={fileType} />
+            <div className="w-full space-y-3">
                 <Input
                     type="file"
                     accept={accept}
@@ -83,7 +157,7 @@ function UploadZone({
                         )}
                     </label>
                 </Button>
-            </form>
+            </div>
 
             {state.error ? (
                 <div className="mt-3 flex items-center gap-2 text-sm text-destructive">

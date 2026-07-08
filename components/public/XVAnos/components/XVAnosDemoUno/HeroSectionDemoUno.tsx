@@ -1,11 +1,31 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { Volume2, VolumeX } from "lucide-react"
 import Image from "next/image"
 
-export function HeroSectionDemoUno() {
+function formatEventDate(eventDate?: string) {
+    if (!eventDate) return "Próximamente"
+
+    const normalizedDate = eventDate.split("T")[0]
+    const dateParts = normalizedDate.match(/^(\d{4})[-/](\d{2})[-/](\d{2})$/)
+
+    if (!dateParts) return eventDate
+
+    const [, year, month, day] = dateParts
+    const parsedDate = new Date(Number(year), Number(month) - 1, Number(day))
+
+    if (Number.isNaN(parsedDate.getTime())) return eventDate
+
+    const monthName = parsedDate.toLocaleDateString("es-ES", { month: "long" })
+    const formattedMonth = monthName.charAt(0).toUpperCase() + monthName.slice(1)
+
+    return `${parsedDate.getDate()} de ${formattedMonth}, ${parsedDate.getFullYear()}`
+}
+
+export function HeroSectionDemoUno({ name, eventDate }: { name?: string; eventDate?: string }) {
     const [isMuted, setIsMuted] = useState(true)
+    const formattedDate = formatEventDate(eventDate)
 
     return (
         <section className="bg-[url('/hanni/fondo_moños.png')] bg-cover bg-center  relative min-h-screen flex flex-col items-center justify-center h-screen  ">
@@ -64,7 +84,7 @@ export function HeroSectionDemoUno() {
                 // style={{ fontFamily: 'var(--font-great-vibes)' }}
 
                 >
-                    Valentina
+                    {name}
                 </h1>
 
                 {/* Decorative line */}
@@ -76,7 +96,7 @@ export function HeroSectionDemoUno() {
 
                 {/* Date teaser */}
                 <p className="mt-6 text-muted-foreground tracking-widest text-sm">
-                    15 de Agosto, 2026
+                    {formattedDate}
                 </p>
             </div>
 

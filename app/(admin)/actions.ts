@@ -136,24 +136,33 @@ export const deleteMediaAction = async (
         const storagePath = decodeURIComponent(new URL(mediaUrl).pathname)
             .replace(/^\/storage\/v1\/object\/public\/wedding-media\//, "");
 
-            console.log(storagePath)
+        console.log("storagePath:", storagePath);
 
         if (!storagePath) {
             return { error: "Unable to determine the file path for deletion.", success: false };
         }
 
-        const { data, error: storageError } = await supabase.storage
-            .from("wedding-media")
-            .remove([storagePath]);
+        // 1. Check if the file exists in the public bucket using a HEAD request
+        let fileExists = false;
+        try {
+            const headRes = await fetch(mediaUrl, { method: "HEAD" });
+            fileExists = headRes.status === 200;
+            console.log(`HEAD check for ${mediaUrl}: status ${headRes.status}, exists: ${fileExists}`);
+        } catch (fetchError) {
+            console.warn("Failed to check file existence via HEAD request, assuming it might exist:", fetchError);
+            // Default to true to attempt deletion anyway
+            fileExists = true;
+        }
 
-            console.log("Attempting to delete media from storage:", { storagePath, customerId, mediaId});
-         
+        // 2. Only attempt to remove the file from storage if it exists in the bucket
+        if (fileExists) {
+            const { data, error: storageError } = await supabase.storage
+                .from("wedding-media")
+                .remove([storagePath]);
 
-        if (storageError) {
-            const message = storageError.message?.toLowerCase() ?? "";
-            const isMissingFile = message.includes("not found") || message.includes("does not exist") || message.includes("object not found");
+            console.log("Supabase storage remove response:", { data, storageError });
 
-            if (!isMissingFile) {
+            if (storageError) {
                 console.error("Error deleting media file from storage:", storageError);
                 return {
                     error: storageError.message || "The file could not be removed from storage.",
@@ -161,9 +170,19 @@ export const deleteMediaAction = async (
                 };
             }
 
-            console.warn("Storage object was already missing; continuing with database cleanup.", storageError);
+            // If Supabase returns success (error is null) but data is empty, it means RLS blocked the deletion
+            if (!data || data.length === 0) {
+                console.error("RLS policy blocked deletion or file was not removed. Data:", data);
+                return {
+                    error: "Permission denied: The storage file could not be deleted. Check your Supabase Storage policies.",
+                    success: false,
+                };
+            }
+        } else {
+            console.log("File is already missing from storage bucket. Proceeding to delete database record.");
         }
 
+        // 3. Delete the record from the database
         const { error: dbError } = await supabase
             .from("media")
             .delete()
@@ -543,6 +562,9 @@ export const addEventAction = async (
         const event_date = formData.get("event_date")?.toString();
         const event_time = formData.get("event_time")?.toString();
         const location_name = formData.get("location_name")?.toString();
+        const icon = formData.get("icon")?.toString() || "PartyPopper";
+        const address = formData.get("address")?.toString() || null;
+        const google_maps_url = formData.get("google_maps_url")?.toString() || null;
 
         if (!event_name || !event_date || !event_time || !location_name) {
             return { error: "All fields are required.", success: false };
@@ -551,7 +573,16 @@ export const addEventAction = async (
         const supabase = await createClient();
         const { error } = await supabase
             .from("events")
-            .insert([{ event_name, event_date, event_time, location_name, customer_id: customerId }]);
+            .insert([{ 
+                event_name, 
+                event_date, 
+                event_time, 
+                location_name, 
+                customer_id: customerId,
+                icon,
+                address,
+                google_maps_url
+            }]);
 
         if (error) {
             console.error("Error adding event:", error);
@@ -587,5 +618,26 @@ export const deleteEventAction = async (
     } catch (err: unknown) {
         console.error("Exception in deleteEventAction:", err);
         return { error: "An unexpected error occurred. Please try again.", success: false };
+    }
+};
+
+export const getInvitationBySlug = async (slug: string) => {
+    try {
+        const supabase = await createClient();
+        const { data: customer, error } = await supabase
+            .from("customers")
+            .select("*, events(*), media(*)")
+            .eq("slug", slug)
+            .single();
+
+        if (error) {
+            console.error("Error fetching invitation by slug:", error);
+            return null;
+        }
+
+        return customer;
+    } catch (error) {
+        console.error("Unexpected error in getInvitationBySlug:", error);
+        return null;
     }
 };

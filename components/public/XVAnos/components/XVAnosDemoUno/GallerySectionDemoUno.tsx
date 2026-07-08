@@ -31,7 +31,17 @@ const galleryImages = [
     },
 ]
 
-export function GallerySectionDemoUno() {
+
+type MediaItem = {
+    id: string;
+    file_url: string;
+    file_type: "image" | "audio";
+    is_hero: boolean;
+}
+
+export function GallerySectionDemoUno({ photos }: { photos?: MediaItem[] }) {
+    const safePhotos = photos ?? []
+    console.log("customer photos", safePhotos)
     const [selectedImage, setSelectedImage] = useState<number | null>(null)
 
     const openLightbox = (index: number) => setSelectedImage(index)
@@ -62,15 +72,15 @@ export function GallerySectionDemoUno() {
 
                 {/* Gallery grid */}
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    {galleryImages.map((image, index) => (
+                    {safePhotos.map((image, index) => (
                         <button
                             key={index}
                             onClick={() => openLightbox(index)}
                             className="group relative aspect-square overflow-hidden rounded-2xl bg-muted cursor-pointer"
                         >
                             <Image
-                                src={image.src}
-                                alt={image.alt}
+                                src={image.file_url}
+                                alt={image.file_url}
                                 fill
                                 className="object-cover transition-transform duration-500 group-hover:scale-110"
                             />

@@ -1,10 +1,17 @@
 "use client"
 
-import { useState } from "react"
+import { useCallback, useMemo, useState } from "react"
 import Image from "next/image"
 import { Crown, Camera, X, ChevronLeft, ChevronRight } from "lucide-react"
 
-const photos = [
+type GalleryPhoto = {
+  src?: string
+  file_url?: string
+  alt?: string
+  span?: string
+}
+
+const fallbackImages: GalleryPhoto[] = [
   {
     src: "/xv/XV_Anos_2.png",
     alt: "Vestido de quinceañera azul real",
@@ -32,23 +39,46 @@ const photos = [
   },
 ]
 
-export function PhotoGallery() {
+const DEFAULT_FALLBACK_SRC = fallbackImages[0]?.src ?? "/xv/XV_Anos_2.png"
+
+export function PhotoGallery({ photos }: { photos?: GalleryPhoto[] }) {
+  const normalizedPhotos = useMemo(() => {
+    const providedPhotos = (photos ?? []).filter(Boolean)
+
+    if (providedPhotos.length > 0) {
+      return providedPhotos.map((photo) => ({
+        src: photo.src ?? photo.file_url,
+        alt: photo.alt ?? "Foto de la galería",
+        span: photo.span ?? "col-span-1 row-span-1",
+      }))
+    }
+
+    return fallbackImages
+  }, [photos])
+
   const [selectedPhoto, setSelectedPhoto] = useState<number | null>(null)
+  const [imageErrors, setImageErrors] = useState<Record<number, boolean>>({})
 
-  const openLightbox = (index: number) => setSelectedPhoto(index)
-  const closeLightbox = () => setSelectedPhoto(null)
+  const openLightbox = useCallback((index: number) => setSelectedPhoto(index), [])
+  const closeLightbox = useCallback(() => setSelectedPhoto(null), [])
+  const handleImageError = useCallback((index: number) => {
+    setImageErrors((prev) => ({ ...prev, [index]: true }))
+  }, [])
 
-  const goToPrevious = () => {
-    if (selectedPhoto !== null) {
-      setSelectedPhoto(selectedPhoto === 0 ? photos.length - 1 : selectedPhoto - 1)
-    }
-  }
+  const goToPrevious = useCallback(() => {
+    if (selectedPhoto === null || normalizedPhotos.length === 0) return
 
-  const goToNext = () => {
-    if (selectedPhoto !== null) {
-      setSelectedPhoto(selectedPhoto === photos.length - 1 ? 0 : selectedPhoto + 1)
-    }
-  }
+    setSelectedPhoto(selectedPhoto === 0 ? normalizedPhotos.length - 1 : selectedPhoto - 1)
+  }, [normalizedPhotos.length, selectedPhoto])
+
+  const goToNext = useCallback(() => {
+    if (selectedPhoto === null || normalizedPhotos.length === 0) return
+
+    setSelectedPhoto(selectedPhoto === normalizedPhotos.length - 1 ? 0 : selectedPhoto + 1)
+  }, [normalizedPhotos.length, selectedPhoto])
+
+  const currentPhoto = selectedPhoto !== null ? normalizedPhotos[selectedPhoto] : null
+  const hasPhotos = normalizedPhotos.length > 0
 
   return (
     <section className="relative py-24 overflow-hidden">
@@ -70,32 +100,46 @@ export function PhotoGallery() {
           </p>
         </div>
 
-        {/* Masonry-style gallery */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto">
-          {photos.map((photo, index) => (
-            <div
-              key={index}
-              className={`${photo.span} relative group cursor-pointer overflow-hidden rounded-2xl`}
-              onClick={() => openLightbox(index)}
-            >
-              <div className="absolute inset-0 bg-[#4169E1]/0 group-hover:bg-[#4169E1]/30 transition-all duration-300 z-10" />
-              <div className="absolute inset-0 border-2 border-transparent group-hover:border-[#FFD700]/50 rounded-2xl transition-all duration-300 z-10" />
-              <Image
-                src={photo.src}
-                alt={photo.alt}
-                fill
-                className="object-cover group-hover:scale-110 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
-                <Crown className="w-10 h-10 text-[#FFD700]" />
-              </div>
-            </div>
-          ))}
-        </div>
+        {hasPhotos ? (
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto">
+            {normalizedPhotos.map((photo, index) => {
+              const resolvedSrc = imageErrors[index]
+                ? DEFAULT_FALLBACK_SRC
+                : (photo.src ?? DEFAULT_FALLBACK_SRC)
+
+              return (
+                <button
+                  key={`${resolvedSrc}-${index}`}
+                  type="button"
+                  className={`${photo.span ?? "col-span-1 row-span-1"} relative group cursor-pointer overflow-hidden rounded-2xl aspect-square`}
+                  onClick={() => openLightbox(index)}
+                >
+                  <div className="absolute inset-0 bg-[#4169E1]/0 group-hover:bg-[#4169E1]/30 transition-all duration-300 z-10" />
+                  <div className="absolute inset-0 border-2 border-transparent group-hover:border-[#FFD700]/50 rounded-2xl transition-all duration-300 z-10" />
+                  <Image
+                    src={resolvedSrc}
+                    alt={photo.alt ?? `Foto ${index + 1}`}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                    priority={index < 2}
+                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                    onError={() => handleImageError(index)}
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
+                    <Crown className="w-10 h-10 text-[#FFD700]" />
+                  </div>
+                </button>
+              )
+            })}
+          </div>
+        ) : (
+          <div className="mx-auto max-w-2xl rounded-2xl border border-white/10 bg-white/5 p-8 text-center text-[#87CEEB]/70">
+            Aún no hay fotos para mostrar en esta galería.
+          </div>
+        )}
       </div>
 
-      {/* Lightbox */}
-      {selectedPhoto !== null && (
+      {selectedPhoto !== null && currentPhoto && (
         <div className="fixed inset-0 z-50 bg-[#0a1628]/95 backdrop-blur-sm flex items-center justify-center p-4">
           <button
             onClick={closeLightbox}
@@ -120,10 +164,12 @@ export function PhotoGallery() {
 
           <div className="relative w-full max-w-4xl aspect-[3/4] md:aspect-video">
             <Image
-              src={photos[selectedPhoto].src}
-              alt={photos[selectedPhoto].alt}
+              src={imageErrors[selectedPhoto] ? DEFAULT_FALLBACK_SRC : (currentPhoto.src ?? DEFAULT_FALLBACK_SRC)}
+              alt={currentPhoto.alt ?? "Foto de la galería"}
               fill
+              sizes="(max-width: 768px) 100vw, 80vw"
               className="object-contain"
+              onError={() => handleImageError(selectedPhoto)}
             />
           </div>
         </div>

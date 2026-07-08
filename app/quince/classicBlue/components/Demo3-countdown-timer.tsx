@@ -10,7 +10,7 @@ interface TimeLeft {
   seconds: number
 }
 
-export function CountdownTimer() {
+export function CountdownTimer({ targetDate }: { targetDate: string }) {
   const [timeLeft, setTimeLeft] = useState<TimeLeft>({
     days: 0,
     hours: 0,
@@ -19,11 +19,11 @@ export function CountdownTimer() {
   })
 
   useEffect(() => {
-    const targetDate = new Date("2025-11-15T16:00:00")
+    const parsedTargetDate = new Date(targetDate)
 
     const timer = setInterval(() => {
       const now = new Date()
-      const difference = targetDate.getTime() - now.getTime()
+      const difference = parsedTargetDate.getTime() - now.getTime()
 
       if (difference > 0) {
         setTimeLeft({
@@ -32,11 +32,18 @@ export function CountdownTimer() {
           minutes: Math.floor((difference / 1000 / 60) % 60),
           seconds: Math.floor((difference / 1000) % 60),
         })
+      } else {
+        setTimeLeft({
+          days: 0,
+          hours: 0,
+          minutes: 0,
+          seconds: 0,
+        })
       }
     }, 1000)
 
     return () => clearInterval(timer)
-  }, [])
+  }, [targetDate])
 
   const timeUnits = [
     { value: timeLeft.days, label: "Días" },

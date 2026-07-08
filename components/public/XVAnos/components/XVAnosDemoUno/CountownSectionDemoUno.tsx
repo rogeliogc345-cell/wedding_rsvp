@@ -9,7 +9,7 @@ interface TimeLeft {
     seconds: number
 }
 
-export function CountdownSectionDemoUno() {
+export function CountdownSectionDemoUno({ eventDate }: { eventDate?: string }) {
     const [timeLeft, setTimeLeft] = useState<TimeLeft>({
         days: 0,
         hours: 0,
@@ -18,7 +18,13 @@ export function CountdownSectionDemoUno() {
     })
 
     useEffect(() => {
-        const targetDate = new Date("2026-08-15T18:00:00")
+        const defaultTargetDate = new Date("2026-08-15T18:00:00")
+        const normalizedDate = eventDate?.split("T")[0]
+        const dateParts = normalizedDate?.match(/^(\d{4})[-/](\d{2})[-/](\d{2})$/)
+
+        const targetDate = dateParts
+            ? new Date(Number(dateParts[1]), Number(dateParts[2]) - 1, Number(dateParts[3]), 18, 0, 0)
+            : defaultTargetDate
 
         const calculateTimeLeft = () => {
             const now = new Date()
@@ -38,7 +44,7 @@ export function CountdownSectionDemoUno() {
         const timer = setInterval(calculateTimeLeft, 1000)
 
         return () => clearInterval(timer)
-    }, [])
+    }, [eventDate])
 
     const timeUnits = [
         { value: timeLeft.days, label: "Días" },
@@ -55,7 +61,7 @@ export function CountdownSectionDemoUno() {
                 </p>
 
                 <div className="flex justify-center items-center gap-4 md:gap-8 flex-wrap">
-                    {timeUnits.map((unit, index) => (
+                    {timeUnits.map((unit) => (
                         <div key={unit.label} className="flex flex-col items-center">
                             <div className="relative">
                                 <div className="w-20 h-20 md:w-28 md:h-28 rounded-2xl bg-card shadow-lg flex items-center justify-center border border-border">

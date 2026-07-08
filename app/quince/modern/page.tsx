@@ -8,13 +8,14 @@ import { RSVPDemo2 } from "@/components/public/XVAnos/components/XVAnosDemoTwoo/
 
 
 
-export default function XVModernTemplate() {
+export default function XVModernTemplate({ customer }: { customer: any }) {
+
   return (
     <main className="min-h-screen theme-xvGreen">
-      <HeroDemo2 />
-      <CountdownDemo2 />
-      <EventDetailsDemo2 />
-      <GalleryDemo2 />
+      <HeroDemo2 name={customer.couple_name} eventDate={customer.event_date} />
+      <CountdownDemo2 eventDate={customer.event_date} />
+      <EventDetailsDemo2 events={customer.events} />
+      <GalleryDemo2 media={customer.media} customerId={customer.id} />
       <DressCodeDemo2 />
       <RSVPDemo2 />
       <FooterDemo2 />

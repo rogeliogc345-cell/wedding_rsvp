@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 
-export function AboutSectionDemoUno() {
+export function AboutSectionDemoUno({ name }: { name?: string }) {
     return (
         <section id="about" className="py-20 px-4 bg-background">
             <div className="max-w-4xl mx-auto">
@@ -48,7 +48,7 @@ export function AboutSectionDemoUno() {
                             className="text-4xl text-primary"
                             style={{ fontFamily: 'var(--font-great-vibes)' }}
                         >
-                            Hola, soy Valentina
+                            Hola, {name || "name"}
                         </h3>
                         <p className="text-muted-foreground leading-relaxed">
                             Hoy celebro una de las etapas más importantes de mi vida. Mis XV años
@@ -71,7 +71,7 @@ export function AboutSectionDemoUno() {
                                 className="text-3xl text-gold font-wedding"
 
                             >
-                                Con cariño, Valentina
+                                Con cariño, {name || "name"}
                             </p>
                         </div>
                     </div>

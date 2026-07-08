@@ -3,7 +3,7 @@
 import Image from "next/image"
 import { Crown, Sparkles } from "lucide-react"
 
-export function HeroSection() {
+export function HeroSection({ name }: { name: string }) {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background gradient */}
@@ -34,7 +34,7 @@ export function HeroSection() {
             </h2>
 
             <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold mb-6 bg-gradient-to-r from-[#87CEEB] to-[#FFD700] bg-clip-text text-transparent leading-tight">
-              Valentina
+              {name}
             </h1>
 
             <div className="flex items-center justify-center lg:justify-start gap-4 mb-8">

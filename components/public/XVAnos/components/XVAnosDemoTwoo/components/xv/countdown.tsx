@@ -10,7 +10,7 @@ interface TimeLeft {
   seconds: number
 }
 
-export function CountdownDemo2() {
+export function CountdownDemo2({ eventDate }: { eventDate: string }) {
   const [timeLeft, setTimeLeft] = useState<TimeLeft>({
     days: 0,
     hours: 0,
@@ -19,7 +19,7 @@ export function CountdownDemo2() {
   })
 
   useEffect(() => {
-    const targetDate = new Date("2025-06-21T19:00:00")
+    const targetDate = new Date(eventDate)
 
     const calculateTimeLeft = () => {
       const now = new Date()
