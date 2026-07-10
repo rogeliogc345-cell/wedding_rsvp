@@ -12,6 +12,10 @@ export interface Customer {
     is_published: boolean;
     category: "wedding" | "XV";
     template?: "classic" | "clasicBlue" | "modern";
+    color_preferences?: {
+        suggested: string[];
+        forbidden: string[];
+    };
 }
 
 export interface WeddingEvent {

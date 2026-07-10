@@ -7,8 +7,9 @@ import {
     TableRow
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { Mail, MessageSquare } from "lucide-react";
+import { Mail } from "lucide-react";
 import { getGuestsByCustomerId } from "@/app/(admin)/actions";
+import { GuestTicketsEditor } from "@/components/admin/GuestTicketsEditor";
 
 export async function GuestList({ customerId }: { customerId: string }) {
     const guests = await getGuestsByCustomerId(customerId);
@@ -25,6 +26,8 @@ export async function GuestList({ customerId }: { customerId: string }) {
                         <TableHead>Email</TableHead>
                         <TableHead>Message</TableHead>
                         <TableHead>Passcode</TableHead>
+                        <TableHead>Confirmed</TableHead>
+                        <TableHead>Tickets Allowed</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -53,6 +56,16 @@ export async function GuestList({ customerId }: { customerId: string }) {
                             </TableCell>
                             <TableCell className="font-mono font-bold uppercase tracking-widest text-blue-600">
                                 {guest.passcode}
+                            </TableCell>
+                            <TableCell className="text-center text-sm font-medium">
+                                {guest.tickets_confirmed}
+                            </TableCell>
+                            <TableCell>
+                                <GuestTicketsEditor
+                                    guestId={guest.id}
+                                    customerId={customerId}
+                                    initialTicketsAllowed={guest.tickets_allowed}
+                                />
                             </TableCell>
                         </TableRow>
                     ))}

@@ -5,9 +5,7 @@ import { Calendar, Clock, MapPin, Church, PartyPopper } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { getEventIcon } from "@/lib/icons"
 
-export function EventDetailsDemo2({ events }: { events: any[] }) {
-  console.log(events)
-
+export function EventDetailsDemo2({ events, date }: { events: any[], date: string }) {
 
   return (
     <section className="py-24 px-4 bg-black">
@@ -32,7 +30,7 @@ export function EventDetailsDemo2({ events }: { events: any[] }) {
           <div className="hidden md:block h-px flex-1 bg-border" />
           <div className="flex items-center gap-6 px-8 py-4 border border-primary/30 rounded-full">
             <Calendar className="w-5 h-5 text-primary text-xvgreen-text" />
-            <span className="text-lg tracking-wider text-white">Jueves 30 de Julio, 2026</span>
+            <span className="text-lg tracking-wider text-white">{date}</span>
           </div>
           <div className="hidden md:block h-px flex-1 bg-border" />
         </motion.div>
@@ -60,37 +58,37 @@ export function EventDetailsDemo2({ events }: { events: any[] }) {
                       <IconComponent className="w-7 h-7 text-primary text-xvgreen-text" />
                     </div>
 
-                  {/* Title */}
-                  <h3 className="text-2xl font-serif font-bold text-foreground mb-6 text-white">{event.event_name}</h3>
+                    {/* Title */}
+                    <h3 className="text-2xl font-serif font-bold text-foreground mb-6 text-white">{event.event_name}</h3>
 
-                  {/* Details */}
-                  <div className="space-y-4 mb-8">
-                    <div className="flex items-center gap-3 text-muted-foreground">
-                      <Clock className="w-4 h-4 text-primary text-xvgreen-text" />
-                      <span>{event.event_time} - {event.event_date}</span>
-                    </div>
-                    <div className="flex items-start gap-3 text-muted-foreground">
-                      <MapPin className="w-4 h-4 text-xvgreen-text mt-1" />
-                      <div>
-                        <p className="text-white font-medium">{event.location_name}</p>
-                        <p className="text-sm">{event.address}</p>
+                    {/* Details */}
+                    <div className="space-y-4 mb-8">
+                      <div className="flex items-center gap-3 text-muted-foreground">
+                        <Clock className="w-4 h-4 text-primary text-xvgreen-text" />
+                        <span>{event.event_time} - {event.event_date}</span>
+                      </div>
+                      <div className="flex items-start gap-3 text-muted-foreground">
+                        <MapPin className="w-4 h-4 text-xvgreen-text mt-1" />
+                        <div>
+                          <p className="text-white font-medium">{event.location_name}</p>
+                          <p className="text-sm">{event.address}</p>
+                        </div>
                       </div>
                     </div>
+
+                    {/* Map button */}
+                    <Button
+
+                      className="bg-black border-xvgreen-border text-xvgreen-text hover:bg-primary hover:text-primary-foreground transition-all"
+                      onClick={() => window.open(event.google_maps_url, "_blank")}
+                    >
+                      Ver en Mapa
+                    </Button>
                   </div>
-
-                  {/* Map button */}
-                  <Button
-
-                    className="bg-black border-xvgreen-border text-xvgreen-text hover:bg-primary hover:text-primary-foreground transition-all"
-                    onClick={() => window.open(event.google_maps_url, "_blank")}
-                  >
-                    Ver en Mapa
-                  </Button>
                 </div>
-              </div>
-            </motion.div>
-          )
-        })}
+              </motion.div>
+            )
+          })}
         </div>
       </div>
     </section>

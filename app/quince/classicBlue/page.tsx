@@ -18,7 +18,7 @@ const XVClassicBlueTemplate = ({ customer }: { customer: any }) => {
             <EventDetails events={customer.events} />
             <DressCode />
             <PhotoGallery  photos={customer.media} />
-            <RSVPForm />
+            <RSVPForm customerId={customer.id} />
             <Footer />
         </main>
     )

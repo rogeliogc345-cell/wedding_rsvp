@@ -57,7 +57,7 @@ const XVAnosDemoUnoTemplate = ({ customer }: XVAnosDemoUnoTemplateProps) => {
             <AboutSectionDemoUno name={customer?.couple_name} />
             <ItinerarySectionDemoUno events={customer?.events} />
             {/* <LocationSectionDemoUno /> */}
-            <RSVPSectionDemoUno />
+            <RSVPSectionDemoUno customerId={customer?.id} />
             <GallerySectionDemoUno photos={customer?.media} />
             <CalendarSectionDemoUno />
             <HashtagSection />

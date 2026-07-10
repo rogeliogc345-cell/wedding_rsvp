@@ -14,10 +14,10 @@ export default function XVModernTemplate({ customer }: { customer: any }) {
     <main className="min-h-screen theme-xvGreen">
       <HeroDemo2 name={customer.couple_name} eventDate={customer.event_date} />
       <CountdownDemo2 eventDate={customer.event_date} />
-      <EventDetailsDemo2 events={customer.events} />
+      <EventDetailsDemo2 events={customer.events} date={customer.event_date} />
       <GalleryDemo2 media={customer.media} customerId={customer.id} />
       <DressCodeDemo2 />
-      <RSVPDemo2 />
+      <RSVPDemo2 customerId={customer.id} />
       <FooterDemo2 />
     </main>
   )

@@ -311,14 +311,34 @@ export const confirmRSVPAction = async (prevState: FormState, formData: FormData
             }
         }
 
+        // Fetch the updated guest record so we can return it to the client
+        const { data: updatedGuest, error: fetchError } = await supabase
+            .from("guests")
+            .select("*")
+            .eq("id", guestId)
+            .single();
 
-        revalidatePath(`/invite/${prevState.guest?.customer_id}`); // Revalidate the invite page to reflect changes
+        if (fetchError || !updatedGuest) {
+            console.error("Error fetching updated guest:", fetchError);
+            // Still return thanks state but without guest details
+            revalidatePath(`/invite/${prevState.guest?.customer_id}`);
+            return {
+                ...prevState,
+                step: 'thanks',
+                guest: null,
+                error: null,
+            }
+        }
 
+        // Revalidate invite page using the customer_id from the updated guest
+        revalidatePath(`/invite/${updatedGuest.customer_id}`);
 
         return {
             ...prevState,
             step: 'thanks',
-            guest: prevState.guest ? { ...prevState.guest, tickets_confirmed, has_responded: true, attending: tickets_confirmed > 0, email, message, responded_at: new Date().toISOString() } : null,
+            guest: {
+                ...updatedGuest,
+            },
             error: null,
         }
 
@@ -394,6 +414,45 @@ export type AddGuestState = {
     error: string | null;
     success: boolean;
     guestName?: string;
+};
+
+export type UpdateGuestState = {
+    error: string | null;
+    success: boolean;
+};
+
+export const updateGuestAction = async (prevState: UpdateGuestState, formData: FormData): Promise<UpdateGuestState> => {
+    try {
+        const guestId = formData.get("guestId")?.toString();
+        const customerId = formData.get("customerId")?.toString();
+        const ticketsAllowed = parseInt(formData.get("ticketsAllowed")?.toString() || "1", 10);
+
+        if (!guestId || !customerId) {
+            return { error: "Guest ID and customer ID are required.", success: false };
+        }
+
+        if (Number.isNaN(ticketsAllowed) || ticketsAllowed < 1) {
+            return { error: "Tickets allowed must be at least 1.", success: false };
+        }
+
+        const supabase = await createClient();
+        const { error } = await supabase
+            .from("guests")
+            .update({ tickets_allowed: ticketsAllowed })
+            .eq("id", guestId);
+
+        if (error) {
+            console.error("Error updating guest tickets_allowed:", error);
+            return { error: "Unable to update guest tickets.", success: false };
+        }
+
+        revalidatePath(`/dashboard/edit/${customerId}`);
+
+        return { error: null, success: true };
+    } catch (err) {
+        console.error("Exception in updateGuestAction:", err);
+        return { error: "An unexpected error occurred. Please try again.", success: false };
+    }
 };
 
 export const addGuestAction = async (prevState: AddGuestState, formData: FormData): Promise<AddGuestState> => {
