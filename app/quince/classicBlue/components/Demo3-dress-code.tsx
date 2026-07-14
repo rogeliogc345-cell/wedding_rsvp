@@ -2,16 +2,27 @@
 
 import { Crown, Shirt, Ban, Sparkles } from "lucide-react"
 
-const allowedColors = [
-  { color: "#1C1C1C", name: "Negro" },
-  { color: "#C0C0C0", name: "Plata" },
-  { color: "#87CEEB", name: "Azul Cielo" },
-  { color: "#FFFFFF", name: "Blanco" },
-]
 
-const restrictedColor = { color: "#4169E1", name: "Azul Real" }
 
-export function DressCode() {
+
+
+export function DressCode({ customer_color_preferences }: { customer_color_preferences: any }) {
+  const { suggested = [], forbidden = [] } = customer_color_preferences ?? {}
+  console.log("suggested", suggested)
+  console.log("forbidden", forbidden)
+
+  // Normalize colors to objects with { name, color }
+  const allowedColors = (suggested || []).map((item: any) => {
+    if (!item) return { name: 'Desconocido', color: '#777' }
+    if (typeof item === 'string') return { name: item, color: item }
+    return { name: item.name ?? item.color ?? 'Color', color: item.color ?? item.name }
+  })
+
+  const restrictedColors = (forbidden || []).map((item: any) => {
+    if (!item) return { name: 'Reservado', color: '#ff0000' }
+    if (typeof item === 'string') return { name: item, color: item }
+    return { name: item.name ?? item.color ?? 'Reservado', color: item.color ?? item.name ?? '#ff0000' }
+  })
   return (
     <section className="relative py-24 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-[#0a1628] via-[#0d1f3c] to-[#0a1628]" />
@@ -49,7 +60,7 @@ export function DressCode() {
                 Paleta de Colores Sugerida
               </h3>
               <div className="flex flex-wrap justify-center gap-6">
-                {allowedColors.map((item, index) => (
+                {allowedColors.map((item: any, index: number) => (
                   <div key={index} className="flex flex-col items-center gap-3 group">
                     <div
                       className="w-16 h-16 md:w-20 md:h-20 rounded-full border-4 border-[#FFD700]/30 shadow-lg group-hover:scale-110 group-hover:border-[#FFD700]/60 transition-all duration-300"
@@ -72,17 +83,21 @@ export function DressCode() {
                 Color Reservado para la Quinceañera
               </h3>
               <div className="flex justify-center">
-                <div className="flex flex-col items-center gap-3 group">
-                  <div className="relative">
-                    <div
-                      className="w-20 h-20 md:w-24 md:h-24 rounded-full border-4 border-red-400/50 shadow-lg"
-                      style={{ backgroundColor: restrictedColor.color }}
-                    />
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <Ban className="w-12 h-12 text-red-400/80" />
+                <div className="flex flex-wrap justify-center gap-6">
+                  {restrictedColors.map((item: any, index: number) => (
+                    <div key={index} className="flex flex-col items-center gap-3 group">
+                      <div className="relative">
+                        <div
+                          className="w-20 h-20 md:w-24 md:h-24 rounded-full border-4 border-red-400/50 shadow-lg"
+                          style={{ backgroundColor: item.color }}
+                        />
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <Ban className="w-12 h-12 text-red-400/80" />
+                        </div>
+                      </div>
+                      <span className="text-sm text-red-400/80">{item.name}</span>
                     </div>
-                  </div>
-                  <span className="text-sm text-red-400/80">{restrictedColor.name}</span>
+                  ))}
                 </div>
               </div>
               <p className="text-center text-[#87CEEB]/60 text-sm mt-4">

@@ -49,7 +49,7 @@ function renderIcon(iconName: any, className: string) {
 
   // 1. Normalize and clean the string (lowercase, strip accents/diacritics, remove spaces/punctuation for key lookup)
   const rawString = typeof iconName === 'string' ? iconName : '';
-  
+
   // Remove accents: "Recepción" -> "recepcion"
   const normalized = rawString
     .normalize("NFD")
@@ -68,63 +68,63 @@ function renderIcon(iconName: any, className: string) {
 
   // 3. Fallback to keyword matching within the normalized string
   if (
-    normalized.includes('church') || 
-    normalized.includes('misa') || 
-    normalized.includes('ceremonia') || 
-    normalized.includes('ceremony') || 
+    normalized.includes('church') ||
+    normalized.includes('misa') ||
+    normalized.includes('ceremonia') ||
+    normalized.includes('ceremony') ||
     normalized.includes('religiosa') ||
     normalized.includes('templo') ||
     normalized.includes('parroquia')
   ) {
     return <Church className={className} />;
   }
-  
+
   if (
-    normalized.includes('party') || 
-    normalized.includes('recepcion') || 
-    normalized.includes('reception') || 
-    normalized.includes('fiesta') || 
+    normalized.includes('party') ||
+    normalized.includes('recepcion') ||
+    normalized.includes('reception') ||
+    normalized.includes('fiesta') ||
     normalized.includes('celebracion') ||
     normalized.includes('salon')
   ) {
     return <PartyPopper className={className} />;
   }
-  
+
   if (
-    normalized.includes('music') || 
-    normalized.includes('dance') || 
-    normalized.includes('baile') || 
-    normalized.includes('vals') || 
+    normalized.includes('music') ||
+    normalized.includes('dance') ||
+    normalized.includes('baile') ||
+    normalized.includes('vals') ||
     normalized.includes('dj') ||
     normalized.includes('pista')
   ) {
     return <Music className={className} />;
   }
-  
+
   if (
-    normalized.includes('food') || 
-    normalized.includes('dinner') || 
-    normalized.includes('cena') || 
-    normalized.includes('comida') || 
+    normalized.includes('food') ||
+    normalized.includes('dinner') ||
+    normalized.includes('cena') ||
+    normalized.includes('comida') ||
     normalized.includes('banquete') ||
     normalized.includes('platillo')
   ) {
     return <Utensils className={className} />;
   }
-  
+
   if (
-    normalized.includes('toast') || 
-    normalized.includes('brindis') || 
-    normalized.includes('copa') || 
+    normalized.includes('toast') ||
+    normalized.includes('brindis') ||
+    normalized.includes('copa') ||
     normalized.includes('bebida') ||
     normalized.includes('coctel')
   ) {
     return <GlassWater className={className} />;
   }
-  
+
   if (
-    normalized.includes('crown') || 
-    normalized.includes('corona') || 
+    normalized.includes('crown') ||
+    normalized.includes('corona') ||
     normalized.includes('quince') ||
     normalized.includes('presentacion')
   ) {
@@ -135,16 +135,15 @@ function renderIcon(iconName: any, className: string) {
   return <PartyPopper className={className} />;
 }
 
-export function EventDetails({ events }: { events: Event[] }) {
+export function EventDetails({ events, date }: { events: Event[], date: string }) {
   console.log("events", events)
 
-  const firstEventDate = events?.[0]?.event_date;
   let day = "15";
   let monthYear = "Noviembre 2025";
-  
-  if (firstEventDate) {
+
+  if (date) {
     try {
-      const dateObj = new Date(firstEventDate + "T00:00:00");
+      const dateObj = new Date(date + "T00:00:00");
       if (!isNaN(dateObj.getTime())) {
         day = dateObj.getDate().toString();
         const months = [
@@ -201,7 +200,7 @@ export function EventDetails({ events }: { events: Event[] }) {
           {events?.map((event, index) => {
             const eventColor = event.color || COLORS[index % COLORS.length];
             const eventIcon = event.icon || event.event_name;
-            
+
             return (
               <Card
                 key={index}

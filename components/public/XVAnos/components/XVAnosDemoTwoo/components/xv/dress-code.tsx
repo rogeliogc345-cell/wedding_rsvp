@@ -3,18 +3,13 @@
 import { motion } from "framer-motion"
 import { Shirt, Ban } from "lucide-react"
 
-export function DressCodeDemo2() {
-  const colors = [
-    { name: "Negro", hex: "#1a1a1a" },
-    { name: "Blanco", hex: "#ffffff" },
-    { name: "Dorado", hex: "#d4af37" },
-    { name: "Plateado", hex: "#c0c0c0" },
-  ]
+export function DressCodeDemo2({ customer_color_preferences }: { customer_color_preferences: any }) {
 
-  const avoidColors = [
-    { name: "Verde Lima", hex: "#b4e646" },
-    { name: "Rosa", hex: "#ff69b4" },
-  ]
+
+  const colors = customer_color_preferences?.suggested || [];
+  const avoidColors = customer_color_preferences?.forbidden || [];
+  console.log('avoidColors', avoidColors);
+
 
   return (
     <section className="py-24 px-4 relative overflow-hidden bg-black">
@@ -49,20 +44,20 @@ export function DressCodeDemo2() {
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-              {colors.map((color, index) => (
+              {colors.map((color: string, index: number) => (
                 <motion.div
-                  key={color.name}
+                  key={`${color}-${index}`}
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="flex items-center gap-3 p-3 rounded-lg  hover:border-primary/30 transition-colors"
+                  className="flex items-center gap-3 p-3 rounded-lg hover:border-primary/30 transition-colors"
                 >
                   <div
-                    className="w-8 h-8 rounded-full border border-border"
-                    style={{ backgroundColor: color.hex }}
+                    className="w-8 h-8 rounded-full border border-border flex-shrink-0"
+                    style={{ backgroundColor: color }}
                   />
-                  <span className="text-sm text-muted-foreground">{color.name}</span>
+                  <span className="text-sm text-muted-foreground font-mono">{color}</span>
                 </motion.div>
               ))}
             </div>
@@ -87,23 +82,23 @@ export function DressCodeDemo2() {
             </p>
 
             <div className="grid grid-cols-2 gap-4">
-              {avoidColors.map((color, index) => (
+              {avoidColors.map((color: string, index: number) => (
                 <motion.div
-                  key={color.name}
+                  key={`${color}-${index}`}
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
                   className="flex items-center gap-3 p-3 rounded-lg border border-destructive/20 bg-destructive/5"
                 >
-                  <div className="relative">
+                  <div className="relative flex-shrink-0">
                     <div
                       className="w-8 h-8 rounded-full border border-border"
-                      style={{ backgroundColor: color.hex }}
+                      style={{ backgroundColor: color }}
                     />
                     <Ban className="absolute -top-1 -right-1 w-4 h-4 text-destructive" />
                   </div>
-                  <span className="text-sm text-muted-foreground">{color.name}</span>
+                  <span className="text-sm text-muted-foreground font-mono">{color}</span>
                 </motion.div>
               ))}
             </div>

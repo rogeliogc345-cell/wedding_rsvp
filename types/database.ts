@@ -12,6 +12,7 @@ export interface Customer {
     is_published: boolean;
     category: "wedding" | "XV";
     template?: "classic" | "clasicBlue" | "modern";
+    about_me?: string | null;
     color_preferences?: {
         suggested: string[];
         forbidden: string[];

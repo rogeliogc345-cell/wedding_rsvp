@@ -509,6 +509,7 @@ export const CreateCustomerEventAction = async (
         template: formData.get("template")?.toString() ?? "classic",
         event_date: formData.get("event_date")?.toString() ?? "",
         category: formData.get("category")?.toString() ?? "wedding",
+        about_me: formData.get("about_me")?.toString() ?? "",
     };
 
     const parsed = customerSchema.safeParse(raw);
@@ -568,6 +569,7 @@ export const UpdateCustomerAction = async (
         template: formData.get("template")?.toString() ?? "classic",
         event_date: formData.get("event_date")?.toString() ?? "",
         category: formData.get("category")?.toString() ?? "wedding",
+        about_me: formData.get("about_me")?.toString() ?? "",
     };
 
     const { editCustomerSchema } = await import("@/lib/validation");
@@ -632,11 +634,11 @@ export const addEventAction = async (
         const supabase = await createClient();
         const { error } = await supabase
             .from("events")
-            .insert([{ 
-                event_name, 
-                event_date, 
-                event_time, 
-                location_name, 
+            .insert([{
+                event_name,
+                event_date,
+                event_time,
+                location_name,
                 customer_id: customerId,
                 icon,
                 address,

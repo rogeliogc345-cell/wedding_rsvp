@@ -66,6 +66,7 @@ export function AddCustomerForm() {
             template: "classic",
             event_date: "",
             category: "wedding",
+            about_me: "",
         },
     });
 
@@ -229,6 +230,26 @@ export function AddCustomerForm() {
                             <FormLabel>Event Date</FormLabel>
                             <FormControl>
                                 <Input type="date" {...field} value={field.value || ""} />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+
+                {/* ── About Me ────────────────────────────────────── */}
+                <FormField
+                    control={form.control}
+                    name="about_me"
+                    render={({ field }: { field: ControllerRenderProps<CustomerFormValues, "about_me"> }) => (
+                        <FormItem>
+                            <FormLabel>About Me</FormLabel>
+                            <FormControl>
+                                <textarea
+                                    {...field}
+                                    rows={4}
+                                    placeholder="Share a short description about the couple or the quinceañera…"
+                                    className="flex min-h-[96px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+                                />
                             </FormControl>
                             <FormMessage />
                         </FormItem>

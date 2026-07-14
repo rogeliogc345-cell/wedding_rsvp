@@ -16,7 +16,7 @@ export default function XVModernTemplate({ customer }: { customer: any }) {
       <CountdownDemo2 eventDate={customer.event_date} />
       <EventDetailsDemo2 events={customer.events} date={customer.event_date} />
       <GalleryDemo2 media={customer.media} customerId={customer.id} />
-      <DressCodeDemo2 />
+      <DressCodeDemo2 customer_color_preferences={customer.color_preferences} />
       <RSVPDemo2 customerId={customer.id} />
       <FooterDemo2 />
     </main>

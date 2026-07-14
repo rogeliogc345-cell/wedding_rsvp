@@ -10,6 +10,7 @@ export const customerSchema = z.object({
     template: z.enum(XV_TEMPLATES),
     event_date: z.string().optional(),
     category: z.enum(["wedding", "XV"]),
+    about_me: z.string().optional(),
 });
 
 export const editCustomerSchema = z.object({
@@ -19,6 +20,7 @@ export const editCustomerSchema = z.object({
     template: z.enum(XV_TEMPLATES),
     event_date: z.string().optional(),
     category: z.enum(["wedding", "XV"]),
+    about_me: z.string().optional(),
 });
 
 

@@ -2,13 +2,14 @@
 
 import Image from "next/image"
 
-export function AboutSectionDemoUno({ name }: { name?: string }) {
+export function AboutSectionDemoUno({ name, about_me }: { name?: string, about_me?: string | null }) {
+    console.log("about", about_me)
     return (
         <section id="about" className="py-20 px-4 bg-background">
-            <div className="max-w-4xl mx-auto">
+            <div className="w-full lg:max-w-4xl mx-auto">
                 {/* Section header */}
                 <div className="text-center mb-12">
-                    <p className="text-sm tracking-[0.3em] text-muted-foreground uppercase mb-4">
+                    <p className="text-sm tracking-[0.3em] text-muted-foreground uppercase mb-4 text-left lg:text-center">
                         Conoce a
                     </p>
                     <h2
@@ -17,7 +18,7 @@ export function AboutSectionDemoUno({ name }: { name?: string }) {
                     >
                         La Quinceañera
                     </h2>
-                    <div className="mt-4 flex items-center justify-center gap-4">
+                    <div className="mt-4 flex items-center justify-center gap-4 text-center">
                         <div className="w-16 h-px bg-gradient-to-r from-transparent via-gold to-transparent" />
                         <div className="w-2 h-2 rotate-45 bg-gold" />
                         <div className="w-16 h-px bg-gradient-to-r from-transparent via-gold to-transparent" />
@@ -51,19 +52,11 @@ export function AboutSectionDemoUno({ name }: { name?: string }) {
                             Hola, {name || "name"}
                         </h3>
                         <p className="text-muted-foreground leading-relaxed">
-                            Hoy celebro una de las etapas más importantes de mi vida. Mis XV años
-                            representan el comienzo de una nueva aventura, llena de sueños,
-                            esperanzas y momentos inolvidables.
+                            {!about_me ? "Hoy celebro una de las etapas más importantes de mi vida. Mis XV años" +
+                                " representan el comienzo de una nueva aventura, llena de sueños," +
+                                " esperanzas y momentos inolvidables." : about_me}
                         </p>
-                        <p className="text-muted-foreground leading-relaxed">
-                            Quiero compartir este día tan especial contigo, rodeada de las personas
-                            que más quiero. Tu presencia hará de esta noche un recuerdo que
-                            guardaré en mi corazón para siempre.
-                        </p>
-                        <p className="text-muted-foreground leading-relaxed">
-                            Gracias por ser parte de mi historia y por acompañarme en este
-                            momento tan significativo. ¡Te espero para celebrar juntos!
-                        </p>
+
 
                         {/* Signature */}
                         <div className="pt-4">

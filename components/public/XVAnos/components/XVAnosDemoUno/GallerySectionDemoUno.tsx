@@ -4,32 +4,7 @@ import { useState } from "react"
 import Image from "next/image"
 import { X, ChevronLeft, ChevronRight } from "lucide-react"
 
-const galleryImages = [
-    {
-        src: "/hanni/hani1.jpeg",
-        alt: "Foto de pre-XV 1",
-    },
-    {
-        src: "/hanni/hani2.jpeg",
-        alt: "Foto de pre-XV 2",
-    },
-    {
-        src: "/hanni/hani3.jpeg",
-        alt: "Foto de pre-XV 3",
-    },
-    {
-        src: "/hanni/hani4.jpeg",
-        alt: "Foto de pre-XV 4",
-    },
-    {
-        src: "/hanni/hani5.jpeg",
-        alt: "Foto de pre-XV 5",
-    },
-    {
-        src: "/hanni/hani6.jpeg",
-        alt: "Foto de pre-XV 6",
-    },
-]
+
 
 
 type MediaItem = {
@@ -41,13 +16,12 @@ type MediaItem = {
 
 export function GallerySectionDemoUno({ photos }: { photos?: MediaItem[] }) {
     const safePhotos = photos ?? []
-    console.log("customer photos", safePhotos)
     const [selectedImage, setSelectedImage] = useState<number | null>(null)
 
     const openLightbox = (index: number) => setSelectedImage(index)
     const closeLightbox = () => setSelectedImage(null)
-    const nextImage = () => setSelectedImage((prev) => (prev !== null ? (prev + 1) % galleryImages.length : 0))
-    const prevImage = () => setSelectedImage((prev) => (prev !== null ? (prev - 1 + galleryImages.length) % galleryImages.length : 0))
+    const nextImage = () => setSelectedImage((prev) => (prev !== null ? (prev + 1) % safePhotos.length : 0))
+    const prevImage = () => setSelectedImage((prev) => (prev !== null ? (prev - 1 + safePhotos.length) % safePhotos.length : 0))
 
     return (
         <section id="gallery" className="py-20 px-4 bg-background">
@@ -129,8 +103,8 @@ export function GallerySectionDemoUno({ photos }: { photos?: MediaItem[] }) {
                             onClick={(e) => e.stopPropagation()}
                         >
                             <Image
-                                src={galleryImages[selectedImage].src}
-                                alt={galleryImages[selectedImage].alt}
+                                src={safePhotos[selectedImage].file_url}
+                                alt={safePhotos[selectedImage].file_url}
                                 fill
                                 className="object-contain"
                             />
@@ -138,7 +112,7 @@ export function GallerySectionDemoUno({ photos }: { photos?: MediaItem[] }) {
 
                         {/* Counter */}
                         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/70 text-sm">
-                            {selectedImage + 1} / {galleryImages.length}
+                            {selectedImage + 1} / {safePhotos.length}
                         </div>
                     </div>
                 )}

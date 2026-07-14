@@ -15,9 +15,9 @@ const XVClassicBlueTemplate = ({ customer }: { customer: any }) => {
             <SparkleEffect />
             <HeroSection name={customer.couple_name ?? 'Quinceañera'} />
             <CountdownTimer targetDate={customer.event_date} />
-            <EventDetails events={customer.events} />
-            <DressCode />
-            <PhotoGallery  photos={customer.media} />
+            <EventDetails events={customer.events} date={customer.event_date} />
+            <DressCode customer_color_preferences={customer.color_preferences} />
+            <PhotoGallery photos={customer.media} />
             <RSVPForm customerId={customer.id} />
             <Footer />
         </main>

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useActionState, useEffect } from "react";
+import { useActionState, useEffect, useRef } from "react";
 import { useFormStatus } from "react-dom";
 import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -60,6 +60,7 @@ export function EditCustomerForm({ customer }: { customer: any }) {
             template: customer.template ?? customer.template_id ?? "classic",
             event_date: customer.event_date ?? "",
             category: customer.category ?? "wedding",
+            about_me: customer.about_me ?? "",
         },
     });
 
@@ -71,6 +72,37 @@ export function EditCustomerForm({ customer }: { customer: any }) {
 
     // Watch category to conditionally show/hide the XV template picker
     const selectedCategory = useWatch({ control: form.control, name: "category" });
+
+    // Watch couple_name so we can derive the slug automatically
+    const coupleName = form.watch("couple_name");
+
+    // Stable UUID suffix — seeded from the existing slug's last segment if it
+    // already looks like a UUID, otherwise a fresh one. Computed eagerly (NOT
+    // as a lazy initializer) because useRef does not support that pattern.
+    const uuidSuffix = useRef<string>((() => {
+        const existingSlug = customer.slug ?? "";
+        const lastSegment = existingSlug.split("-").slice(-5).join("-");
+        const uuidPattern =
+            /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+        return uuidPattern.test(lastSegment)
+            ? lastSegment
+            : crypto.randomUUID();
+    })());
+
+    // Auto-generate slug from couple_name whenever it changes
+    useEffect(() => {
+        const base = coupleName
+            .normalize("NFD")                    // decompose accented chars
+            .replace(/[\u0300-\u036f]/g, "")     // strip combining diacritics
+            .toLowerCase()
+            .trim()
+            .replace(/[^a-z0-9\s-]/g, "")       // remove non-alphanumeric (except spaces/hyphens)
+            .replace(/\s+/g, "-")               // spaces → hyphens
+            .replace(/-+/g, "-")                // collapse multiple hyphens
+            .replace(/^-|-$/g, "");             // trim leading/trailing hyphens
+        const generated = base ? `${base}-${uuidSuffix.current}` : "";
+        form.setValue("slug", generated, { shouldValidate: true });
+    }, [coupleName, form]);
 
     // When category changes away from XV, reset template to classic
     useEffect(() => {
@@ -206,6 +238,26 @@ export function EditCustomerForm({ customer }: { customer: any }) {
                             <FormLabel>Event Date</FormLabel>
                             <FormControl>
                                 <Input type="date" {...field} value={field.value ?? ""} />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+
+                {/* ── Publicly visible switch ────────────────────────────── */}
+                <FormField
+                    control={form.control}
+                    name="about_me"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>About Me</FormLabel>
+                            <FormControl>
+                                <textarea
+                                    {...field}
+                                    rows={4}
+                                    placeholder="Share a short description about the couple or the quinceañera…"
+                                    className="flex min-h-[96px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+                                />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
