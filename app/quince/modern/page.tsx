@@ -8,16 +8,28 @@ import { RSVPDemo2 } from "@/components/public/XVAnos/components/XVAnosDemoTwoo/
 
 
 
-export default function XVModernTemplate({ customer }: { customer: any }) {
+export default function XVModernTemplate({ customer }: { customer?: any }) {
+  const safeCustomer = {
+    couple_name: "",
+    event_date: "",
+    events: [],
+    media: [],
+    color_preferences: { suggested: [], forbidden: [] },
+    ...(customer ?? {}),
+  }
+
+  const safeEvents = Array.isArray(safeCustomer.events) ? safeCustomer.events : []
+  const safeMedia = Array.isArray(safeCustomer.media) ? safeCustomer.media : []
+  const safeColorPreferences = safeCustomer.color_preferences ?? { suggested: [], forbidden: [] }
 
   return (
     <main className="min-h-screen theme-xvGreen">
-      <HeroDemo2 name={customer.couple_name} eventDate={customer.event_date} />
-      <CountdownDemo2 eventDate={customer.event_date} />
-      <EventDetailsDemo2 events={customer.events} date={customer.event_date} />
-      <GalleryDemo2 media={customer.media} customerId={customer.id} />
-      <DressCodeDemo2 customer_color_preferences={customer.color_preferences} />
-      <RSVPDemo2 customerId={customer.id} />
+      <HeroDemo2 name={safeCustomer.couple_name} eventDate={safeCustomer.event_date} />
+      <CountdownDemo2 eventDate={safeCustomer.event_date} />
+      <EventDetailsDemo2 events={safeEvents} date={safeCustomer.event_date} />
+      <GalleryDemo2 media={safeMedia} customerId={safeCustomer.id} />
+      <DressCodeDemo2 customer_color_preferences={safeColorPreferences} />
+      <RSVPDemo2 customerId={safeCustomer.id} />
       <FooterDemo2 />
     </main>
   )

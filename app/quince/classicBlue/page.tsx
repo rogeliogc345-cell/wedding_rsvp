@@ -8,17 +8,18 @@ import { PhotoGallery } from './components/Demo3-photo-gallery'
 import { RSVPForm } from './components/Demo3-rsvp-form'
 import { Footer } from './components/Demo3-footer'
 
-const XVClassicBlueTemplate = ({ customer }: { customer: any }) => {
-    console.log("customer", customer);
+const XVClassicBlueTemplate = ({ customer }: { customer?: any }) => {
+    const safeCustomer = customer ?? {}
+    console.log("customer", safeCustomer);
     return (
         <main className='min-h-screen bg-background'>
             <SparkleEffect />
-            <HeroSection name={customer.couple_name ?? 'Quinceañera'} />
-            <CountdownTimer targetDate={customer.event_date} />
-            <EventDetails events={customer.events} date={customer.event_date} />
-            <DressCode customer_color_preferences={customer.color_preferences} />
-            <PhotoGallery photos={customer.media} />
-            <RSVPForm customerId={customer.id} />
+            <HeroSection name={safeCustomer.couple_name ?? 'Quinceañera'} />
+            <CountdownTimer targetDate={safeCustomer.event_date} />
+            <EventDetails events={safeCustomer.events} date={safeCustomer.event_date} />
+            <DressCode customer_color_preferences={safeCustomer.color_preferences} />
+            <PhotoGallery photos={safeCustomer.media} />
+            <RSVPForm customerId={safeCustomer.id} />
             <Footer />
         </main>
     )

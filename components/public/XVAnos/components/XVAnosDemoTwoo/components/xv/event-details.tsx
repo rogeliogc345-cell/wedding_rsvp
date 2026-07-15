@@ -5,7 +5,9 @@ import { Calendar, Clock, MapPin, Church, PartyPopper } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { getEventIcon } from "@/lib/icons"
 
-export function EventDetailsDemo2({ events, date }: { events: any[], date: string }) {
+export function EventDetailsDemo2({ events, date }: { events?: any[], date?: string }) {
+  const safeEvents = Array.isArray(events) ? events : []
+  const safeDate = date ?? ""
 
   return (
     <section className="py-24 px-4 bg-black">
@@ -30,14 +32,14 @@ export function EventDetailsDemo2({ events, date }: { events: any[], date: strin
           <div className="hidden md:block h-px flex-1 bg-border" />
           <div className="flex items-center gap-6 px-8 py-4 border border-primary/30 rounded-full">
             <Calendar className="w-5 h-5 text-primary text-xvgreen-text" />
-            <span className="text-lg tracking-wider text-white">{date}</span>
+            <span className="text-lg tracking-wider text-white">{safeDate}</span>
           </div>
           <div className="hidden md:block h-px flex-1 bg-border" />
         </motion.div>
 
         {/* Events grid */}
         <div className="grid md:grid-cols-2 gap-8">
-          {events.map((event, index) => {
+          {safeEvents.map((event, index) => {
             const IconComponent = getEventIcon(event.icon);
             return (
               <motion.div
