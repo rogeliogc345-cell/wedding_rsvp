@@ -115,7 +115,7 @@ async function compressAudio(file: File, bitrateKbps = 96): Promise<Blob> {
             chunks.push(new Uint8Array(flush));
         }
 
-        return new Blob(chunks, { type: "audio/mpeg" });
+        return new Blob(chunks as any[], { type: "audio/mpeg" });
     } finally {
         await context.close();
     }

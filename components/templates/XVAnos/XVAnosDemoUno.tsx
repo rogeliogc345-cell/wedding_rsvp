@@ -10,15 +10,7 @@ import { GallerySectionDemoUno } from '@/components/public/XVAnos/components/XVA
 import { CalendarSectionDemoUno } from '@/components/public/XVAnos/components/XVAnosDemoUno/CalendarSectionDemoUno';
 import { HashtagSection } from '@/components/public/XVAnos/components/XVAnosDemoUno/HashTagSectionDemoUno';
 import { RSVPSectionDemoUno } from '@/components/public/XVAnos/components/XVAnosDemoUno/RSVPSectionDemoUno';
-
-
-type EventItem = {
-    time: string;
-    title: string;
-    description?: string;
-    icon?: ReactNode;
-}
-
+import { Photo } from '@/components/public/XVAnos/components/photoGallery';
 
 
 interface MediaItem {
@@ -30,7 +22,7 @@ interface MediaItem {
 
 interface XVAnosDemoUnoTemplateProps {
     customer?: Customer & {
-        events?: EventItem[];
+        events?: any[];
         media?: MediaItem[];
     };
 }
@@ -105,7 +97,7 @@ const XVAnosDemoUnoTemplate = ({ customer }: XVAnosDemoUnoTemplateProps) => {
             <HeroSectionDemoUno name={customer?.couple_name} eventDate={customer?.event_date} />
             <CountdownSectionDemoUno eventDate={customer?.event_date} />
             <AboutSectionDemoUno name={customer?.couple_name} />
-            <ItinerarySectionDemoUno events={customer.events} />
+            <ItinerarySectionDemoUno events={customer?.events} />
             <LocationSectionDemoUno />
             <RSVPSectionDemoUno />
             <GallerySectionDemoUno />

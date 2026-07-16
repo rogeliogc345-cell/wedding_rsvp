@@ -132,7 +132,6 @@ const photos: Photo[] = [
 const XVAnosClassic = ({ customer, events, media }: XVAnosClassicProps) => {
 
   const { primary_color, font_family } = customer.template_config;
-  const photos = media?.filter((m: any) => m.file_type === 'image');
 
   return (
     <div className='w-full  flex flex-col items-center justify-center'>
