@@ -1,13 +1,16 @@
 import { AddCustomerForm } from '@/components/admin/AddCustomerForm'
+import { ChangeAdminPasswordForm } from '@/components/admin/ChangeAdminPasswordForm';
 import { Button } from '@/components/ui/button'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
 import { getCustomers } from '../actions';
 import { Badge } from '@/components/ui/badge';
-import { ExternalLink, Plus, Settings } from 'lucide-react';
+import { ExternalLink, Settings } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react'
 import { LogoutButtonAdmin } from '@/components/admin/LogoutButtonAdmin';
+import { createClient } from '@/lib/supabase/server';
+import { redirect } from 'next/navigation';
 
 export const dynamic = 'force-dynamic';
 
@@ -34,6 +37,14 @@ function CategoryBadge({ category }: { category: string | null }) {
 }
 
 const dashboard = async () => {
+    const supabase = await createClient();
+    const {
+        data: { user },
+    } = await supabase.auth.getUser();
+
+    if (!user) {
+        redirect('/admin/login');
+    }
 
     const customers = await getCustomers();
 
@@ -47,9 +58,11 @@ const dashboard = async () => {
 
             <h1 className='text-4xl font-bold mb-8 '>Dashboard</h1>
 
-            <AddCustomerForm />
+            <div className="mb-8 flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+                <AddCustomerForm />
+                <ChangeAdminPasswordForm />
+            </div>
             <LogoutButtonAdmin />
-
 
 
             <div className="border rounded-lg">
