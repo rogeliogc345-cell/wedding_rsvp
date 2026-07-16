@@ -23,7 +23,7 @@ export default function XVModernTemplate({ customer }: { customer?: any }) {
   const safeColorPreferences = safeCustomer.color_preferences ?? { suggested: [], forbidden: [] }
 
   return (
-    <main className="min-h-screen theme-xvGreen">
+    <main className="min-h-screen theme-xv-green">
       <HeroDemo2 name={safeCustomer.couple_name} eventDate={safeCustomer.event_date} />
       <CountdownDemo2 eventDate={safeCustomer.event_date} />
       <EventDetailsDemo2 events={safeEvents} date={safeCustomer.event_date} />

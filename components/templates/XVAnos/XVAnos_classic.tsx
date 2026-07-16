@@ -1,19 +1,19 @@
 'use client'
 import XVHeroComponent from '@/components/public/XVAnos/components/HeroComponent'
-import React, { Suspense, useRef, useState } from 'react'
+import React, { Suspense } from 'react'
 import AboutMe from './AboutMeQuinceañera'
 import ItineraryQuinceanera from '@/components/public/XVAnos/components/ItineraryQuinceanera';
 import { EventLocations as EventLocationQuinceanera } from '@/components/public/XVAnos/components/LocationQuinceanera';
 import { Photo, PhotoGalleryQuinceañera } from '@/components/public/XVAnos/components/photoGallery';
-import { Clock, Music, Utensils, Camera, Sparkles, Music4, HeartHandshake, Flower } from "lucide-react";
+import { Clock, Music, Utensils, Camera, Sparkles, Flower } from "lucide-react";
 import { GiftRegistryMinimal } from '@/components/public/XVAnos/components/GiftsQuinceanera';
 import { GiftRegistryQuinceanera } from '@/components/public/XVAnos/components/GiftQuienceanera1';
 import FooterQuinceanera from '@/components/public/XVAnos/components/Header';
 import { RSVPForm } from '@/components/public/RSVPForm';
 import { Customer } from '@/types/database';
-import { WelcomeDialog } from '@/components/public/XVAnos/components/WelcomeDialog';
 import HanniSobresDinero from '@/components/public/XVAnos/components/HanniSobresDinero';
 import Image from 'next/image';
+import MusicPlayer from '@/components/public/XVAnos/MusicPlayer';
 
 
 type EventItem = {
@@ -132,84 +132,12 @@ const photos: Photo[] = [
 const XVAnosClassic = ({ customer, events, media }: XVAnosClassicProps) => {
 
   const { primary_color, font_family } = customer.template_config;
-  // Filter media by type
-  // const photos = media?.filter((m: any) => m.file_type === 'image');
-  const song = media?.find((m: any) => m.file_type === 'audio');
-  const audioRef = useRef<HTMLAudioElement>(null)
-  const [isPlaying, setIsPlaying] = useState(false)
-
-  const toggleMusic = () => {
-    if (!audioRef.current) return
-
-    if (isPlaying) {
-      audioRef.current.pause()
-    } else {
-      audioRef.current.play()
-    }
-
-    setIsPlaying(!isPlaying)
-  }
-
-  console.log(photos);
-  console.log(song);
-
-
+  const photos = media?.filter((m: any) => m.file_type === 'image');
 
   return (
     <div className='w-full  flex flex-col items-center justify-center'>
 
-      {song && (
-        <>
-          {/* Audio oculto */}
-          <audio ref={audioRef} src={song.file_url} loop />
-
-          {/* Botón flotante */}
-          <button
-            onClick={toggleMusic}
-            className="
-  fixed bottom-6 right-6 z-50
-  w-16 h-16 rounded-full
-  bg-gradient-to-br from-rose-200/40 to-pink-300/30
-  backdrop-blur-lg
-  border border-white/40
-  shadow-xl
-  flex items-center justify-center
-  transition-all duration-300
-  hover:scale-110 hover:shadow-2xl
-"
-
-          // "
-          //   fixed bottom-6 right-6 z-50
-          //   w-16 h-16 rounded-full
-          //    backdrop-blur-lg
-          //   border 
-          //   shadow-xl
-          //   flex items-center justify-center
-          //   transition-all duration-100
-          //   hover:scale-110 hover:bg-white/50 bg-rose-200/40 border-rose-300/40
-          // "
-          >
-            {isPlaying ? (
-              <>
-                <Music4 className="w-6 h-6 text-gray-800" />
-
-
-
-              </>
-
-
-            ) : (
-              <HeartHandshake className="w-6 h-6 text-gray-800 ml-1" />
-
-            )}
-          </button>
-
-          {/* Animación romántica */}
-          {isPlaying && (
-            <div className="fixed bottom-6 right-6 w-16 h-16 rounded-full bg-rose-300/30 animate-ping z-40"></div>
-          )}
-        </>
-      )}
+      <MusicPlayer customer={{ ...customer, media }} />
 
 
 

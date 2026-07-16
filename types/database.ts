@@ -1,3 +1,8 @@
+export interface ColorPreferenceEntry {
+    name: string;
+    color: string;
+}
+
 export interface Customer {
     id: string;
     couple_name: string;
@@ -14,8 +19,8 @@ export interface Customer {
     template?: "classic" | "clasicBlue" | "modern";
     about_me?: string | null;
     color_preferences?: {
-        suggested: string[];
-        forbidden: string[];
+        suggested: Array<string | ColorPreferenceEntry>;
+        forbidden: Array<string | ColorPreferenceEntry>;
     };
 }
 

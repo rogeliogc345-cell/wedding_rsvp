@@ -5,6 +5,8 @@ import XVClassicTemplate from "@/app/quince/classic/page";
 import XVClassicBlueTemplate from "@/app/quince/classicBlue/page";
 import XVModernTemplate from "@/app/quince/modern/page";
 
+import MusicPlayer from "@/components/public/XVAnos/MusicPlayer";
+
 const TEMPLATE_MAP = {
     XV: {
         classic: XVClassicTemplate,
@@ -45,7 +47,12 @@ export default async function InvitationPage({ params }: { params: Promise<{ slu
         const normalizedTemplate = rawTemplate === "classicBlue" ? "clasicBlue" : rawTemplate;
         const TemplateComponent = TEMPLATE_MAP.XV[normalizedTemplate as keyof typeof TEMPLATE_MAP.XV] ?? XVClassicTemplate;
 
-        return <TemplateComponent customer={customer} />;
+        return (
+            <>
+                <TemplateComponent customer={customer} />
+                <MusicPlayer customer={customer} />
+            </>
+        );
     }
 
     // Default to ModernTemplate for Wedding (and as a fallback)

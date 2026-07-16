@@ -38,12 +38,13 @@ export default async function EditPage({ params }: { params: Promise<{ id: strin
                     <TabsTrigger value="design">Design & Template</TabsTrigger>
                     <TabsTrigger value="media">Media</TabsTrigger>
                     <TabsTrigger value="guests">Guest List</TabsTrigger>
-                    <TabsTrigger value="example-2">Example 2</TabsTrigger>
+                    
                 </TabsList>
 
                 <TabsContent value="general" className="mt-6">
                     <EditCustomerForm customer={customer} />
                 </TabsContent>
+
 
                 <TabsContent value="events" className="mt-6">
                     <ManageEvents customerId={customer.id} initialEvents={customer.events} />
@@ -70,9 +71,7 @@ export default async function EditPage({ params }: { params: Promise<{ id: strin
                 </TabsContent>
 
 
-                <TabsContent value="example-2" className="mt-6">
-                    <p>Example 2</p>
-                </TabsContent>
+               
             </Tabs>
         </div>
     );

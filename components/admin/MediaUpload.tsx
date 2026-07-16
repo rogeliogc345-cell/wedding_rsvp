@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState, useEffect, startTransition } from "react";
+import { Mp3Encoder } from "@breezystack/lamejs";
 import { uploadMediaAction, type UploadMediaState } from "@/app/(admin)/actions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -63,6 +64,63 @@ function compressImage(file: File, maxWidth = 1920, maxHeight = 1920, quality = 
     });
 }
 
+async function compressAudio(file: File, bitrateKbps = 96): Promise<Blob> {
+    const AudioContextCtor = window.AudioContext || (window as typeof window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+
+    if (!AudioContextCtor) {
+        throw new Error("AudioContext is not supported in this browser.");
+    }
+
+    const context = new AudioContextCtor();
+
+    try {
+        const arrayBuffer = await file.arrayBuffer();
+        const decoded = await context.decodeAudioData(arrayBuffer.slice(0));
+        const sampleRate = decoded.sampleRate;
+        const frameCount = decoded.length;
+        const mono = new Float32Array(frameCount);
+
+        if (decoded.numberOfChannels === 1) {
+            decoded.getChannelData(0).forEach((value, index) => {
+                mono[index] = value;
+            });
+        } else {
+            const left = decoded.getChannelData(0);
+            const right = decoded.getChannelData(1);
+            for (let index = 0; index < frameCount; index += 1) {
+                mono[index] = (left[index] + right[index]) / 2;
+            }
+        }
+
+        const pcm = new Int16Array(frameCount);
+        for (let index = 0; index < frameCount; index += 1) {
+            const sample = Math.max(-1, Math.min(1, mono[index]));
+            pcm[index] = sample < 0 ? sample * 0x8000 : sample * 0x7fff;
+        }
+
+        const encoder = new Mp3Encoder(1, sampleRate, bitrateKbps);
+        const chunks: Uint8Array[] = [];
+        const chunkSize = 1152;
+
+        for (let index = 0; index < pcm.length; index += chunkSize) {
+            const chunk = pcm.subarray(index, index + chunkSize);
+            const encodedChunk = encoder.encodeBuffer(chunk);
+            if (encodedChunk.length > 0) {
+                chunks.push(new Uint8Array(encodedChunk));
+            }
+        }
+
+        const flush = encoder.flush();
+        if (flush.length > 0) {
+            chunks.push(new Uint8Array(flush));
+        }
+
+        return new Blob(chunks, { type: "audio/mpeg" });
+    } finally {
+        await context.close();
+    }
+}
+
 type UploadZoneProps = {
     title: string;
     description: string;
@@ -113,7 +171,17 @@ function UploadZone({
                 formData.append("file", file);
             }
         } else {
-            formData.append("file", file);
+            try {
+                const compressedBlob = await compressAudio(file);
+                const compressedFile = new File([compressedBlob], file.name.replace(/\.[^/.]+$/, "") + ".mp3", {
+                    type: "audio/mpeg",
+                    lastModified: Date.now(),
+                });
+                formData.append("file", compressedFile);
+            } catch (err) {
+                console.error("Client-side audio compression failed. Falling back to raw file upload.", err);
+                formData.append("file", file);
+            }
         }
 
         startTransition(() => {
@@ -223,7 +291,7 @@ export function MediaUpload({ customerId }: { customerId: string }) {
 
                 <UploadZone
                     title="Add Background Music"
-                    description="Upload MP3 or other audio files"
+                    description="Upload MP3 or other audio files. MP3s are re-encoded to a lighter bitrate before uploading."
                     accept="audio/*"
                     inputId="music-upload"
                     fileType="audio"

@@ -1,5 +1,5 @@
 'use client'
-import type { ElementType } from 'react'
+import type { ReactNode } from 'react'
 import { Customer } from '@/types/database';
 import { HeroSectionDemoUno } from '@/components/public/XVAnos/components/XVAnosDemoUno/HeroSectionDemoUno';
 import { CountdownSectionDemoUno } from '@/components/public/XVAnos/components/XVAnosDemoUno/CountownSectionDemoUno';
@@ -13,13 +13,10 @@ import { RSVPSectionDemoUno } from '@/components/public/XVAnos/components/XVAnos
 
 
 type EventItem = {
-    event_name: string;
-    event_date: string;
-    event_time: string;
-    location_name: string;
-    address?: string;
-    google_maps_url?: string;
-    icon?: ElementType;
+    time: string;
+    title: string;
+    description?: string;
+    icon?: ReactNode;
 }
 
 
@@ -44,6 +41,59 @@ interface XVAnosDemoUnoTemplateProps {
 
 
 
+const photos: Photo[] = [
+    {
+        id: "1",
+        src: "/hanni/hani2.jpeg",
+        alt: "Foto de la quinceañera con su familia y amigos",
+        aspectRatio: 4 / 3,
+
+
+    },
+
+    {
+        id: "2",
+        src: "/hanni/hani3.jpeg",
+        alt: "Foto de la quinceañera con su vestido de gala",
+        aspectRatio: 4 / 3,
+    },
+    {
+        id: "3",
+        src: "/hanni/hani8.jpeg",
+        alt: "Foto de la quinceañera con sus amigas",
+        aspectRatio: 4 / 3,
+    },
+    {
+        id: "4",
+        src: "/hanni/hani5.jpeg",
+        alt: "Foto de la quinceañera con su familia",
+        aspectRatio: 4 / 3,
+    },
+    {
+        id: "5",
+        src: "/hanni/hani6.jpeg",
+        alt: "Foto de la quinceañera con su vestido de gala",
+        aspectRatio: 5 / 4,
+    },
+    {
+        id: "6",
+        src: "/hanni/hani7.jpeg",
+        alt: "Foto de la quinceañera con su vestido de gala",
+        aspectRatio: 5 / 4,
+    },
+
+    {
+        id: "8",
+        src: "/hanni/hani20.jpeg",
+        alt: "Foto de la quinceañera con su vestido de gala",
+        aspectRatio: 5 / 4,
+
+    },
+
+
+]
+
+
 
 
 const XVAnosDemoUnoTemplate = ({ customer }: XVAnosDemoUnoTemplateProps) => {
@@ -54,11 +104,11 @@ const XVAnosDemoUnoTemplate = ({ customer }: XVAnosDemoUnoTemplateProps) => {
         <div>
             <HeroSectionDemoUno name={customer?.couple_name} eventDate={customer?.event_date} />
             <CountdownSectionDemoUno eventDate={customer?.event_date} />
-            <AboutSectionDemoUno name={customer?.couple_name} about_me={customer?.about_me} />
-            {/* <ItinerarySectionDemoUno events={customer?.events} /> */}
-            {/* <LocationSectionDemoUno /> */}
-            <RSVPSectionDemoUno customerId={customer?.id} />
-            <GallerySectionDemoUno photos={customer?.media} />
+            <AboutSectionDemoUno name={customer?.couple_name} />
+            <ItinerarySectionDemoUno events={customer.events} />
+            <LocationSectionDemoUno />
+            <RSVPSectionDemoUno />
+            <GallerySectionDemoUno />
             <CalendarSectionDemoUno />
             <HashtagSection />
         </div>

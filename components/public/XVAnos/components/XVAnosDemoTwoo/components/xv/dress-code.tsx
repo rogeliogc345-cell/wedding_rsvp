@@ -8,6 +8,18 @@ export function DressCodeDemo2({ customer_color_preferences }: { customer_color_
 
   const colors = customer_color_preferences?.suggested || [];
   const avoidColors = customer_color_preferences?.forbidden || [];
+
+  const normalizeColor = (item: any) => {
+    if (!item) return { name: 'Desconocido', color: '#777' };
+    if (typeof item === 'string') return { name: item, color: item };
+    return {
+      name: item.name ?? item.color ?? 'Color',
+      color: item.color ?? item.hex ?? '#777',
+    };
+  };
+
+  const normalizedColors = colors.map(normalizeColor);
+  const normalizedAvoidColors = avoidColors.map(normalizeColor);
   console.log('avoidColors', avoidColors);
 
 
@@ -44,9 +56,9 @@ export function DressCodeDemo2({ customer_color_preferences }: { customer_color_
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-              {colors.map((color: string, index: number) => (
+              {normalizedColors.map((color: any, index: number) => (
                 <motion.div
-                  key={`${color}-${index}`}
+                  key={`${color.color}-${index}`}
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -55,9 +67,9 @@ export function DressCodeDemo2({ customer_color_preferences }: { customer_color_
                 >
                   <div
                     className="w-8 h-8 rounded-full border border-border flex-shrink-0"
-                    style={{ backgroundColor: color }}
+                    style={{ backgroundColor: color.color }}
                   />
-                  <span className="text-sm text-muted-foreground font-mono">{color}</span>
+                  <span className="text-sm text-muted-foreground font-mono">{color.name}</span>
                 </motion.div>
               ))}
             </div>
@@ -82,9 +94,9 @@ export function DressCodeDemo2({ customer_color_preferences }: { customer_color_
             </p>
 
             <div className="grid grid-cols-2 gap-4">
-              {avoidColors.map((color: string, index: number) => (
+              {normalizedAvoidColors.map((color: any, index: number) => (
                 <motion.div
-                  key={`${color}-${index}`}
+                  key={`${color.color}-${index}`}
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -94,11 +106,11 @@ export function DressCodeDemo2({ customer_color_preferences }: { customer_color_
                   <div className="relative flex-shrink-0">
                     <div
                       className="w-8 h-8 rounded-full border border-border"
-                      style={{ backgroundColor: color }}
+                      style={{ backgroundColor: color.color }}
                     />
                     <Ban className="absolute -top-1 -right-1 w-4 h-4 text-destructive" />
                   </div>
-                  <span className="text-sm text-muted-foreground font-mono">{color}</span>
+                  <span className="text-sm text-muted-foreground font-mono">{color.name}</span>
                 </motion.div>
               ))}
             </div>
