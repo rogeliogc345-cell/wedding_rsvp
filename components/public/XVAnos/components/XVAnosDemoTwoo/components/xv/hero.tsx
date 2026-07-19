@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import { Sparkles } from "lucide-react"
+import Image from "next/image"
 
 export function HeroDemo2({ name, eventDate }: { name: string, eventDate: string }) {
   return (
@@ -75,6 +76,73 @@ export function HeroDemo2({ name, eventDate }: { name: string, eventDate: string
           <p className="text-muted-foreground text-lg tracking-wide">Te invito a celebrar conmigo</p>
           <p className="text-primary text-4xl md:text-5xl font-serif font-bold text-xvgreen-text">{eventDate}</p>
         </motion.div>
+
+
+
+
+
+        <section className="relative py-24 px-6 bg-[#0A0A0A] text-white overflow-hidden">
+          <div className="max-w-6xl mx-auto grid md:grid-cols-12 gap-12 items-center">
+
+            {/* Left Column: Editorial Portrait */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="md:col-span-5 relative h-[500px] w-full"
+            >
+              <div className="absolute inset-0 bg-[#BFFF00]/20 translate-x-4 translate-y-4" />
+              <div className="relative w-full h-full bg-slate-800 overflow-hidden shadow-2xl">
+                {/* Replace with your image */}
+                <Image
+                  width={500}
+                  height={500}
+                  src="/xv/XVAnos_1.jpg"
+                  alt="Elizabeth"
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                />
+              </div>
+            </motion.div>
+
+            {/* Right Column: Content */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="md:col-span-7 space-y-8"
+            >
+              <div>
+                <span className="text-[#BFFF00] tracking-[0.3em] text-sm uppercase">Sobre Elizabeth</span>
+                <h2 className="text-6xl md:text-8xl font-serif mt-4">Elizabeth</h2>
+              </div>
+
+              <p className="text-gray-300 text-lg leading-relaxed max-w-lg italic">
+                "Celebrando la vida, la familia y los sueños que comienzan a florecer en este día tan especial."
+              </p>
+
+              {/* Favorites Grid */}
+              <div className="grid grid-cols-2 gap-6 pt-8 border-t border-gray-800">
+                {[
+                  { label: "Sueño", val: "Viajar" },
+                  { label: "Pasión", val: "Bailar" },
+                  { label: "Color", val: "Verde Lima" },
+                  { label: "Postre", val: "Tiramisú" },
+                  { label: "Mascota", val: "Bowie" },
+                  { label: "Templo", val: "San Miguel Arcángel" }
+                ].map((item, i) => (
+                  <div key={i}>
+                    <p className="text-[#BFFF00] text-xs uppercase tracking-widest">{item.label}</p>
+                    <p className="text-xl font-medium mt-1">{item.val}</p>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+
+
+
 
         {/* Scroll indicator */}
         <motion.div

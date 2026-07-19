@@ -13,33 +13,13 @@ type GalleryPhoto = {
 
 const fallbackImages: GalleryPhoto[] = [
   {
-    src: "/xv/XV_Anos_2.png",
+    src: "/xv/fondo_demo1_hero.png",
     alt: "Vestido de quinceañera azul real",
     span: "col-span-2 row-span-2",
   },
-  {
-    src: "/xv/XV_Anos_3.png",
-    alt: "Decoración elegante",
-    span: "col-span-1 row-span-1",
-  },
-  {
-    src: "/xv/XV_Anos_4.png",
-    alt: "Corona dorada",
-    span: "col-span-1 row-span-1",
-  },
-  {
-    src: "/xv/XV_Anos_5.png",
-    alt: "Celebración mágica",
-    span: "col-span-1 row-span-2",
-  },
-  {
-    src: "/xv/XV_Anos_6.png",
-    alt: "Detalles florales",
-    span: "col-span-1 row-span-1",
-  },
 ]
 
-const DEFAULT_FALLBACK_SRC = fallbackImages[0]?.src ?? "/xv/XV_Anos_2.png"
+const DEFAULT_FALLBACK_SRC = "/xv/fondo_demo1_hero.png"
 
 export function PhotoGallery({ photos }: { photos?: GalleryPhoto[] }) {
   const normalizedPhotos = useMemo(() => {

@@ -5,6 +5,7 @@ import { FooterDemo2 } from "@/components/public/XVAnos/components/XVAnosDemoTwo
 import { GalleryDemo2 } from "@/components/public/XVAnos/components/XVAnosDemoTwoo/components/xv/gallery";
 import { HeroDemo2 } from "@/components/public/XVAnos/components/XVAnosDemoTwoo/components/xv/hero";
 import { RSVPDemo2 } from "@/components/public/XVAnos/components/XVAnosDemoTwoo/components/xv/rsvp";
+import MesaDeRegalos from '@/components/public/MesaDeRegalos';
 
 
 
@@ -29,6 +30,7 @@ export default function XVModernTemplate({ customer }: { customer?: any }) {
       <EventDetailsDemo2 events={safeEvents} date={safeCustomer.event_date} />
       <GalleryDemo2 media={safeMedia} customerId={safeCustomer.id} />
       <DressCodeDemo2 customer_color_preferences={safeColorPreferences} />
+      <MesaDeRegalos theme="modern" festejadaName={safeCustomer.couple_name} />
       <RSVPDemo2 customerId={safeCustomer.id} />
       <FooterDemo2 />
     </main>

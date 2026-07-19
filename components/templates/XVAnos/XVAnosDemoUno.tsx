@@ -11,6 +11,7 @@ import { CalendarSectionDemoUno } from '@/components/public/XVAnos/components/XV
 import { HashtagSection } from '@/components/public/XVAnos/components/XVAnosDemoUno/HashTagSectionDemoUno';
 import { RSVPSectionDemoUno } from '@/components/public/XVAnos/components/XVAnosDemoUno/RSVPSectionDemoUno';
 import { Photo } from '@/components/public/XVAnos/components/photoGallery';
+import MesaDeRegalos from '@/components/public/MesaDeRegalos';
 
 
 interface MediaItem {
@@ -101,6 +102,7 @@ const XVAnosDemoUnoTemplate = ({ customer }: XVAnosDemoUnoTemplateProps) => {
             <LocationSectionDemoUno />
             <RSVPSectionDemoUno />
             <GallerySectionDemoUno />
+            <MesaDeRegalos festejadaName={customer?.couple_name} />
             <CalendarSectionDemoUno />
             <HashtagSection />
         </div>
