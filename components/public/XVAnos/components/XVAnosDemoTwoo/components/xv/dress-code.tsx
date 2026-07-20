@@ -66,10 +66,10 @@ export function DressCodeDemo2({ customer_color_preferences }: { customer_color_
                   className="flex items-center gap-3 p-3 rounded-lg hover:border-primary/30 transition-colors"
                 >
                   <div
-                    className="w-8 h-8 rounded-full border border-border flex-shrink-0"
-                    style={{ backgroundColor: color.color }}
+                    className="w-8 h-8 rounded-full border border-border flex-shrink-0 text-white"
+                    style={{ backgroundColor: color.color  }}
                   />
-                  <span className="text-sm text-muted-foreground font-mono">{color.name}</span>
+                  <span className="text-sm  text-white text-muted-foreground font-mono">{color.name}</span>
                 </motion.div>
               ))}
             </div>
@@ -108,9 +108,9 @@ export function DressCodeDemo2({ customer_color_preferences }: { customer_color_
                       className="w-8 h-8 rounded-full border border-border"
                       style={{ backgroundColor: color.color }}
                     />
-                    <Ban className="absolute -top-1 -right-1 w-4 h-4 text-destructive" />
+                    <Ban className="absolute -top-1 -right-1 w-4 h-4 text-white " />
                   </div>
-                  <span className="text-sm text-muted-foreground font-mono">{color.name}</span>
+                  <span className="text-sm  text-white text-muted-foreground font-mono">{color.name}</span>
                 </motion.div>
               ))}
             </div>
@@ -124,7 +124,7 @@ export function DressCodeDemo2({ customer_color_preferences }: { customer_color_
           viewport={{ once: true }}
           className="mt-8 text-center"
         >
-          <p className="text-muted-foreground text-sm">
+          <p className="text-muted-foreground text-sm text-white">
             {"¡Ven elegante y listo para celebrar!"}
           </p>
         </motion.div>

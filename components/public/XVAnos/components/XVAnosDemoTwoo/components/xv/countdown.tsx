@@ -50,8 +50,8 @@ export function CountdownDemo2({ eventDate }: { eventDate: string }) {
   return (
     <section className="py-24 px-4 relative overflow-hidden bg-black">
       {/* Large background text */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <span className="text-[25vw] font-serif font-bold text-primary/[0.03] select-none">XV</span>
+      <div className="absolute inset-0 flex items-top justify-center pointer-events-none ">
+        <span className="text-[25vw] font-serif font-bold text-white/30 select-none">XV</span>
       </div>
 
       <div className="max-w-6xl mx-auto relative z-10 ">
@@ -75,16 +75,16 @@ export function CountdownDemo2({ eventDate }: { eventDate: string }) {
               transition={{ delay: index * 0.1 }}
               className="group"
             >
-              <div className="relative    border border-border rounded-lg p-6 md:p-8 overflow-hidden transition-all duration-300 hover:border-primary/50">
+              <div className="relative    border border-border border-white/30 rounded-lg p-6 md:p-8 overflow-hidden transition-all duration-300 hover:border-white/50">
                 {/* Hover glow effect */}
                 <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity" />
 
-                <div className="relative z-10 bg-black">
+                <div className="relative z-10 bg-black text-center">
                   <motion.span
                     key={unit.value}
                     initial={{ y: -20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
-                    className="block text-5xl md:text-7xl font-serif font-bold text-foreground bg-black mb-2 text-white "
+                    className="block text-5xl md:text-7xl font-serif font-bold text-foreground  mb-2 text-white "
                   >
                     {String(unit.value).padStart(2, "0")}
                   </motion.span>

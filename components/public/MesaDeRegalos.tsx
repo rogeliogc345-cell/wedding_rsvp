@@ -95,6 +95,7 @@ export default function MesaDeRegalos({
     cardClass = "bg-[#10223b]/90 border-blue-500/20 text-slate-100 hover:shadow-[0_0_15px_rgba(56,189,248,0.15)] hover:border-blue-400/40";
     titleClass = "text-white";
     subtitleClass = "text-slate-400";
+    
   } else if (theme === "modern") {
     bgClass = "bg-black text-zinc-50";
     cardClass = "bg-black/50 border-zinc-800 text-zinc-50 hover:shadow-[0_0_15px_rgba(125,223,100,0.15)] hover:border-lime-400/40";

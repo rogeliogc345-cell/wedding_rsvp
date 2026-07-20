@@ -94,10 +94,10 @@ const XVAnosDemoUnoTemplate = ({ customer }: XVAnosDemoUnoTemplateProps) => {
     // const { primary_color, font_family } = customer?.template_config;
 
     return (
-        <div>
+        <div>   
             <HeroSectionDemoUno name={customer?.couple_name} eventDate={customer?.event_date} />
             <CountdownSectionDemoUno eventDate={customer?.event_date} />
-            <AboutSectionDemoUno name={customer?.couple_name} />
+            <AboutSectionDemoUno name={customer?.couple_name} about_me={customer?.about_me}/>
             <ItinerarySectionDemoUno events={customer?.events} />
             <LocationSectionDemoUno />
             <RSVPSectionDemoUno />

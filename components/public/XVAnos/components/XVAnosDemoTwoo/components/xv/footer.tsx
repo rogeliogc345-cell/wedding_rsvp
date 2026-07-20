@@ -41,12 +41,12 @@ export function FooterDemo2() {
           </div>
 
           {/* Message */}
-          <p className="text-muted-foreground text-sm mb-4">
+          <p className="text-muted-foreground text-sm mb-4 text-white">
             Tu presencia es el mejor regalo
           </p>
 
           {/* Made with love */}
-          <div className="flex items-center justify-center gap-2 text-muted-foreground text-xs">
+          <div className="flex items-center justify-center gap-2 text-muted-foreground text-xs text-white">
             <span>Hecho con</span>
             <Heart className="w-3 h-3 text-primary fill-primary text-xvgreen-text" />
             <span>para Valentina</span>

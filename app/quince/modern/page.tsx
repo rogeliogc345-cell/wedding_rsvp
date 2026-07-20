@@ -24,7 +24,7 @@ export default function XVModernTemplate({ customer }: { customer?: any }) {
   const safeColorPreferences = safeCustomer.color_preferences ?? { suggested: [], forbidden: [] }
 
   return (
-    <main className="min-h-screen theme-xv-green">
+    <main className=" theme-xv-green">
       <HeroDemo2 name={safeCustomer.couple_name} eventDate={safeCustomer.event_date} />
       <CountdownDemo2 eventDate={safeCustomer.event_date} />
       <EventDetailsDemo2 events={safeEvents} date={safeCustomer.event_date} />
@@ -32,7 +32,7 @@ export default function XVModernTemplate({ customer }: { customer?: any }) {
       <DressCodeDemo2 customer_color_preferences={safeColorPreferences} />
       <MesaDeRegalos theme="modern" festejadaName={safeCustomer.couple_name} />
       <RSVPDemo2 customerId={safeCustomer.id} />
-      <FooterDemo2 />
+      <FooterDemo2  />
     </main>
   )
 }
