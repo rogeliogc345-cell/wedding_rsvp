@@ -1,6 +1,19 @@
 'use client'
-import type { ReactNode } from 'react'
+import XVHeroComponent from '@/components/public/XVAnos/components/HeroComponent'
+import React, { Suspense, useRef, useState } from 'react'
+import AboutMe from './AboutMeQuinceañera'
+import ItineraryQuinceanera from '@/components/public/XVAnos/components/ItineraryQuinceanera';
+import { EventLocations as EventLocationQuinceanera } from '@/components/public/XVAnos/components/LocationQuinceanera';
+import { Photo, PhotoGalleryQuinceañera } from '@/components/public/XVAnos/components/photoGallery';
+import { Clock, Music, Utensils, Camera, Sparkles, Music4, HeartHandshake, Flower } from "lucide-react";
+import { GiftRegistryMinimal } from '@/components/public/XVAnos/components/GiftsQuinceanera';
+import { GiftRegistryQuinceanera } from '@/components/public/XVAnos/components/GiftQuienceanera1';
+import FooterQuinceanera from '@/components/public/XVAnos/components/Header';
+import { RSVPForm } from '@/components/public/RSVPForm';
 import { Customer } from '@/types/database';
+import { WelcomeDialog } from '@/components/public/XVAnos/components/WelcomeDialog';
+import HanniSobresDinero from '@/components/public/XVAnos/components/HanniSobresDinero';
+import Image from 'next/image';
 import { HeroSectionDemoUno } from '@/components/public/XVAnos/components/XVAnosDemoUno/HeroSectionDemoUno';
 import { CountdownSectionDemoUno } from '@/components/public/XVAnos/components/XVAnosDemoUno/CountownSectionDemoUno';
 import { AboutSectionDemoUno } from '@/components/public/XVAnos/components/XVAnosDemoUno/AboutSectionDemoUno';
@@ -10,8 +23,15 @@ import { GallerySectionDemoUno } from '@/components/public/XVAnos/components/XVA
 import { CalendarSectionDemoUno } from '@/components/public/XVAnos/components/XVAnosDemoUno/CalendarSectionDemoUno';
 import { HashtagSection } from '@/components/public/XVAnos/components/XVAnosDemoUno/HashTagSectionDemoUno';
 import { RSVPSectionDemoUno } from '@/components/public/XVAnos/components/XVAnosDemoUno/RSVPSectionDemoUno';
-import { Photo } from '@/components/public/XVAnos/components/photoGallery';
-import MesaDeRegalos from '@/components/public/MesaDeRegalos';
+
+
+type EventItem = {
+    time: string;
+    title: string;
+    description?: string;
+    icon?: React.ReactNode;
+}
+
 
 
 interface MediaItem {
@@ -21,11 +41,13 @@ interface MediaItem {
     is_hero: boolean;
 }
 
-interface XVAnosDemoUnoTemplateProps {
-    customer?: Customer & {
-        events?: any[];
-        media?: MediaItem[];
-    };
+
+
+interface XVAnosClassicProps {
+    customer?: Customer;
+    events?: EventItem[];
+    media?: MediaItem[];
+
 }
 
 
@@ -89,20 +111,42 @@ const photos: Photo[] = [
 
 
 
-const XVAnosDemoUnoTemplate = ({ customer }: XVAnosDemoUnoTemplateProps) => {
+const XVAnosDemoUnoTemplate = ({ customer }: any) => {
 
-    // const { primary_color, font_family } = customer?.template_config;
+   
+
+    // const { primary_color, font_family } = customer.template_config;
+    // Filter media by type
+    // const photos = media?.filter((m: any) => m.file_type === 'image');
+    const song = customer.media?.find((m: any) => m.file_type === 'audio');
+    const audioRef = useRef<HTMLAudioElement>(null)
+    const [isPlaying, setIsPlaying] = useState(false)
+
+    const toggleMusic = () => {
+        if (!audioRef.current) return
+
+        if (isPlaying) {
+            audioRef.current.pause()
+        } else {
+            audioRef.current.play()
+        }
+
+        setIsPlaying(!isPlaying)
+    }
+
+   
+
+
 
     return (
-        <div>   
+        <div>
             <HeroSectionDemoUno name={customer?.couple_name} eventDate={customer?.event_date} />
             <CountdownSectionDemoUno eventDate={customer?.event_date} />
-            <AboutSectionDemoUno name={customer?.couple_name} about_me={customer?.about_me}/>
-            <ItinerarySectionDemoUno events={customer?.events} />
+            <AboutSectionDemoUno name={customer?.couple_name} />
+            <ItinerarySectionDemoUno events={customer.events} />
             <LocationSectionDemoUno />
             <RSVPSectionDemoUno />
             <GallerySectionDemoUno />
-            <MesaDeRegalos festejadaName={customer?.couple_name} />
             <CalendarSectionDemoUno />
             <HashtagSection />
         </div>
@@ -116,3 +160,6 @@ const XVAnosDemoUnoTemplate = ({ customer }: XVAnosDemoUnoTemplateProps) => {
 }
 
 export default XVAnosDemoUnoTemplate
+
+
+

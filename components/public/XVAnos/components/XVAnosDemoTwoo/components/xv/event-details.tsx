@@ -18,7 +18,7 @@ export function EventDetailsDemo2({ events, date }: { events?: any[], date?: str
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-sm tracking-[0.3em] text-xvgreen-text mb-4">DETALLES</h2>
+          <h2 className="text-sm tracking-[0.3em] text-xvgreen-text mb-4">ITINERARIO</h2>
           <p className="text-4xl md:text-5xl font-serif text-white">El Gran Día</p>
         </motion.div>
 
@@ -30,7 +30,7 @@ export function EventDetailsDemo2({ events, date }: { events?: any[], date?: str
           className="flex items-center justify-center gap-8 mb-16"
         >
           <div className="hidden md:block h-px flex-1 bg-border" />
-          <div className="flex items-center gap-6 px-8 py-4 border border-primary/30 rounded-full">
+          <div className="flex items-center gap-6 px-8 py-4 border border-white/30 rounded-full">
             <Calendar className="w-5 h-5 text-primary text-xvgreen-text" />
             <span className="text-lg tracking-wider text-white">{safeDate}</span>
           </div>
@@ -50,13 +50,13 @@ export function EventDetailsDemo2({ events, date }: { events?: any[], date?: str
                 transition={{ delay: index * 0.2 }}
                 className="group relative"
               >
-                <div className="relative bg-black border border-border rounded-2xl p-8 md:p-12 overflow-hidden transition-all duration-500 hover:border-primary/50">
+                <div className="relative  border border-border border-white/30 rounded-2xl p-8 md:p-12 overflow-hidden transition-all duration-500 hover:border-white/50">
                   {/* Background decoration */}
                   <div className="absolute -right-8 -top-8 w-32 h-32 rounded-full bg-primary/5 blur-2xl group-hover:bg-primary/10 transition-colors" />
 
                   <div className="relative z-10">
                     {/* Icon */}
-                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-primary/10 border border-primary/20 mb-6">
+                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-primary/10 border border-white mb-6">
                       <IconComponent className="w-7 h-7 text-primary text-xvgreen-text" />
                     </div>
 
@@ -65,9 +65,9 @@ export function EventDetailsDemo2({ events, date }: { events?: any[], date?: str
 
                     {/* Details */}
                     <div className="space-y-4 mb-8">
-                      <div className="flex items-center gap-3 text-muted-foreground">
+                      <div className="flex items-center gap-3 text-muted-foreground text-white">
                         <Clock className="w-4 h-4 text-primary text-xvgreen-text" />
-                        <span>{event.event_time} - {event.event_date}</span>
+                        <span>{event.event_time} </span>
                       </div>
                       <div className="flex items-start gap-3 text-muted-foreground">
                         <MapPin className="w-4 h-4 text-xvgreen-text mt-1" />
