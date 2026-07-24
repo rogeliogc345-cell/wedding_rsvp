@@ -118,7 +118,7 @@ const XVAnosDemoUnoTemplate = ({ customer }: any) => {
     // const { primary_color, font_family } = customer.template_config;
     // Filter media by type
     // const photos = media?.filter((m: any) => m.file_type === 'image');
-    const song = customer.media?.find((m: any) => m.file_type === 'audio');
+    const song = customer?.media?.find((m: any) => m.file_type === 'audio');
     const audioRef = useRef<HTMLAudioElement>(null)
     const [isPlaying, setIsPlaying] = useState(false)
 
@@ -143,7 +143,7 @@ const XVAnosDemoUnoTemplate = ({ customer }: any) => {
             <HeroSectionDemoUno name={customer?.couple_name} eventDate={customer?.event_date} />
             <CountdownSectionDemoUno eventDate={customer?.event_date} />
             <AboutSectionDemoUno name={customer?.couple_name} />
-            <ItinerarySectionDemoUno events={customer.events} />
+            <ItinerarySectionDemoUno events={customer?.events} />
             <LocationSectionDemoUno />
             <RSVPSectionDemoUno />
             <GallerySectionDemoUno />
