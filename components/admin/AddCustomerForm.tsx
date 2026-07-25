@@ -213,6 +213,7 @@ export function AddCustomerForm() {
                                         <option value="classic">Classic</option>
                                         <option value="clasicBlue">Classic Blue</option>
                                         <option value="modern">Modern</option>
+                                        <option value="demo4">Demo 4</option>
                                     </select>
                                 </FormControl>
                                 <FormMessage />

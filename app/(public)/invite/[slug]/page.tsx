@@ -4,6 +4,7 @@ import WeddingTemplate from "@/components/templates/WeddingTemplate";
 import XVClassicTemplate from "@/app/quince/classic/page";
 import XVClassicBlueTemplate from "@/app/quince/classicBlue/page";
 import XVModernTemplate from "@/app/quince/modern/page";
+import XVDemo4Template from "@/app/quince/demo4/page";
 
 import MusicPlayer from "@/components/public/XVAnos/MusicPlayer";
 
@@ -13,6 +14,7 @@ const TEMPLATE_MAP = {
         classicBlue: XVClassicBlueTemplate,
         clasicBlue: XVClassicBlueTemplate,
         modern: XVModernTemplate,
+        demo4: XVDemo4Template,
     }
 };
 

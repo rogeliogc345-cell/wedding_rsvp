@@ -43,8 +43,13 @@ function Unit({ value, label }: { value: number; label: string }) {
   )
 }
 
-export function Countdown() {
-  const target = new Date(EVENT.date).getTime()
+interface Props {
+  date?: string;
+}
+
+
+export function Countdown({ date }: Props) {
+  const target = new Date(date ?? EVENT.date).getTime()
   const [time, setTime] = useState<TimeLeft>({ days: 0, hours: 0, minutes: 0, seconds: 0 })
   const [mounted, setMounted] = useState(false)
 

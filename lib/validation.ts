@@ -1,7 +1,7 @@
 import * as z from "zod";
 
 // XV-specific template options — Wedding templates will be added later
-export const XV_TEMPLATES = ["classic", "clasicBlue", "modern"] as const;
+export const XV_TEMPLATES = ["classic", "clasicBlue", "modern", "demo4"] as const;
 export type XVTemplate = typeof XV_TEMPLATES[number];
 
 export const customerSchema = z.object({

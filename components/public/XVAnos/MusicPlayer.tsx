@@ -181,6 +181,23 @@ export default function MusicPlayer({ customer }: MusicPlayerProps) {
       sparkles: "text-emerald-400",
       noteColor: "text-emerald-400/80",
     };
+  } else if (theme === "demo4") {
+    themeStyles = {
+      welcomeBg: "bg-stone-950/98 text-stone-100",
+      welcomeGradient: "from-violet-950/30 to-stone-950",
+      welcomeCard: "bg-stone-900/90 border-violet-500/20 text-white",
+      welcomeBtn: "from-violet-500 to-purple-600 hover:shadow-violet-500/30 text-white",
+      welcomeSubtitle: "text-violet-400/80",
+      welcomeHeading: "text-stone-100",
+
+      floatBtn: "from-stone-900 to-stone-950/90 border-violet-500/30 text-violet-400 shadow-violet-500/20 shadow-[0_0_20px_rgba(139,92,246,0.25)] hover:shadow-[0_0_30px_rgba(139,92,246,0.45)]",
+      pulseColor: "bg-violet-500/20",
+      discCenter: "bg-violet-500/20 border-violet-400/50",
+      needleColor: "bg-violet-400",
+      iconColor: "text-violet-400",
+      sparkles: "text-violet-300",
+      noteColor: "text-violet-400/80",
+    };
   }
 
   return (

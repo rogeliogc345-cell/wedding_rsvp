@@ -4,11 +4,25 @@ import Image from 'next/image'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
 import { ChevronDown } from 'lucide-react'
-// import { FloatingParticles } from './Demo4Floatingparticles'
 import { Divider } from './Demo4Divider'
 import { EVENT } from './events'
 
-export function Hero() {
+interface Props {
+  name?: string;
+  date?: string;
+}
+
+function formatDate(dateStr?: string): string {
+  if (!dateStr) return EVENT.dateLabel;
+  const [year, month, day] = dateStr.split('-').map(Number);
+  const months = [
+    'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+    'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre',
+  ];
+  return `${day} de ${months[month - 1]}, ${year}`;
+}
+
+export function Hero({ name, date }: Props) {
   const ref = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -69,7 +83,7 @@ export function Hero() {
           transition={{ duration: 1, delay: 0.55 }}
           className="mt-6 font-serif text-3xl italic text-primary text-shadow-soft sm:text-5xl"
         >
-          {EVENT.name}
+          {name}
         </motion.p>
 
         <motion.div
@@ -86,7 +100,7 @@ export function Hero() {
           transition={{ duration: 1, delay: 0.9 }}
           className="text-base font-light uppercase tracking-[0.3em] text-background/90 text-shadow-soft sm:text-lg"
         >
-          {EVENT.dateLabel}
+          {formatDate(date)}
         </motion.p>
 
         <motion.div

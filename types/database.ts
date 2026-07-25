@@ -3,6 +3,13 @@ export interface ColorPreferenceEntry {
     color: string;
 }
 
+export interface MediaItem {
+    id: string;
+    file_url: string;
+    file_type: "image" | "audio";
+    is_hero?: boolean;
+}
+
 export interface Customer {
     id: string;
     couple_name: string;
@@ -16,12 +23,14 @@ export interface Customer {
     };
     is_published: boolean;
     category: "wedding" | "XV";
-    template?: "classic" | "clasicBlue" | "modern";
+    template?: "classic" | "clasicBlue" | "modern" | "demo4";
     about_me?: string | null;
     color_preferences?: {
         suggested: Array<string | ColorPreferenceEntry>;
         forbidden: Array<string | ColorPreferenceEntry>;
     };
+    media?: MediaItem[];
+    events?: WeddingEvent[];
 }
 
 export interface WeddingEvent {

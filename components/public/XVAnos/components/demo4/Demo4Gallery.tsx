@@ -7,29 +7,45 @@ import { X, ChevronLeft, ChevronRight } from 'lucide-react'
 import { Reveal } from './Demo4Reveal'
 import { Divider } from './Demo4Divider'
 
-const IMAGES = [
-  { src: '/images/gallery-1.png', alt: 'Isabella en su vestido blush' },
-  { src: '/images/gallery-5.png', alt: 'Isabella girando con su vestido' },
-  { src: '/images/gallery-2.png', alt: 'Tiara y joyería dorada' },
-  { src: '/images/gallery-6.png', alt: 'Salón decorado para la fiesta' },
-  { src: '/images/gallery-8.png', alt: 'Isabella sonriendo al aire libre' },
-  { src: '/images/gallery-3.png', alt: 'Mesa decorada con rosas' },
-  { src: '/images/gallery-9.png', alt: 'Arco floral de rosas' },
-  { src: '/images/gallery-4.png', alt: 'Pastel de celebración' },
-  { src: '/images/gallery-7.png', alt: 'Detalle de zapatillas y ramo' },
-]
+interface MediaItem {
+  id?: string
+  file_url?: string
+  file_type?: string
+  src?: string
+  alt?: string
+}
 
-export function Gallery() {
+
+
+interface Props {
+  images?: (MediaItem | string)[]
+}
+
+export function Gallery({ images }: Props) {
   const [active, setActive] = useState<number | null>(null)
+
+  const resolvedImages = (images && images.length > 0)
+    ? images
+      .filter((item) => typeof item === 'string' || item.file_type !== 'audio')
+      .map((item, index) => {
+        if (typeof item === 'string') {
+          return { src: item, alt: `Foto ${index + 1}` }
+        }
+        return {
+          src: item.file_url || item.src || '/placeholder.svg',
+          alt: item.alt || `Foto ${index + 1}`,
+        }
+      })
+    : []
 
   const close = useCallback(() => setActive(null), [])
   const next = useCallback(
-    () => setActive((i) => (i === null ? i : (i + 1) % IMAGES.length)),
-    [],
+    () => setActive((i) => (i === null ? i : (i + 1) % resolvedImages.length)),
+    [resolvedImages.length],
   )
   const prev = useCallback(
-    () => setActive((i) => (i === null ? i : (i - 1 + IMAGES.length) % IMAGES.length)),
-    [],
+    () => setActive((i) => (i === null ? i : (i - 1 + resolvedImages.length) % resolvedImages.length)),
+    [resolvedImages.length],
   )
 
   useEffect(() => {
@@ -47,6 +63,8 @@ export function Gallery() {
     }
   }, [active, close, next, prev])
 
+  if (resolvedImages.length === 0) return null
+
   return (
     <section id="gallery" className="relative overflow-hidden py-24 sm:py-32">
       <div className="mx-auto max-w-6xl px-6">
@@ -62,16 +80,16 @@ export function Gallery() {
 
         <Reveal delay={0.1}>
           <div className="columns-2 gap-4 [column-fill:balance] lg:columns-3">
-            {IMAGES.map((img, i) => (
+            {resolvedImages.map((img, i) => (
               <motion.button
-                key={img.src}
+                key={`${img.src}-${i}`}
                 onClick={() => setActive(i)}
                 whileHover={{ scale: 0.985 }}
                 className="group relative mb-4 block w-full overflow-hidden rounded-2xl shadow-md shadow-black/5"
                 aria-label={`Ver imagen: ${img.alt}`}
               >
                 <Image
-                  src={img.src || '/placeholder.svg'}
+                  src={img.src}
                   alt={img.alt}
                   width={600}
                   height={800}
@@ -87,7 +105,7 @@ export function Gallery() {
       </div>
 
       <AnimatePresence>
-        {active !== null && (
+        {active !== null && resolvedImages[active] && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -136,8 +154,8 @@ export function Gallery() {
               onClick={(e) => e.stopPropagation()}
             >
               <Image
-                src={IMAGES[active].src || '/placeholder.svg'}
-                alt={IMAGES[active].alt}
+                src={resolvedImages[active].src}
+                alt={resolvedImages[active].alt}
                 width={1000}
                 height={1300}
                 className="mx-auto max-h-[85vh] w-auto rounded-2xl object-contain shadow-2xl"
