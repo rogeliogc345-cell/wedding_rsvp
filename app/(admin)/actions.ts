@@ -163,20 +163,11 @@ export const deleteMediaAction = async (
             console.log("Supabase storage remove response:", { data, storageError });
 
             if (storageError) {
-                console.error("Error deleting media file from storage:", storageError);
-                return {
-                    error: storageError.message || "The file could not be removed from storage.",
-                    success: false,
-                };
+                console.warn("Storage deletion error/warning:", storageError);
             }
 
-            // If Supabase returns success (error is null) but data is empty, it means RLS blocked the deletion
             if (!data || data.length === 0) {
-                console.error("RLS policy blocked deletion or file was not removed. Data:", data);
-                return {
-                    error: "Permission denied: The storage file could not be deleted. Check your Supabase Storage policies.",
-                    success: false,
-                };
+                console.warn("Storage file was not returned in remove response (may already be deleted or RLS restricted). Proceeding to delete DB record.");
             }
         } else {
             console.log("File is already missing from storage bucket. Proceeding to delete database record.");

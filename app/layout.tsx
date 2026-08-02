@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Space_Grotesk, Syne } from "next/font/google";
+import { Geist, Space_Grotesk, Syne, Playfair_Display } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import "./globals.css";
 import { Toaster } from "sonner";
@@ -29,6 +29,10 @@ const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   variable: '--font-space-grotesk'
 });
+const playfairDisplay = Playfair_Display({
+  subsets: ["latin"],
+  variable: '--font-playfair'
+});
 
 export default function RootLayout({
   children,
@@ -43,7 +47,7 @@ export default function RootLayout({
       </head>
 
 
-      <body className={`${syne.variable} ${spaceGrotesk.variable} font-sans antialiased`}>
+      <body className={`${syne.variable} ${spaceGrotesk.variable} ${playfairDisplay.variable} font-sans antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

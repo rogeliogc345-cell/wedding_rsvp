@@ -56,7 +56,9 @@ export async function updateSession(request: NextRequest) {
     !pathname.startsWith("/auth") &&
     !pathname.startsWith("/admin/login") &&
     !pathname.startsWith("/quinceanera") &&
-    !pathname.startsWith("/invite")
+    !pathname.startsWith("/invite") &&
+    !pathname.startsWith("/quince") &&
+    !pathname.startsWith("/xv")
   ) {
     const url = request.nextUrl.clone();
     url.pathname = isAdminRoute ? "/admin/login" : "/auth/login";

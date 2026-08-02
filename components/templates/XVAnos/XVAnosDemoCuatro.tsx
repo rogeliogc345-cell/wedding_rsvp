@@ -32,7 +32,7 @@ const XVAnosDemoCuatro = ({ customer }: XVAnosDemoCuatroProps) => {
         <Parents />
         <Location />
         <GiftSection />
-        <RSVP />
+        <RSVP customerId={customer?.id} name={customer?.couple_name} />
       </main>
       <Footer />
     </div>
