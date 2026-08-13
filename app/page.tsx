@@ -41,9 +41,11 @@ export default function LandingPage() {
                 </Button>
               </Link>
 
-              <Button variant="outline" className="px-8 py-4 rounded-full text-lg border-amber-300 text-rose-700 hover:bg-amber-50">
-                Ver Demo
-              </Button>
+              <Link href="/xv">
+                <Button variant="outline" className="px-8 py-4 rounded-full text-lg border-amber-300 text-rose-700 hover:bg-amber-50">
+                  Ver Demo
+                </Button>
+              </Link>
             </div>
           </div>
 

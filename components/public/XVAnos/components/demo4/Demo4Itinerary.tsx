@@ -59,7 +59,8 @@ const EVENTS: Event[] = [
   },
 ]
 
-export function Itinerary() {
+export function Itinerary({ events = [] }: { events?: any }) {
+  console.log(events)
   return (
     <section
       id="itinerary"
@@ -83,18 +84,17 @@ export function Itinerary() {
           />
 
           <ul className="space-y-8">
-            {EVENTS.map((event, i) => {
+            {events.map((event: any, i: number) => {
               const Icon = event.icon
               const isLeft = i % 2 === 0
               return (
-                <li key={event.title} className="relative">
+                <li key={event.event_name} className="relative">
                   <Reveal delay={i * 0.05}>
                     <div
-                      className={`flex items-start gap-5 sm:w-1/2 ${
-                        isLeft
-                          ? 'sm:ml-0 sm:pr-10 sm:text-right'
-                          : 'sm:ml-auto sm:flex-row-reverse sm:pl-10 sm:text-left'
-                      }`}
+                      className={`flex items-start gap-5 sm:w-1/2 ${isLeft
+                        ? 'sm:ml-0 sm:pr-10 sm:text-right'
+                        : 'sm:ml-auto sm:flex-row-reverse sm:pl-10 sm:text-left'
+                        }`}
                     >
                       <motion.div
                         whileHover={{ scale: 1.12, rotate: 6 }}
@@ -106,18 +106,17 @@ export function Itinerary() {
 
                       <motion.div
                         whileHover={{ y: -4 }}
-                        className={`group flex-1 rounded-2xl border border-border/70 bg-card p-5 shadow-sm transition-shadow hover:shadow-lg ${
-                          isLeft ? '' : ''
-                        }`}
+                        className={`group flex-1 rounded-2xl border border-border/70 bg-card p-5 shadow-sm transition-shadow hover:shadow-lg ${isLeft ? '' : ''
+                          }`}
                       >
                         <span className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
-                          {event.time}
+                          {event.event_time}
                         </span>
                         <h3 className="mt-1 font-serif text-2xl text-foreground">
-                          {event.title}
+                          {event.event_name}
                         </h3>
                         <p className="mt-2 text-sm font-light leading-relaxed text-muted-foreground">
-                          {event.description}
+                          {event.location_name}
                         </p>
                       </motion.div>
                     </div>

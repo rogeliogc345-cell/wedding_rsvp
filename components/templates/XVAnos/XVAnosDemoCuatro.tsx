@@ -22,11 +22,11 @@ const XVAnosDemoCuatro = ({ customer }: XVAnosDemoCuatroProps) => {
   return (
     <div>
       <ScrollProgress />
-      <Navbar />
+      <Navbar name={customer?.couple_name} />
       <main>
         <Hero name={customer?.couple_name} date={customer?.event_date} />
         <Countdown date={customer?.event_date} />
-        <Itinerary />
+        <Itinerary events={customer?.events} />
         <DressCode />
         <Gallery images={customer?.media} />
         <Parents />

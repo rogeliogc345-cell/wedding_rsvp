@@ -13,7 +13,7 @@ const LINKS = [
   { label: 'Confirmar', href: '#rsvp' },
 ]
 
-export function Navbar() {
+export function Navbar({ name }: { name?: string }) {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
 
@@ -48,7 +48,7 @@ export function Navbar() {
             scrolled ? 'text-foreground' : 'text-background text-shadow-soft',
           )}
         >
-          Isabella<span className="text-primary">.</span>
+          {name}<span className="text-primary">.</span>
         </button>
 
         <ul className="hidden items-center gap-8 md:flex">
