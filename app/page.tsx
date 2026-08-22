@@ -21,7 +21,7 @@ export default function LandingPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
-          <div className="text-2xl font-parisienneSerif tracking-tight italic">XVBoda</div>
+          <div className="text-2xl font-parisienneSerif tracking-tight italic">XVBodaOnline</div>
           <div className="hidden md:flex gap-8 text-[11px] uppercase tracking-[0.25em] text-neutral-800">
             <Link href="#features" className="hover:text-black transition">Tu invitación</Link>
             <Link href="/xv" className="hover:text-black transition">Ver colección</Link>
@@ -59,13 +59,13 @@ export default function LandingPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/">
                 <Button className="bg-neutral-900 text-white hover:bg-neutral-800 px-8 py-4 rounded-full text-base shadow-2xl shadow-neutral-900/25">
-                  Diseñar mi invitación <ArrowRight className="ml-2" />
+                  Exporar diseños bodas <ArrowRight className="ml-2" />
                 </Button>
               </Link>
 
               <Link href="/xv">
                 <Button variant="outline" className="px-8 py-4 rounded-full text-base border-neutral-700 text-neutral-800 hover:bg-neutral-800 hover:text-white">
-                  Explorar diseños
+                  Explorar diseños XV <ArrowRight className="ml-2" />
                 </Button>
               </Link>
             </div>
@@ -75,6 +75,39 @@ export default function LandingPage() {
           <div className="pointer-events-none absolute -bottom-20 left-1/2 transform -translate-x-1/2 w-[80%] h-72 bg-gradient-to-t from-transparent via-white/40 to-transparent blur-3xl opacity-60 rounded-full" />
         </motion.section>
       </header>
+
+      <motion.section
+        className="relative min-h-[520px] overflow-hidden bg-cover bg-center bg-fixed"
+        style={{ backgroundImage: "url('/xv/fondo_demo1_hero.png')" }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, amount: 0.25 }}
+        transition={{ duration: 1 }}
+      >
+        <div className="absolute inset-0 bg-neutral-950/65" />
+        <motion.div
+          className="relative z-10 flex min-h-[520px] items-center justify-center px-6 py-20 text-center text-white"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.35 }}
+          transition={{ duration: 0.8, delay: 0.15, ease: "easeOut" }}
+        >
+          <div className="max-w-3xl">
+            <p className="mb-8 text-[11px] uppercase tracking-[0.4em] text-white/75">Hay momentos que merecen quedarse para siempre</p>
+            <blockquote className="font-parisienneSerif text-4xl leading-tight md:text-6xl">
+              “Tu historia es única. Haz que cada invitado la sienta desde el primer instante.”
+            </blockquote>
+            <p className="mx-auto mt-8 max-w-xl text-base leading-relaxed text-white/80 md:text-lg">
+              Diseñamos una invitación que no solo anuncia tu celebración: abre la puerta a la emoción, la ilusión y los recuerdos que están por comenzar.
+            </p>
+            <Link href="/xv" className="mt-10 inline-block">
+              <Button className="bg-white px-9 py-4 text-base text-neutral-900 shadow-2xl shadow-black/30 hover:bg-neutral-100">
+                Crear un momento inolvidable <ArrowRight className="ml-2" />
+              </Button>
+            </Link>
+          </div>
+        </motion.div>
+      </motion.section>
 
       {/* --- FEATURE GRID --- */}
       <motion.section
@@ -146,7 +179,7 @@ export default function LandingPage() {
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 1 }}
       >
-        <p className="font-parisienneSerif italic text-2xl text-white mb-4">XVBoda</p>
+        <p className="font-parisienneSerif italic text-2xl text-white mb-4">XVBodaOnline</p>
         <p className="text-xs uppercase tracking-widest">&copy; 2026 Creado con Amor — Inspirando recuerdos</p>
       </motion.footer>
     </div>
