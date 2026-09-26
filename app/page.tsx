@@ -157,7 +157,7 @@ export default function LandingPage() {
 
             <FeatureCard
               icon={<Sparkles className="w-8 h-8 text-neutral-800" />}
-              title="Detalles personalizados"
+              title="Detalles personalizados" 
               description="Tipografías, paletas y toques dorados para una identidad única."
             />
 
