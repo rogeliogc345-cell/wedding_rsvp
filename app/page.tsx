@@ -57,7 +57,7 @@ export default function LandingPage() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/">
+              <Link href="/boda">
                 <Button className="bg-neutral-900 text-white hover:bg-neutral-800 px-8 py-4 rounded-full text-base shadow-2xl shadow-neutral-900/25">
                   Exporar diseños bodas <ArrowRight className="ml-2" />
                 </Button>

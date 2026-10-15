@@ -1,14 +1,24 @@
 "use client"
 
 import Image from "next/image"
+import { motion, useReducedMotion } from "framer-motion"
 
 export function AboutSectionDemoUno({ name, about_me }: { name?: string, about_me?: string | null }) {
     console.log("about", about_me)
+    const shouldReduceMotion = useReducedMotion()
+    const revealOffset = shouldReduceMotion ? 0 : 24
+
     return (
         <section id="about" className="py-20 px-4 bg-background">
             <div className="w-full lg:max-w-4xl mx-auto">
                 {/* Section header */}
-                <div className="text-center mb-12">
+                <motion.div
+                    className="mb-12 text-center"
+                    initial={{ opacity: shouldReduceMotion ? 1 : 0, y: revealOffset }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.4 }}
+                    transition={{ duration: shouldReduceMotion ? 0 : 0.65, ease: "easeOut" }}
+                >
                     <p className="text-sm tracking-[0.3em] text-muted-foreground uppercase mb-4 text-left lg:text-center">
                         Conoce a
                     </p>
@@ -23,12 +33,18 @@ export function AboutSectionDemoUno({ name, about_me }: { name?: string, about_m
                         <div className="w-2 h-2 rotate-45 bg-gold" />
                         <div className="w-16 h-px bg-gradient-to-r from-transparent via-gold to-transparent" />
                     </div>
-                </div>
+                </motion.div>
 
                 {/* Content */}
                 <div className="grid md:grid-cols-2 gap-12 items-center">
                     {/* Image */}
-                    <div className="relative">
+                    <motion.div
+                        className="relative"
+                        initial={{ opacity: shouldReduceMotion ? 1 : 0, x: -revealOffset }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true, amount: 0.25 }}
+                        transition={{ duration: shouldReduceMotion ? 0 : 0.8, ease: "easeOut" }}
+                    >
                         <div className="absolute -inset-4 bg-gradient-to-br from-gold/20 to-primary/20 rounded-3xl blur-xl" />
                         <div className="relative aspect-[3/4] rounded-2xl overflow-hidden border-4 border-gold/30 shadow-2xl">
                             <Image
@@ -41,10 +57,16 @@ export function AboutSectionDemoUno({ name, about_me }: { name?: string, about_m
                         {/* Decorative elements */}
                         <div className="absolute -top-2 -left-2 w-8 h-8 border-t-2 border-l-2 border-gold" />
                         <div className="absolute -bottom-2 -right-2 w-8 h-8 border-b-2 border-r-2 border-gold" />
-                    </div>
+                    </motion.div>
 
                     {/* Text content */}
-                    <div className="space-y-6">
+                    <motion.div
+                        className="space-y-6"
+                        initial={{ opacity: shouldReduceMotion ? 1 : 0, x: revealOffset }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true, amount: 0.25 }}
+                        transition={{ duration: shouldReduceMotion ? 0 : 0.8, delay: shouldReduceMotion ? 0 : 0.12, ease: "easeOut" }}
+                    >
                         <h3
                             className="text-4xl text-primary"
                             style={{ fontFamily: 'var(--font-great-vibes)' }}
@@ -67,7 +89,7 @@ export function AboutSectionDemoUno({ name, about_me }: { name?: string, about_m
                                 Con cariño, {name || "name"}
                             </p>
                         </div>
-                    </div>
+                    </motion.div>
                 </div>
             </div>
         </section>
