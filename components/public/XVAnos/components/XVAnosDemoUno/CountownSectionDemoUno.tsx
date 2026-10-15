@@ -54,7 +54,7 @@ export function CountdownSectionDemoUno({ eventDate }: { eventDate?: string }) {
     ]
 
     return (
-        <section className="py-10 px-4   bg-[url('/xv/fondo_demo1_hero.png')] bg-cover bg-center bg-no-repeat bg-fixed">
+        <section className="py-10 px-4   bg-[url('/classic_xv/Classic_2.jpeg')] bg-cover bg-center bg-no-repeat bg-fixed">
             <div className="max-w-4xl mx-auto text-center">
                 <p className="text-sm tracking-[0.3em] text-muted-foreground uppercase mb-4">
                     Faltan

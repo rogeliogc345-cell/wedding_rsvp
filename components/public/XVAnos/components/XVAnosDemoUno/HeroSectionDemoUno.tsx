@@ -28,7 +28,7 @@ export function HeroSectionDemoUno({ name, eventDate }: { name?: string; eventDa
     const formattedDate = formatEventDate(eventDate)
 
     return (
-        <section className="bg-[url('/hanni/fondo_moños.png')] bg-cover bg-center  relative min-h-screen flex flex-col items-center justify-center h-screen  ">
+        <section className="bg-[url('/classic_xv/Classic_1.jpeg')] bg-cover bg-center relative min-h-screen flex flex-col items-center justify-center h-screen">
             {/* Floating sparkles */}
             <div className="absolute inset-0 pointer-events-none">
                 {[...Array(20)].map((_, i) => (
@@ -64,7 +64,7 @@ export function HeroSectionDemoUno({ name, eventDate }: { name?: string; eventDa
                     {/* Photo container */}
                     <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-gold shadow-2xl">
                         <Image
-                            src="/hanni/hani8.jpeg"
+                            src="/classic_xv/Classic_1.jpeg"
                             alt="Quinceañera Valentina"
                             fill
                             className="object-cover object-top"
@@ -74,8 +74,8 @@ export function HeroSectionDemoUno({ name, eventDate }: { name?: string; eventDa
                 </div>
 
                 {/* Event type */}
-                <p className="mt-10 font-parisienneSans text-5xl md:text-6xl tracking-[0.3em] text-muted-foreground uppercase">
-                    Mis XV Años
+                <p className="mt-10 font-parisienneSans text-5xl md:text-6xl tracking-[0.3em] text-muted-foreground uppercase text-center">
+                    Mis XV Años.
                 </p>
 
                 {/* Name */}

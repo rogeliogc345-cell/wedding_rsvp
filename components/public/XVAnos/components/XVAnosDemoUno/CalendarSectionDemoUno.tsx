@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { ChevronLeft, ChevronRight, Star } from "lucide-react"
+import { ChevronLeft, ChevronRight, Crown, Star } from "lucide-react"
 
 const DAYS = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"]
 const MONTHS = [
@@ -58,46 +58,51 @@ export function CalendarSectionDemoUno() {
     }
 
     return (
-        <section id="calendar" className="py-20 px-4 bg-gradient-to-b from-blush to-background confetti-bg">
-            <div className="max-w-lg mx-auto">
+        <section id="calendar" className="relative overflow-hidden bg-[#faf5f6] px-4 py-20">
+            <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-[radial-gradient(circle_at_1px_1px,rgba(190,95,130,0.16)_1px,transparent_0)] [background-size:14px_14px]" />
+            <div className="relative z-10 mx-auto max-w-lg">
                 {/* Section header */}
                 <div className="text-center mb-12">
-                    <p className="text-sm tracking-[0.3em] text-muted-foreground uppercase mb-2">
+                    <p className="mb-3 text-sm uppercase tracking-[0.3em] text-rose-700">
                         Marca la fecha
                     </p>
+                    <Crown className="mx-auto mb-2 h-6 w-6 text-rose-400" strokeWidth={1.4} />
                     <h2
-                        className="text-5xl md:text-7xl text-primary font-wedding"
+                        className="text-5xl text-stone-900 font-wedding md:text-7xl"
 
                     >
                         Save the Date
                     </h2>
                     <div className="mt-4 flex items-center justify-center gap-4">
-                        <div className="w-16 h-px bg-gradient-to-r from-transparent via-gold to-transparent" />
-                        <div className="w-2 h-2 rotate-45 bg-gold" />
-                        <div className="w-16 h-px bg-gradient-to-r from-transparent via-gold to-transparent" />
+                        <div className="h-px w-16 bg-gradient-to-r from-transparent via-rose-300 to-transparent" />
+                        <div className="h-2 w-2 rotate-45 bg-rose-300" />
+                        <div className="h-px w-16 bg-gradient-to-r from-transparent via-rose-300 to-transparent" />
                     </div>
                 </div>
 
                 {/* Calendar */}
-                <div className="bg-card rounded-3xl shadow-2xl overflow-hidden border border-border">
+                <div className="overflow-hidden rounded-sm border-4 border-double border-rose-200 bg-[#fffdfd] shadow-md">
                     {/* Header */}
-                    <div className="bg-gradient-to-r from-primary to-primary/80 p-6 text-center">
-                        <div className="flex items-center justify-between">
+                    <div className="relative border-b border-rose-100 bg-rose-50 p-6 text-center">
+                        <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(190,95,130,0.12)_1px,transparent_0)] [background-size:14px_14px]" />
+                        <div className="relative flex items-center justify-between">
                             <button
                                 onClick={prevMonth}
-                                className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-white hover:bg-white/30 transition-colors"
+                                aria-label="Mes anterior"
+                                className="flex h-10 w-10 items-center justify-center rounded-sm border border-rose-200 bg-white/80 text-rose-800 transition-colors hover:bg-rose-100"
                             >
                                 <ChevronLeft className="w-5 h-5" />
                             </button>
                             <div>
-                                <h3 className="text-2xl text-white font-light">
+                                <h3 className="text-2xl text-stone-900 font-wedding">
                                     {MONTHS[currentDate.getMonth()]}
                                 </h3>
-                                <p className="text-white/80 text-sm">{currentDate.getFullYear()}</p>
+                                <p className="text-sm text-rose-700">{currentDate.getFullYear()}</p>
                             </div>
                             <button
                                 onClick={nextMonth}
-                                className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-white hover:bg-white/30 transition-colors"
+                                aria-label="Mes siguiente"
+                                className="flex h-10 w-10 items-center justify-center rounded-sm border border-rose-200 bg-white/80 text-rose-800 transition-colors hover:bg-rose-100"
                             >
                                 <ChevronRight className="w-5 h-5" />
                             </button>
@@ -107,7 +112,7 @@ export function CalendarSectionDemoUno() {
                     {/* Days header */}
                     <div className="grid grid-cols-7 gap-1 p-4 pb-2">
                         {DAYS.map((day) => (
-                            <div key={day} className="text-center text-sm text-muted-foreground font-medium py-2">
+                            <div key={day} className="py-2 text-center text-sm font-medium text-rose-800">
                                 {day}
                             </div>
                         ))}
@@ -119,38 +124,39 @@ export function CalendarSectionDemoUno() {
                             <div
                                 key={index}
                                 className={`
-                  relative aspect-square flex items-center justify-center text-sm rounded-full
+                  relative flex aspect-square items-center justify-center rounded-sm text-sm
                   transition-all duration-300
-                  ${day ? "hover:bg-muted cursor-pointer" : ""}
-                  ${isEventDay(day || 0) ? "bg-primary text-white scale-110 shadow-lg" : ""}
-                  ${isToday(day || 0) && !isEventDay(day || 0) ? "border-2 border-gold" : ""}
+                  ${day ? "cursor-pointer hover:bg-rose-50" : ""}
+                  ${isEventDay(day || 0) ? "bg-rose-700 text-white shadow-sm" : "text-stone-800"}
+                  ${isToday(day || 0) && !isEventDay(day || 0) ? "border border-rose-400" : ""}
                 `}
                             >
                                 {day}
                                 {isEventDay(day || 0) && (
-                                    <Star className="absolute -top-1 -right-1 w-4 h-4 text-gold fill-gold" />
+                                    <Star className="absolute -right-1 -top-1 h-4 w-4 fill-rose-300 text-rose-500" />
                                 )}
                             </div>
                         ))}
                     </div>
 
                     {/* Event info */}
-                    <div className="p-6 pt-2 text-center border-t border-border">
-                        <p className="text-muted-foreground text-sm">
+                    <div className="border-t border-rose-100 p-6 pt-4 text-center">
+                        <p className="text-sm text-muted-foreground">
                             ¡No olvides marcar el
                         </p>
                         <p
-                            className="text-2xl text-gold mt-1"
+                            className="mt-1 text-2xl text-rose-800"
                             style={{ fontFamily: 'var(--font-great-vibes)' }}
                         >
                             15 de Agosto de 2026
                         </p>
                     </div>
+                    <div aria-hidden="true" className="h-3 bg-[radial-gradient(ellipse_at_top,rgba(244,204,216,0.9)_0%,rgba(244,204,216,0.9)_50%,transparent_52%)] [background-size:24px_12px]" />
                 </div>
 
                 {/* Add to calendar button */}
                 <div className="mt-8 text-center">
-                    <button className="inline-flex items-center gap-2 px-8 py-3 bg-gold text-white rounded-full hover:bg-gold/90 transition-colors shadow-lg">
+                    <button className="inline-flex items-center gap-2 rounded-sm border border-rose-300 bg-white px-8 py-3 text-rose-800 shadow-sm transition-colors hover:bg-rose-50">
                         <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                         </svg>

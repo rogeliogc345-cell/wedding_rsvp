@@ -32,7 +32,7 @@ export function AboutSectionDemoUno({ name, about_me }: { name?: string, about_m
                         <div className="absolute -inset-4 bg-gradient-to-br from-gold/20 to-primary/20 rounded-3xl blur-xl" />
                         <div className="relative aspect-[3/4] rounded-2xl overflow-hidden border-4 border-gold/30 shadow-2xl">
                             <Image
-                                src="/hanni/hani1.jpeg"
+                                src="/classic_xv/about_me.jpeg"
                                 alt="Valentina - Quinceañera"
                                 fill
                                 className="object-cover"

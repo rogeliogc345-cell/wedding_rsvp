@@ -68,6 +68,15 @@ export default function Page() {
           backgroundPosition: "center",
         }}
       >
+        <motion.div
+          initial={{ opacity: 0.25, scale: 1.08, filter: "blur(2px) brightness(0.8)" }}
+          animate={{ opacity: 1, scale: 1.02, filter: "blur(3px) brightness(0.9)" }}
+          transition={{ duration: 2.2, ease: "easeOut" }}
+          className="absolute inset-0 -z-10 bg-cover bg-center"
+          style={{
+            backgroundImage: "linear-gradient(rgba(22, 17, 18, 0.25), rgba(22, 17, 18, 0.4)), url('/boda/boda_1.jpeg')",
+          }}
+        />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.08),_transparent_60%)]" />
 
         <motion.div
@@ -142,31 +151,60 @@ export default function Page() {
         className="mx-auto max-w-6xl px-6 py-20 md:px-10"
       >
         <div className="grid items-center gap-10 md:grid-cols-[1.1fr_0.9fr]">
-          <div className="space-y-6">
-            <p className="text-sm uppercase tracking-[0.5em] text-rose-400">About us</p>
-            <h2 className="font-serif text-4xl text-stone-800 md:text-5xl">Nuestra historia empieza aquí</h2>
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="relative"
+          >
+            <motion.div
+              initial={{ opacity: 0.2, scale: 0.96 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, amount: 0.4 }}
+              animate={{
+                rotate: [0, 0.8, -0.8, 0],
+                scale: [1, 1.02, 1],
+              }}
+              transition={{ duration: 8, ease: "easeInOut", repeat: Infinity }}
+              className="absolute -inset-5 rounded-[2rem] border border-rose-200/60"
+            />
 
-            <div className="h-px w-24 bg-gradient-to-r from-rose-300 via-rose-400 to-transparent" />
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, amount: 0.4 }}
+              animate={{ opacity: [0.35, 0.9, 0.45] }}
+              transition={{ duration: 5, ease: "easeInOut", repeat: Infinity }}
+              className="absolute -inset-2 rounded-[1.5rem] border border-rose-100/80"
+            />
 
-            <p className="text-lg leading-8 text-stone-600">
-              Dos corazones, un mismo destino y un amor que creció entre risas, paseos, sueños y
-              momentos inolvidables. Cada paso nos llevó a este instante tan especial, donde la
-              alegría de compartir nuestra vida se convierte en el comienzo de una nueva aventura.
-            </p>
+            <div className="relative space-y-6">
+              <p className="text-sm uppercase tracking-[0.5em] text-rose-400">About us</p>
+              <h2 className="font-serif text-4xl text-stone-800 md:text-5xl">Nuestra historia empieza aquí</h2>
 
-            <p className="text-lg leading-8 text-stone-600">
-              Con gratitud, emoción y mucho cariño, te invitamos a celebrar este día tan importante
-              junto a nosotros. Queremos compartir con ustedes la belleza de este comienzo y la
-              felicidad de caminar juntos hacia el futuro.
-            </p>
-          </div>
+              <div className="h-px w-24 bg-gradient-to-r from-rose-300 via-rose-400 to-transparent" />
+
+              <p className="text-lg leading-8 text-stone-600">
+                Dos corazones, un mismo destino y un amor que creció entre risas, paseos, sueños y
+                momentos inolvidables. Cada paso nos llevó a este instante tan especial, donde la
+                alegría de compartir nuestra vida se convierte en el comienzo de una nueva aventura.
+              </p>
+
+              <p className="text-lg leading-8 text-stone-600">
+                Con gratitud, emoción y mucho cariño, te invitamos a celebrar este día tan importante
+                junto a nosotros. Queremos compartir con ustedes la belleza de este comienzo y la
+                felicidad de caminar juntos hacia el futuro.
+              </p>
+            </div>
+          </motion.div>
 
           <motion.div
             initial={{ opacity: 0, scale: 0.96 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.9, ease: "easeOut" }}
-            className="overflow-hidden rounded-[2rem] shadow-[0_25px_70px_rgba(120,61,48,0.18)]"
+            className="overflow-hidden rounded-[2rem] shadow-[0_18px_45px_rgba(120,61,48,0.12)]"
           >
             <img
               src="/boda/boda_2.jpeg"
@@ -211,7 +249,7 @@ export default function Page() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.7, delay: index * 0.15 }}
-              className="overflow-hidden rounded-[2rem] border border-stone-200 bg-white/70 shadow-[0_20px_45px_rgba(100,70,58,0.08)] backdrop-blur-sm"
+              className="overflow-hidden rounded-[1rem] border border-stone-200/70 bg-white/60 shadow-[0_12px_30px_rgba(100,70,58,0.05)] backdrop-blur-sm"
             >
               <img src={item.image} alt={item.name} className="h-56 w-full object-cover" />
 
@@ -259,7 +297,7 @@ export default function Page() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.7, delay: index * 0.15 }}
-              className="overflow-hidden rounded-[2rem] border border-stone-200 bg-white/80 shadow-[0_20px_45px_rgba(100,70,58,0.08)]"
+              className="overflow-hidden rounded-[2rem] border border-stone-200/30 bg-white/50 shadow-[0_6px_18px_rgba(100,70,58,0.03)]"
             >
               <img src={hotel.image} alt={hotel.name} className="h-64 w-full object-cover" />
 
@@ -343,7 +381,7 @@ export default function Page() {
         className="mx-auto max-w-6xl px-6 py-20 md:px-10"
       >
         <div className="grid items-center gap-10 md:grid-cols-[0.9fr_1.1fr]">
-          <div className="space-y-6 rounded-[2rem] border border-stone-200 bg-white/70 p-8 shadow-[0_20px_50px_rgba(100,70,58,0.08)]">
+          <div className="space-y-6 rounded-[2rem] border border-stone-200/30 bg-white/35 p-8 shadow-[0_5px_16px_rgba(100,70,58,0.02)]">
             <p className="text-sm uppercase tracking-[0.45em] text-rose-500">Padres</p>
             <h2 className="font-serif text-4xl text-stone-800 md:text-5xl">Con el amor de nuestros padres</h2>
             <div className="h-px w-20 bg-gradient-to-r from-rose-300 via-rose-400 to-transparent" />
@@ -361,10 +399,12 @@ export default function Page() {
               {
                 names: "Ana García & Luis García",
                 role: "Padres de la novia",
+                image: "/boda/boda_2.jpeg",
               },
               {
                 names: "Marta Ruiz & Carlos Ruiz",
                 role: "Padres del novio",
+                image: "/boda/boda_3.jpeg",
               },
             ].map((parent, index) => (
               <motion.div
@@ -373,10 +413,10 @@ export default function Page() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.4 }}
                 transition={{ duration: 0.7, delay: index * 0.1 }}
-                className="rounded-[1.75rem] border border-stone-200 bg-[#fffaf7] p-6 text-center shadow-[0_15px_35px_rgba(100,70,58,0.06)]"
+                className="rounded-[1.5rem] border border-stone-200/30 bg-[#fffaf7]/40 p-6 text-center shadow-[0_4px_12px_rgba(100,70,58,0.02)]"
               >
-                <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-rose-100 to-stone-200 text-3xl">
-                  👨‍👩‍👧
+                <div className="mx-auto mb-5 flex h-24 w-24 items-center justify-center overflow-hidden rounded-full border-[3px] border-stone-800 bg-gradient-to-br from-rose-100 to-stone-200">
+                  <img src={parent.image} alt={parent.names} className="h-full w-full object-cover" />
                 </div>
                 <h3 className="font-serif text-3xl text-stone-800">{parent.names}</h3>
                 <p className="mt-2 text-sm uppercase tracking-[0.25em] text-stone-500">{parent.role}</p>
@@ -414,7 +454,7 @@ export default function Page() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.7, delay: index * 0.08 }}
-                className="min-w-[280px] snap-center rounded-[2rem] border border-stone-200 bg-white/80 p-6 shadow-[0_18px_40px_rgba(100,70,58,0.08)] md:min-w-[340px]"
+                className="min-w-[280px] snap-center rounded-[1.75rem] border border-stone-200/30 bg-white/55 p-6 shadow-[0_6px_18px_rgba(100,70,58,0.02)] md:min-w-[340px]"
               >
                 <p className="text-xs uppercase tracking-[0.35em] text-stone-500">{group.category}</p>
                 <div className="mt-6 space-y-4">
@@ -450,7 +490,7 @@ export default function Page() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.7 }}
-            className="rounded-[2rem] border border-stone-200 bg-[#fffaf7] p-8 shadow-[0_20px_50px_rgba(100,70,58,0.08)]"
+            className="rounded-[2rem] border border-stone-200/30 bg-[#fffaf7]/60 p-8 shadow-[0_6px_18px_rgba(100,70,58,0.03)]"
           >
             <p className="text-xs uppercase tracking-[0.35em] text-stone-500">Cuenta bancaria</p>
             <h3 className="mt-6 font-serif text-3xl text-stone-800">Transferencia</h3>
@@ -468,7 +508,7 @@ export default function Page() {
                 </Button>
               </DialogTrigger>
 
-              <DialogContent className="rounded-[2rem] border border-stone-200 bg-[#fffaf7] p-6 sm:max-w-md">
+              <DialogContent className="rounded-[2rem] border border-stone-200/60 bg-[#fffaf7]/95 p-6 sm:max-w-md shadow-[0_12px_30px_rgba(100,70,58,0.08)]">
                 <DialogHeader className="text-left">
                   <DialogTitle className="font-serif text-3xl text-stone-800">Transferencia</DialogTitle>
                   <DialogDescription className="text-stone-600">
@@ -491,7 +531,7 @@ export default function Page() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.7 }}
-            className="rounded-[2rem] border border-stone-200 bg-white/80 p-8 shadow-[0_20px_50px_rgba(100,70,58,0.08)]"
+            className="rounded-[2rem] border border-stone-200/30 bg-white/55 p-8 shadow-[0_6px_18px_rgba(100,70,58,0.03)]"
           >
             <p className="text-xs uppercase tracking-[0.35em] text-stone-500">Lista de regalos</p>
             <h3 className="mt-6 font-serif text-3xl text-stone-800">Tiendas recomendadas</h3>

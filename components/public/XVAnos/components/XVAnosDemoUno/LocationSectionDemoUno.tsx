@@ -1,6 +1,6 @@
 "use client"
 
-import { MapPin, Clock, Calendar, Navigation } from "lucide-react"
+import { MapPin, Clock, Calendar, Navigation, Crown } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 const venues = [
@@ -57,53 +57,55 @@ export function LocationSectionDemoUno() {
                     {venues.map((venue) => (
                         <div
                             key={venue.name}
-                            className="bg-card rounded-3xl overflow-hidden shadow-xl border border-border hover:shadow-2xl transition-all group"
+                            className="group overflow-hidden rounded-sm border border-rose-200 bg-white p-2 shadow-md transition-shadow hover:shadow-lg"
                         >
-                            {/* Map placeholder */}
-                            <div className="relative h-48 bg-gradient-to-br from-rose-light to-blush flex items-center justify-center overflow-hidden">
-                                <div className="absolute inset-0 bg-[url('/map-pattern.png')] opacity-20" />
-                                <div className="relative z-10 flex flex-col items-center">
-                                    <div className="w-16 h-16 rounded-full bg-card shadow-lg flex items-center justify-center group-hover:scale-110 transition-transform">
-                                        <MapPin className="w-8 h-8 text-primary" />
+                            <div className="overflow-hidden border border-rose-100">
+                                {/* Map placeholder */}
+                                <div className="relative flex h-40 items-center justify-center overflow-hidden bg-rose-50">
+                                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(190,95,130,0.18)_1px,transparent_0)] [background-size:14px_14px]" />
+                                    <div className="relative z-10 flex flex-col items-center">
+                                        <div className="flex h-14 w-14 items-center justify-center rounded-full border border-rose-200 bg-white/90 shadow-sm transition-transform group-hover:scale-105">
+                                            <MapPin className="h-7 w-7 text-rose-700" />
+                                        </div>
                                     </div>
-                                </div>
-                                {/* Decorative circles */}
-                                <div className="absolute w-32 h-32 rounded-full border border-gold/20 top-4 -left-8" />
-                                <div className="absolute w-24 h-24 rounded-full border border-primary/20 -bottom-4 right-8" />
-                            </div>
-
-                            {/* Content */}
-                            <div className="p-6 text-center">
-                                <p className="text-sm tracking-widest text-gold uppercase mb-2">
-                                    {venue.type}
-                                </p>
-                                <h3
-                                    className="text-5xl text-primary mb-4 font-wedding"
-
-                                >
-                                    {venue.name}
-                                </h3>
-
-                                <div className="space-y-3 mb-6">
-                                    <div className="flex items-center justify-center gap-2 text-muted-foreground">
-                                        <MapPin className="w-4 h-4 text-gold" />
-                                        <span className="text-sm">{venue.address}</span>
-                                    </div>
-                                    <div className="flex items-center justify-center gap-2 text-muted-foreground">
-                                        <Clock className="w-4 h-4 text-gold" />
-                                        <span className="text-sm">{venue.time}</span>
-                                    </div>
+                                    <div className="absolute left-[-2rem] top-4 h-32 w-32 rounded-full border border-rose-300/40" />
+                                    <div className="absolute bottom-[-1rem] right-8 h-24 w-24 rounded-full border border-rose-300/40" />
                                 </div>
 
-                                <Button
-                                    asChild
-                                    className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-6"
-                                >
-                                    <a href={venue.mapUrl} target="_blank" rel="noopener noreferrer">
-                                        <Navigation className="w-4 h-4 mr-2" />
-                                        Cómo Llegar
-                                    </a>
-                                </Button>
+                                {/* Content */}
+                                <div className="border-t border-rose-100 px-6 py-7 text-center">
+                                    <p className="mb-3 text-sm uppercase tracking-widest text-rose-700">
+                                        {venue.type}
+                                    </p>
+                                    <Crown className="mx-auto mb-2 h-5 w-5 text-rose-400" strokeWidth={1.5} />
+                                    <h3
+                                        className="mb-4 text-5xl text-stone-900 font-wedding"
+
+                                    >
+                                        {venue.name}
+                                    </h3>
+
+                                    <div className="mb-6 space-y-3">
+                                        <div className="flex items-center justify-center gap-2 text-muted-foreground">
+                                            <MapPin className="h-4 w-4 text-rose-600" />
+                                            <span className="text-sm">{venue.address}</span>
+                                        </div>
+                                        <div className="flex items-center justify-center gap-2 text-muted-foreground">
+                                            <Clock className="h-4 w-4 text-rose-600" />
+                                            <span className="text-sm">{venue.time}</span>
+                                        </div>
+                                    </div>
+
+                                    <Button
+                                        asChild
+                                        className="rounded-sm border border-rose-300 bg-white px-6 text-rose-800 hover:bg-rose-50"
+                                    >
+                                        <a href={venue.mapUrl} target="_blank" rel="noopener noreferrer">
+                                            <Navigation className="mr-2 h-4 w-4" />
+                                            Cómo Llegar
+                                        </a>
+                                    </Button>
+                                </div>
                             </div>
                         </div>
                     ))}
