@@ -114,7 +114,7 @@ export default function MesaDeRegalos({
   };
 
   return (
-    <section className={cn("relative py-24 px-6 md:px-12 w-full transition-colors duration-300", bgClass)}>
+    <section className={cn("relative overflow-x-clip py-24 px-6 md:px-12 w-full transition-colors duration-300", bgClass)}>
       {/* Decorative Blur Background elements */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl pointer-events-none" />

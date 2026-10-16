@@ -2,34 +2,32 @@
 
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { ArrowRight, Sparkles, ShieldCheck, Smartphone, Music2, PanelsRightBottom } from "lucide-react";
+import { ArrowRight, Flower2, Sparkles, ShieldCheck, Smartphone, Music2, PanelsRightBottom } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-white text-neutral-900 selection:bg-neutral-800 selection:text-white">
-      <header
-        className="relative overflow-hidden bg-cover bg-center bg-fixed"
-        style={{ backgroundImage: "url('/xv/fondo_demo1_hero.png')" }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-b from-white/85 via-white/65 to-black/55 -z-10"></div>
-        <div className="absolute inset-0 bg-neutral-900/5 -z-0"></div>
+      <header className="relative overflow-hidden bg-[#f4f0e6] text-[#193a34]">
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(25,58,52,0.035)_1px,transparent_1px),linear-gradient(rgba(25,58,52,0.035)_1px,transparent_1px)] bg-[size:28px_28px]" />
 
         <motion.nav
-          className="relative z-10 flex justify-between items-center px-6 md:px-10 py-6 max-w-7xl mx-auto border-b border-black/10"
+          className="relative z-10 mx-auto flex max-w-7xl items-center justify-between border-b border-[#193a34]/20 px-5 py-5 sm:px-8 md:px-10"
           initial={{ opacity: 0, y: -16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
-          <div className="text-2xl font-parisienneSerif tracking-tight italic">XVBodaOnline</div>
-          <div className="hidden md:flex gap-8 text-[11px] uppercase tracking-[0.25em] text-neutral-800">
-            <Link href="#features" className="hover:text-black transition">Tu invitación</Link>
-            <Link href="/xv" className="hover:text-black transition">Ver colección</Link>
+          <Link href="/" className="font-[family-name:var(--font-playfair)] text-xl font-semibold tracking-tight text-[#193a34] sm:text-2xl">
+            XVBodaOnline
+          </Link>
+          <div className="hidden gap-8 text-[11px] uppercase tracking-[0.2em] text-[#49645c] md:flex">
+            <Link href="#features" className="transition hover:text-[#b54c39]">Tu invitación</Link>
+            <Link href="/xv" className="transition hover:text-[#b54c39]">Ver colección</Link>
           </div>
         </motion.nav>
 
         <motion.section
-          className="relative z-10 flex items-center justify-center text-center px-5 pt-16 md:pt-24 pb-24 md:pb-32"
+          className="relative z-10 flex items-center justify-center px-5 pb-16 pt-12 text-center sm:pb-20 sm:pt-16"
           initial="hidden"
           animate="visible"
           variants={{
@@ -38,53 +36,62 @@ export default function LandingPage() {
           }}
         >
           <motion.div
-            className="w-full max-w-5xl mx-auto border border-black/20 bg-white/30 px-5 py-12 md:px-16 md:py-16 backdrop-blur-[2px]"
+            className="mx-auto w-full max-w-5xl px-1 py-6 sm:px-8 sm:py-8"
             variants={{ hidden: { opacity: 0, y: 22 }, visible: { opacity: 1, y: 0 } }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <div className="flex items-center gap-3 justify-center mb-7 opacity-90">
-              <span className="h-px w-10 bg-neutral-800" />
-              <span className="uppercase tracking-[0.35em] text-[11px] text-neutral-900">Bodas · XV años</span>
-              <span className="h-px w-10 bg-neutral-800" />
+            <div className="mb-5 flex items-center justify-center gap-3 text-[#b54c39]">
+              <Flower2 aria-hidden="true" className="h-4 w-4" />
+              <span className="text-[10px] uppercase tracking-[0.28em] sm:text-xs">Invitaciones digitales · Bodas · XV años</span>
+              <Flower2 aria-hidden="true" className="h-4 w-4" />
             </div>
 
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-parisienneSerif mb-6 leading-[0.95] text-neutral-900 drop-shadow-[0_6px_20px_rgba(255,255,255,0.8)]">
-              El comienzo de algo <span className="italic">inolvidable</span>
+            <div className="mx-auto mb-5 max-w-3xl border-y border-[#193a34]/70 py-3 sm:py-4">
+              <p className="font-[family-name:var(--font-playfair)] text-4xl uppercase tracking-[0.12em] text-[#193a34] sm:text-6xl md:text-7xl">
+                XVBodaOnline
+              </p>
+            </div>
+
+            <h1 className="mx-auto mb-4 max-w-3xl font-[family-name:var(--font-syne)] text-2xl font-semibold uppercase leading-tight text-[#193a34] sm:text-3xl md:text-4xl">
+              El comienzo de algo <span className="font-[family-name:var(--font-playfair)] font-normal italic normal-case text-[#b54c39]">inolvidable</span>
             </h1>
 
-            <p className="text-base md:text-lg text-neutral-800 mb-10 max-w-2xl mx-auto leading-relaxed">
+            <p className="mx-auto mb-7 max-w-2xl text-sm leading-7 text-[#52655d] sm:text-base md:text-lg">
               Invitaciones digitales diseñadas para celebrar tu gran día con belleza, emoción y todos los detalles que tus invitados necesitan.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="mx-auto mb-9 flex max-w-md items-center justify-center gap-0">
+              <InvitationPhone src="/boda/demo1" title="Invitación de boda" variant="back" />
+              <InvitationPhone src="/xvdemouno" title="Invitación de XV años" variant="front" />
+            </div>
+
+            <div className="flex flex-col justify-center gap-3 sm:flex-row sm:gap-4">
               <Link href="/boda">
-                <Button className="bg-neutral-900 text-white hover:bg-neutral-800 px-8 py-4 rounded-full text-base shadow-2xl shadow-neutral-900/25">
-                  Exporar diseños bodas <ArrowRight className="ml-2" />
+                <Button className="min-h-12 rounded-sm bg-[#193a34] px-7 text-sm text-white shadow-lg shadow-[#193a34]/15 hover:bg-[#28564b]">
+                  Explorar diseños de boda <ArrowRight className="ml-2" />
                 </Button>
               </Link>
 
               <Link href="/xv">
-                <Button variant="outline" className="px-8 py-4 rounded-full text-base border-neutral-700 text-neutral-800 hover:bg-neutral-800 hover:text-white">
+                <Button variant="outline" className="min-h-12 rounded-sm border-[#193a34] px-7 text-sm text-[#193a34] hover:bg-[#193a34] hover:text-white">
                   Explorar diseños XV <ArrowRight className="ml-2" />
                 </Button>
               </Link>
             </div>
           </motion.div>
 
-          {/* Decorative cinematic glow */}
-          <div className="pointer-events-none absolute -bottom-20 left-1/2 transform -translate-x-1/2 w-[80%] h-72 bg-gradient-to-t from-transparent via-white/40 to-transparent blur-3xl opacity-60 rounded-full" />
         </motion.section>
       </header>
 
       <motion.section
-        className="relative min-h-[520px] overflow-hidden bg-cover bg-center bg-fixed"
+        className="relative min-h-[460px] overflow-hidden bg-cover bg-center"
         style={{ backgroundImage: "url('/xv/fondo_demo1_hero.png')" }}
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, amount: 0.25 }}
         transition={{ duration: 1 }}
       >
-        <div className="absolute inset-0 bg-neutral-950/65" />
+        <div className="absolute inset-0 bg-[#193a34]/75" />
         <motion.div
           className="relative z-10 flex min-h-[520px] items-center justify-center px-6 py-20 text-center text-white"
           initial={{ opacity: 0, y: 24 }}
@@ -93,15 +100,15 @@ export default function LandingPage() {
           transition={{ duration: 0.8, delay: 0.15, ease: "easeOut" }}
         >
           <div className="max-w-3xl">
-            <p className="mb-8 text-[11px] uppercase tracking-[0.4em] text-white/75">Hay momentos que merecen quedarse para siempre</p>
-            <blockquote className="font-parisienneSerif text-4xl leading-tight md:text-6xl">
+            <p className="mb-8 text-[11px] uppercase tracking-[0.3em] text-[#f0d8a5]">Hay momentos que merecen quedarse para siempre</p>
+            <blockquote className="font-[family-name:var(--font-playfair)] text-4xl leading-tight md:text-6xl">
               “Tu historia es única. Haz que cada invitado la sienta desde el primer instante.”
             </blockquote>
             <p className="mx-auto mt-8 max-w-xl text-base leading-relaxed text-white/80 md:text-lg">
               Diseñamos una invitación que no solo anuncia tu celebración: abre la puerta a la emoción, la ilusión y los recuerdos que están por comenzar.
             </p>
             <Link href="/xv" className="mt-10 inline-block">
-              <Button className="bg-white px-9 py-4 text-base text-neutral-900 shadow-2xl shadow-black/30 hover:bg-neutral-100">
+              <Button className="rounded-sm bg-[#f4f0e6] px-8 py-4 text-sm text-[#193a34] shadow-xl shadow-black/20 hover:bg-white">
                 Crear un momento inolvidable <ArrowRight className="ml-2" />
               </Button>
             </Link>
@@ -112,19 +119,19 @@ export default function LandingPage() {
       {/* --- FEATURE GRID --- */}
       <motion.section
         id="features"
-        className="py-24 bg-neutral-900"
+        className="bg-[#193a34] py-24"
         initial={{ opacity: 0, y: 28 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.15 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
         <div className="max-w-7xl mx-auto px-6">
-          <div className="max-w-2xl mb-14 text-white">
-            <p className="mb-4 text-[11px] uppercase tracking-[0.3em] text-neutral-400">Todo lo que imaginas</p>
-            <h2 className="text-4xl md:text-5xl font-parisienneSerif leading-tight">Un recuerdo que empieza desde la invitación.</h2>
+          <div className="mb-14 max-w-2xl text-white">
+            <p className="mb-4 text-[11px] uppercase tracking-[0.3em] text-[#e4b887]">Todo lo que imaginas</p>
+            <h2 className="font-playfair text-4xl leading-tight md:text-5xl">Un recuerdo que empieza desde la invitación.</h2>
           </div>
           <motion.div
-            className="grid md:grid-cols-3 gap-px bg-neutral-700 border border-neutral-700"
+            className="grid gap-px border border-[#45645b] bg-[#45645b] md:grid-cols-3"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.15 }}
@@ -132,37 +139,37 @@ export default function LandingPage() {
           >
 
             <FeatureCard
-              icon={<ShieldCheck className="w-8 h-8 text-neutral-800" />}
+              icon={<ShieldCheck className="h-8 w-8 text-[#b54c39]" />}
               title="RSVP Seguro"
               description="Confirmaciones con códigos únicos y privacidad para tus invitados."
             />
 
             <FeatureCard
-              icon={<Smartphone className="w-8 h-8 text-neutral-800" />}
+              icon={<Smartphone className="h-8 w-8 text-[#b54c39]" />}
               title="Mobile First"
               description="Experiencias adaptadas a dispositivos, con navegación simple y elegante."
             />
 
             <FeatureCard
-              icon={<PanelsRightBottom className="w-8 h-8 text-neutral-800" />}
+              icon={<PanelsRightBottom className="h-8 w-8 text-[#b54c39]" />}
               title="Galería de recuerdos"
               description="Comparte fotos y videos con un diseño limpio que realza tus momentos."
             />
 
             <FeatureCard
-              icon={<Music2 className="w-8 h-8 text-neutral-800" />}
+              icon={<Music2 className="h-8 w-8 text-[#b54c39]" />}
               title="Música de ambiente"
               description="Incluye tu canción favorita; reproduce automáticamente para crear ambiente."
             />
 
             <FeatureCard
-              icon={<Sparkles className="w-8 h-8 text-neutral-800" />}
+              icon={<Sparkles className="h-8 w-8 text-[#b54c39]" />}
               title="Detalles personalizados" 
               description="Tipografías, paletas y toques dorados para una identidad única."
             />
 
             <FeatureCard
-              icon={<ArrowRight className="w-8 h-8 text-neutral-800" />}
+              icon={<ArrowRight className="h-8 w-8 text-[#b54c39]" />}
               title="Fácil de enviar"
               description="Compartir invitaciones por link o QR en segundos."
             />
@@ -173,30 +180,63 @@ export default function LandingPage() {
 
       {/* --- FOOTER --- */}
       <motion.footer
-        className="py-20 text-center text-neutral-400 border-t border-neutral-700 bg-neutral-900"
+        className="border-t border-[#45645b] bg-[#142d28] py-20 text-center text-[#c0cec4]"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 1 }}
       >
-        <p className="font-parisienneSerif italic text-2xl text-white mb-4">XVBodaOnline</p>
+        <p className="mb-4 font-[family-name:var(--font-playfair)] text-2xl italic text-white">XVBodaOnline</p>
         <p className="text-xs uppercase tracking-widest">&copy; 2026 Creado con Amor — Inspirando recuerdos</p>
       </motion.footer>
     </div>
   );
 }
 
+function InvitationPhone({
+  src,
+  title,
+  variant,
+}: {
+  src: string;
+  title: string;
+  variant: "back" | "front";
+}) {
+  const isFront = variant === "front";
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 28, rotate: isFront ? 7 : -8 }}
+      animate={{ opacity: 1, y: 0, rotate: isFront ? 5 : -7 }}
+      transition={{ duration: 0.8, delay: isFront ? 0.5 : 0.35, ease: "easeOut" }}
+      className={`relative h-[clamp(300px,82vw,420px)] w-[clamp(145px,40vw,210px)] shrink-0 rounded-[30px] border-[7px] border-[#18312d] bg-[#18312d] p-[4px] shadow-[0_22px_50px_rgba(25,58,52,0.24)] ${isFront ? "z-10" : "z-0"}`}
+      aria-label={title}
+    >
+      <div className="absolute left-1/2 top-0 z-20 h-5 w-20 -translate-x-1/2 rounded-b-xl bg-[#18312d]" />
+      <div className="h-full w-full overflow-hidden rounded-[21px] bg-white">
+        <iframe
+          src={src}
+          title={title}
+          className="h-full w-full border-0 bg-white"
+          loading="lazy"
+          sandbox="allow-scripts allow-same-origin"
+        />
+      </div>
+    </motion.div>
+  );
+}
+
 function FeatureCard({ icon, title, description }: { icon: React.ReactNode, title: string, description: string }) {
   return (
     <motion.div
-      className="flex flex-col items-start bg-white p-6 md:p-7"
+      className="flex flex-col items-start bg-[#f7f4eb] p-6 md:p-7"
       variants={{ hidden: { opacity: 0, y: 18 }, visible: { opacity: 1, y: 0 } }}
       transition={{ duration: 0.55, ease: "easeOut" }}
       whileHover={{ y: -4 }}
     >
-      <div className="mb-4 p-3 bg-neutral-100 rounded-lg inline-flex items-center justify-center">{icon}</div>
-      <h3 className="text-xl font-parisienneSerif text-neutral-900 mb-2">{title}</h3>
-      <p className="text-neutral-600 text-sm leading-relaxed">{description}</p>
+      <div className="mb-4 inline-flex items-center justify-center rounded-md bg-[#f0e5d2] p-3">{icon}</div>
+      <h3 className="mb-2 font-[family-name:var(--font-playfair)] text-xl text-[#193a34]">{title}</h3>
+      <p className="text-sm leading-relaxed text-[#52655d]">{description}</p>
     </motion.div>
   );
 }

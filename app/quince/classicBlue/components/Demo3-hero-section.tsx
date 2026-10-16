@@ -20,10 +20,10 @@ export function HeroSection({ name }: { name: string }) {
         <Sparkles className="w-10 h-10 text-[#87CEEB] animate-float" style={{ animationDelay: "2s" }} />
       </div>
 
-      <div className="relative z-10 container mx-auto px-4 py-20">
-        <div className="flex flex-col lg:flex-row items-center justify-center gap-12">
+      <div className="relative z-10 container mx-auto w-full max-w-full px-4 py-20">
+        <div className="flex w-full min-w-0 flex-col items-center justify-center gap-12 lg:flex-row">
           {/* Text content */}
-          <div className="text-center lg:text-left max-w-xl">
+          <div className="w-full min-w-0 max-w-xl text-center lg:text-left">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#1a3a6e]/50 border border-[#4169E1]/30 mb-6">
               <Sparkles className="w-4 h-4 text-[#FFD700]" />
               <span className="text-sm tracking-widest uppercase text-[#87CEEB]">Invitación Especial</span>
@@ -33,7 +33,7 @@ export function HeroSection({ name }: { name: string }) {
               Mis XV Años
             </h2>
 
-            <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold mb-6 bg-gradient-to-r from-[#87CEEB] to-[#FFD700] bg-clip-text text-transparent leading-tight">
+            <h1 className="mb-6 break-words bg-gradient-to-r from-[#87CEEB] to-[#FFD700] bg-clip-text text-4xl font-bold leading-tight text-transparent sm:text-6xl md:text-8xl lg:text-9xl">
               {name}
             </h1>
 
@@ -66,9 +66,9 @@ export function HeroSection({ name }: { name: string }) {
           </div>
 
           {/* Image */}
-          <div className="relative">
+          <div className="relative w-full max-w-[300px] md:max-w-[400px]">
             <div className="absolute inset-0 bg-[#4169E1]/20 blur-3xl rounded-full" />
-            <div className="relative w-[300px] h-[450px] md:w-[400px] md:h-[600px] rounded-t-full overflow-hidden border-4 border-[#FFD700]/30 shadow-[0_0_60px_rgba(65,105,225,0.3)]">
+            <div className="relative aspect-[2/3] w-full rounded-t-full overflow-hidden border-4 border-[#FFD700]/30 shadow-[0_0_60px_rgba(65,105,225,0.3)]">
               <Image
                 src="/XVAnos_2.png"
                 alt="Vestido de quinceañera azul real"
