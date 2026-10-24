@@ -8,6 +8,11 @@ export function HeroSection({ name }: { name: string }) {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#0a1628] via-[#0d1f3c] to-[#0a1628]" />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-cover bg-center opacity-70"
+        style={{ backgroundImage: "url('/classic-blue/fondo-estelar.svg')" }}
+      />
 
       {/* Decorative elements */}
       <div className="absolute top-20 left-10 opacity-30">

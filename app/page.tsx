@@ -61,8 +61,16 @@ export default function LandingPage() {
             </p>
 
             <div className="mx-auto mb-9 flex max-w-md items-center justify-center gap-0">
-              <InvitationPhone src="/boda/demo1" title="Invitación de boda" variant="back" />
-              <InvitationPhone src="/xvdemouno" title="Invitación de XV años" variant="front" />
+              <InvitationPhone
+                image="/boda/boda_7.jpeg"
+                title="Invitación de boda"
+                variant="back"
+              />
+              <InvitationPhone
+                image="/XVAnos_2.png"
+                title="Invitación de XV años"
+                variant="front"
+              />
             </div>
 
             <div className="flex flex-col justify-center gap-3 sm:flex-row sm:gap-4">
@@ -194,11 +202,11 @@ export default function LandingPage() {
 }
 
 function InvitationPhone({
-  src,
+  image,
   title,
   variant,
 }: {
-  src: string;
+  image: string;
   title: string;
   variant: "back" | "front";
 }) {
@@ -213,14 +221,20 @@ function InvitationPhone({
       aria-label={title}
     >
       <div className="absolute left-1/2 top-0 z-20 h-5 w-20 -translate-x-1/2 rounded-b-xl bg-[#18312d]" />
-      <div className="h-full w-full overflow-hidden rounded-[21px] bg-white">
-        <iframe
-          src={src}
-          title={title}
-          className="h-full w-full border-0 bg-white"
+      <div className="relative h-full w-full overflow-hidden rounded-[21px] bg-white">
+        <img
+          src={image}
+          alt={title}
+          className={`h-full w-full object-cover ${isFront ? "object-[62%_center]" : "object-center"}`}
           loading="lazy"
-          sandbox="allow-scripts allow-same-origin"
         />
+        {!isFront && (
+          <div className="absolute inset-0 flex flex-col items-center justify-end bg-gradient-to-t from-[#102e35]/85 via-[#102e35]/20 to-transparent px-2 pb-9 text-center text-white">
+            <p className="text-[7px] uppercase tracking-[0.24em] text-white/85">Nos casamos</p>
+            <p className="mt-2 font-serif text-[19px] italic leading-none">Lucía & Sebastián</p>
+            <p className="mt-3 text-[7px] uppercase tracking-[0.2em]">19 · 06 · 2027</p>
+          </div>
+        )}
       </div>
     </motion.div>
   );

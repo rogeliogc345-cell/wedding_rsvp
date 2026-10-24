@@ -13,13 +13,21 @@ type GalleryPhoto = {
 
 const fallbackImages: GalleryPhoto[] = [
   {
-    src: "/xv/fondo_demo1_hero.png",
-    alt: "Vestido de quinceañera azul real",
+    src: "/classic-blue/galeria-vestido.svg",
+    alt: "Ilustración de vestido de gala en azul y plata",
     span: "col-span-2 row-span-2",
+  },
+  {
+    src: "/classic-blue/galeria-corona.svg",
+    alt: "Corona de quinceañera con detalles plateados y azules",
+  },
+  {
+    src: "/classic-blue/galeria-baile.svg",
+    alt: "Ilustración de un baile de quinceañera bajo luces azules",
   },
 ]
 
-const DEFAULT_FALLBACK_SRC = "/xv/fondo_demo1_hero.png"
+const DEFAULT_FALLBACK_SRC = "/classic-blue/galeria-vestido.svg"
 
 export function PhotoGallery({ photos }: { photos?: GalleryPhoto[] }) {
   const normalizedPhotos = useMemo(() => {

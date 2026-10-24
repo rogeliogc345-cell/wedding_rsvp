@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#edf7ff"/><stop offset="1" stop-color="#a9d5f3"/>
+    </linearGradient>
+    <linearGradient id="silver" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#fff"/><stop offset=".48" stop-color="#8bb9df"/><stop offset="1" stop-color="#fff0bd"/>
+    </linearGradient>
+    <radialGradient id="halo">
+      <stop stop-color="#fff" stop-opacity=".92"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <path fill="url(#bg)" d="M0 0h800v800H0z"/>
+  <circle cx="406" cy="378" r="310" fill="url(#halo)"/>
+  <circle cx="400" cy="400" r="315" stroke="#315f99" stroke-opacity=".18" stroke-width="2"/>
+  <circle cx="400" cy="400" r="286" stroke="#c7a75f" stroke-opacity=".6" stroke-width="2" stroke-dasharray="3 12"/>
+  <g fill="#315f99" fill-opacity=".52">
+    <path d="m142 193 5 14 14 5-14 5-5 14-5-14-14-5 14-5 5-14Zm516 48 4 11 11 4-11 4-4 11-4-11-11-4 11-4 4-11ZM180 576l4 11 11 4-11 4-4 11-4-11-11-4 11-4 4-11Zm441-54 5 14 14 5-14 5-5 14-5-14-14-5 14-5 5-14Z"/>
+  </g>
+  <path d="M225 469c77 49 273 49 350 0l-37 103H262l-37-103Z" fill="url(#silver)" stroke="#315f99" stroke-width="8"/>
+  <path d="m229 464 28-143 86 87 57-185 57 185 86-87 28 143c-91 48-251 48-342 0Z" fill="url(#silver)" stroke="#315f99" stroke-width="9" stroke-linejoin="round"/>
+  <path d="m343 408 57-185 57 185" stroke="#fff" stroke-width="9" stroke-linecap="round"/>
+  <g fill="#4169e1" stroke="#fff" stroke-width="6">
+    <circle cx="257" cy="318" r="19"/><circle cx="343" cy="408" r="16"/><circle cx="400" cy="223" r="22"/>
+    <circle cx="457" cy="408" r="16"/><circle cx="543" cy="318" r="19"/>
+  </g>
+  <g fill="#f4d889">
+    <circle cx="287" cy="479" r="7"/><circle cx="328" cy="491" r="6"/><circle cx="369" cy="497" r="7"/>
+    <circle cx="431" cy="497" r="7"/><circle cx="472" cy="491" r="6"/><circle cx="513" cy="479" r="7"/>
+  </g>
+  <path d="M257 594c84 42 202 42 286 0" stroke="#315f99" stroke-opacity=".35" stroke-width="3"/>
+</svg>

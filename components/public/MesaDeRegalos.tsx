@@ -88,13 +88,13 @@ export default function MesaDeRegalos({
   let titleClass = "text-stone-900";
   let subtitleClass = "text-stone-600";
   // Default colors per theme — modern uses oklch(0.85 0.21 128) to match the theme-xv-green design system
-  let primaryColor = primaryColorProp || (theme === "classic" ? "#db2777" : theme === "classicBlue" ? "#38bdf8" : "oklch(0.85 0.21 128)");
+  let primaryColor = primaryColorProp || (theme === "classic" ? "#db2777" : theme === "classicBlue" ? "#FFD700" : "oklch(0.85 0.21 128)");
 
   if (theme === "classicBlue") {
-    bgClass = "bg-[#0a1628]/40 text-slate-100";
-    cardClass = "bg-[#10223b]/90 border-blue-500/20 text-slate-100 hover:shadow-[0_0_15px_rgba(56,189,248,0.15)] hover:border-blue-400/40";
+    bgClass = "bg-gradient-to-b from-[#0a1628] via-[#0d1f3c] to-[#0a1628] text-slate-100";
+    cardClass = "bg-[#1a3a6e]/30 border-[#4169E1]/20 text-slate-100 hover:shadow-[0_0_20px_rgba(65,105,225,0.18)] hover:border-[#FFD700]/40";
     titleClass = "text-white";
-    subtitleClass = "text-slate-400";
+    subtitleClass = "text-[#87CEEB]/70";
     
   } else if (theme === "modern") {
     bgClass = "bg-black text-zinc-50";
@@ -102,6 +102,15 @@ export default function MesaDeRegalos({
     titleClass = "text-zinc-50";
     subtitleClass = "text-zinc-400";
   }
+
+  const iconTileClass = theme === "classicBlue"
+    ? "bg-[#4169E1]/15"
+    : theme === "classic"
+      ? "bg-rose-500/10"
+      : "bg-lime-400/10";
+  const storeLinkClass = theme === "classicBlue"
+    ? "bg-[#142844]/70 hover:bg-[#1a3a6e]/80 border-[#4169E1]/20 text-[#d9edff]"
+    : "bg-muted/40 hover:bg-muted/70 border-muted-foreground/10";
 
   const copyToClipboard = async (text: string, field: string) => {
     try {
@@ -116,14 +125,25 @@ export default function MesaDeRegalos({
   return (
     <section className={cn("relative overflow-x-clip py-24 px-6 md:px-12 w-full transition-colors duration-300", bgClass)}>
       {/* Decorative Blur Background elements */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
+      <div className={cn(
+        "absolute top-0 left-1/4 w-96 h-96 rounded-full blur-3xl pointer-events-none",
+        theme === "classicBlue" ? "bg-[#4169E1]/10" : "bg-primary/5",
+      )} />
+      <div className={cn(
+        "absolute bottom-0 right-1/4 w-96 h-96 rounded-full blur-3xl pointer-events-none",
+        theme === "classicBlue" ? "bg-[#87CEEB]/10" : "bg-accent/5",
+      )} />
 
       <div className="max-w-5xl mx-auto relative z-10">
 
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center justify-center p-3 rounded-full mb-4 bg-muted/20 border border-muted-foreground/10">
+          <div className={cn(
+            "inline-flex items-center justify-center p-3 rounded-full mb-4 border",
+            theme === "classicBlue"
+              ? "bg-[#1a3a6e]/50 border-[#4169E1]/30"
+              : "bg-muted/20 border-muted-foreground/10",
+          )}>
             <Gift className="w-8 h-8" style={{ color: primaryColor }} />
           </div>
           <h2 className="text-4xl md:text-5xl font-light tracking-wide font-savoir mb-4" style={{ color: primaryColor }}>
@@ -146,7 +166,7 @@ export default function MesaDeRegalos({
             onClick={() => setShowBankModal(true)}
           >
             <div>
-              <div className="w-14 h-14 rounded-xl flex items-center justify-center mb-6 bg-rose-500/10 text-rose-500">
+              <div className={cn("w-14 h-14 rounded-xl flex items-center justify-center mb-6", iconTileClass)}>
                 <Landmark className="w-7 h-7" style={{ color: primaryColor }} />
               </div>
               <h3 className="text-xl font-medium mb-3">Transferencia</h3>
@@ -170,7 +190,7 @@ export default function MesaDeRegalos({
               onClick={() => setShowEnvelopeModal(true)}
             >
               <div>
-                <div className="w-14 h-14 rounded-xl flex items-center justify-center mb-6 bg-purple-500/10 text-purple-500">
+                <div className={cn("w-14 h-14 rounded-xl flex items-center justify-center mb-6", iconTileClass)}>
                   <MailOpen className="w-7 h-7" style={{ color: primaryColor }} />
                 </div>
                 <h3 className="text-xl font-medium mb-3">Lluvia de Sobres</h3>
@@ -193,7 +213,7 @@ export default function MesaDeRegalos({
             className={cn("flex flex-col justify-between p-8 rounded-2xl border transition-all duration-300 shadow-sm", cardClass)}
           >
             <div>
-              <div className="w-14 h-14 rounded-xl flex items-center justify-center mb-6 bg-pink-500/10 text-pink-500">
+              <div className={cn("w-14 h-14 rounded-xl flex items-center justify-center mb-6", iconTileClass)}>
                 <Gift className="w-7 h-7" style={{ color: primaryColor }} />
               </div>
               <h3 className="text-xl font-medium mb-3">Mesa de Regalos</h3>
@@ -209,7 +229,7 @@ export default function MesaDeRegalos({
                     href={store.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-between p-3 rounded-lg bg-muted/40 hover:bg-muted/70 transition-all border border-muted-foreground/10 text-sm font-medium group"
+                    className={cn("flex items-center justify-between p-3 rounded-lg transition-all border text-sm font-medium group", storeLinkClass)}
                   >
                     <span className="flex items-center gap-2">
                       <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: primaryColor }} />
@@ -222,7 +242,12 @@ export default function MesaDeRegalos({
             </div>
 
             <div className="mt-8 flex items-center gap-2 text-xs opacity-60">
-              <Heart className="w-3.5 h-3.5 fill-current text-rose-500" />
+              <Heart
+                className={cn(
+                  "w-3.5 h-3.5 fill-current",
+                  theme === "classicBlue" ? "text-[#FFD700]" : theme === "classic" ? "text-rose-500" : "text-lime-400",
+                )}
+              />
               <span>¡Muchas gracias!</span>
             </div>
           </motion.div>
@@ -303,7 +328,10 @@ export default function MesaDeRegalos({
             )}
 
             {/* Note/WhatsApp Alert */}
-            <div className="rounded-xl p-4 border border-rose-200/30 bg-rose-500/5 text-sm flex gap-3">
+            <div className={cn(
+              "rounded-xl p-4 border text-sm flex gap-3",
+              theme === "classicBlue" ? "border-[#4169E1]/30 bg-[#4169E1]/10" : "border-rose-200/30 bg-rose-500/5",
+            )}>
               <span className="text-base select-none">📝</span>
               <p className="opacity-80">
                 Una vez realizada la transferencia, te agradecemos nos compartas el comprobante para poder registrarlo y agradecerte.
@@ -327,7 +355,12 @@ export default function MesaDeRegalos({
           </DialogHeader>
 
           <div className="space-y-6 mt-6">
-            <div className="flex flex-col items-center justify-center p-6 rounded-2xl bg-muted/10 border border-muted-foreground/10 text-center">
+            <div className={cn(
+              "flex flex-col items-center justify-center p-6 rounded-2xl border text-center",
+              theme === "classicBlue"
+                ? "bg-[#142844] border-[#4169E1]/20"
+                : "bg-muted/10 border-muted-foreground/10",
+            )}>
               <MailOpen className="w-16 h-16 mb-4 animate-bounce" style={{ color: primaryColor }} />
               <p className="text-sm opacity-90 leading-relaxed">
                 Es una tradición donde los invitados depositan su obsequio en efectivo dentro de un sobre cerrado y lo colocan en una urna, cofre o buzón especial ubicado en la entrada de la recepción.
