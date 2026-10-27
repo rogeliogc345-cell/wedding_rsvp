@@ -87,27 +87,33 @@ export default function Page() {
           <p className="text-sm uppercase tracking-[0.3em] text-white/90 sm:text-base">
             14 de agosto de 2027 · Valle de Bravo
           </p>
-
-          <div className="mx-auto mt-12 grid max-w-2xl grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
-            {countdownItems.map((item, index) => (
-              <motion.div
-                key={item.label}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.35 + index * 0.1 }}
-                className="border border-white/35 bg-[#203a34]/40 px-3 py-5 backdrop-blur-sm"
-              >
-                <p className="font-serif text-4xl text-[#f4e9bf] sm:text-5xl">
-                  {String(item.value).padStart(2, "0")}
-                </p>
-                <p className="mt-2 text-[10px] uppercase tracking-[0.2em] text-white/80">
-                  {item.label}
-                </p>
-              </motion.div>
-            ))}
-          </div>
         </motion.div>
       </main>
+
+      <motion.section
+        initial={{ opacity: 0, y: 18 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.85, ease: "easeOut" }}
+        className="mx-auto -mt-10 w-full max-w-5xl px-5 pb-14 sm:px-0"
+      >
+        <div className="flex flex-wrap items-center justify-center gap-0 border border-[#d8c891] bg-[#2a433f]/90 px-1 py-3 text-white shadow-[0_18px_32px_rgba(28,39,37,0.12)] backdrop-blur-sm sm:px-2">
+          {countdownItems.map((item, index) => (
+            <div
+              key={item.label}
+              className="flex items-center justify-center border-r border-white/10 last:border-r-0"
+            >
+              <div className="min-w-[92px] px-2 py-2 text-center sm:min-w-[120px] sm:px-4">
+                <p className="font-serif text-2xl text-[#f4e9bf] sm:text-4xl">
+                  {String(item.value).padStart(2, "0")}
+                </p>
+                <p className="mt-1 text-[9px] uppercase tracking-[0.22em] text-white/75 sm:text-[10px]">
+                  {item.label}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </motion.section>
 
       <motion.section {...reveal} className="mx-auto grid max-w-6xl items-center gap-12 px-6 py-20 md:grid-cols-2 md:px-10 md:py-28">
         <div className="space-y-6">

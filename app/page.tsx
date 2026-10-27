@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { ArrowRight, Flower2, Sparkles, ShieldCheck, Smartphone, Music2, PanelsRightBottom } from "lucide-react";
+import { ArrowRight, Check, Flower2, Sparkles, ShieldCheck, Smartphone, Music2, PanelsRightBottom } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function LandingPage() {
@@ -22,6 +22,7 @@ export default function LandingPage() {
           </Link>
           <div className="hidden gap-8 text-[11px] uppercase tracking-[0.2em] text-[#49645c] md:flex">
             <Link href="#features" className="transition hover:text-[#b54c39]">Tu invitación</Link>
+            <Link href="#precios" className="transition hover:text-[#b54c39]">Precios</Link>
             <Link href="/xv" className="transition hover:text-[#b54c39]">Ver colección</Link>
           </div>
         </motion.nav>
@@ -62,13 +63,13 @@ export default function LandingPage() {
 
             <div className="mx-auto mb-9 flex max-w-md items-center justify-center gap-0">
               <InvitationPhone
-                image="/boda/boda_7.jpeg"
-                title="Invitación de boda"
+                image="/boda/boda_1.jpeg"
+                title="Invitación elegante de boda"
                 variant="back"
               />
               <InvitationPhone
-                image="/XVAnos_2.png"
-                title="Invitación de XV años"
+                image="/boda/boda_7.jpeg"
+                title="Detalles de la boda"
                 variant="front"
               />
             </div>
@@ -93,7 +94,7 @@ export default function LandingPage() {
 
       <motion.section
         className="relative min-h-[460px] overflow-hidden bg-cover bg-center"
-        style={{ backgroundImage: "url('/xv/fondo_demo1_hero.png')" }}
+        style={{ backgroundImage: "url('/boda/boda_5.jpeg')" }}
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, amount: 0.25 }}
@@ -183,6 +184,78 @@ export default function LandingPage() {
             />
 
           </motion.div>
+        </div>
+      </motion.section>
+
+      <motion.section
+        id="precios"
+        className="relative overflow-hidden bg-[#f4f0e6] px-6 py-24 text-[#193a34] sm:py-28"
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
+        <div aria-hidden="true" className="absolute -right-20 -top-20 h-72 w-72 rounded-full border border-[#b54c39]/15 sm:h-96 sm:w-96" />
+        <div aria-hidden="true" className="absolute -right-10 -top-10 h-52 w-52 rounded-full border border-[#b54c39]/10 sm:h-72 sm:w-72" />
+
+        <div className="relative mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1fr_0.85fr]">
+          <div>
+            <p className="mb-5 flex items-center gap-3 text-[10px] font-medium uppercase tracking-[0.3em] text-[#b54c39] sm:text-xs">
+              <Sparkles aria-hidden="true" className="h-4 w-4" />
+              Una invitación, todo lo que necesitas
+            </p>
+            <h2 className="max-w-2xl font-[family-name:var(--font-playfair)] text-4xl leading-tight sm:text-5xl md:text-6xl">
+              Un gran día merece una invitación <span className="italic text-[#b54c39]">inolvidable.</span>
+            </h2>
+            <p className="mt-6 max-w-xl text-sm leading-7 text-[#52655d] sm:text-base">
+              Comparte cada detalle de tu celebración con una experiencia digital elegante, personalizada y fácil de enviar.
+            </p>
+
+            <ul className="mt-8 grid gap-x-8 gap-y-4 sm:grid-cols-2">
+              {[
+                "Confirmación RSVP segura",
+                "Diseño adaptable a celulares",
+                "Galería de fotos y recuerdos",
+                "Música",
+                "Detalles y estilo personalizados",
+                "Envío por enlace o código QR",
+              ].map((feature) => (
+                <li key={feature} className="flex items-center gap-3 text-sm text-[#344c43]">
+                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#193a34] text-[#f4f0e6]">
+                    <Check aria-hidden="true" className="h-3.5 w-3.5" />
+                  </span>
+                  {feature}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="relative mx-auto w-full max-w-md border border-[#193a34]/15 bg-white p-7 shadow-[0_24px_70px_rgba(25,58,52,0.12)] sm:p-10">
+            <div className="absolute -right-3 -top-3 flex h-14 w-14 items-center justify-center bg-[#b54c39] text-[#fffaf0]">
+              <Flower2 aria-hidden="true" className="h-6 w-6" />
+            </div>
+            <p className="text-[10px] uppercase tracking-[0.28em] text-[#718078]">Paquete digital</p>
+            <p className="mt-5 font-[family-name:var(--font-playfair)] text-2xl text-[#193a34]">Tu historia empieza aquí</p>
+            <div className="mt-5 flex items-end gap-2">
+              <span className="pb-2 text-sm text-[#52655d]">Desde</span>
+              <span className="font-[family-name:var(--font-playfair)] text-6xl leading-none text-[#193a34] sm:text-7xl">$1,500</span>
+              <span className="pb-2 text-xs uppercase tracking-[0.16em] text-[#718078]">MXN</span>
+            </div>
+            <p className="mt-4 border-t border-[#193a34]/10 pt-5 text-sm leading-6 text-[#52655d]">
+              Todas las características esenciales para invitar, emocionar y mantener a tus invitados al tanto.
+            </p>
+            <div className="mt-7 flex flex-col gap-3">
+              <Link href="/boda" className="inline-flex min-h-12 items-center justify-center gap-2 bg-[#193a34] px-5 text-sm text-white transition-colors hover:bg-[#28564b]">
+                Ver diseños de boda <ArrowRight aria-hidden="true" className="h-4 w-4" />
+              </Link>
+              <Link href="/xv" className="inline-flex min-h-12 items-center justify-center gap-2 border border-[#193a34]/25 px-5 text-sm text-[#193a34] transition-colors hover:bg-[#f4f0e6]">
+                Ver diseños de XV <ArrowRight aria-hidden="true" className="h-4 w-4" />
+              </Link>
+            </div>
+            <p className="mt-5 text-center text-[10px] uppercase tracking-[0.18em] text-[#718078]">
+              Para celebrar a tu manera
+            </p>
+          </div>
         </div>
       </motion.section>
 

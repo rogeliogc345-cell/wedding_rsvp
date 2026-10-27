@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion"
 import { Sparkles } from "lucide-react"
-import Image from "next/image"
 
 export function HeroDemo2({ name, eventDate }: { name: string, eventDate: string }) {
   return (
@@ -76,16 +75,6 @@ export function HeroDemo2({ name, eventDate }: { name: string, eventDate: string
           <p className="text-muted-foreground text-lg tracking-wide text-white">Te invito a celebrar conmigo</p>
           <p className="text-primary text-4xl md:text-5xl font-serif font-bold text-xvgreen-text">{eventDate}</p>
         </motion.div>
-
-
-
-
-
-  
-
-
-
-
 
         {/* Scroll indicator */}
         <motion.div

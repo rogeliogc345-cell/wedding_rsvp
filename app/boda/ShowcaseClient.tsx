@@ -109,8 +109,8 @@ export default function ShowcaseClient() {
       </header>
 
       <section
-        aria-label="Mesa de boda decorada con flores blancas, follaje y velas"
-        className="relative flex min-h-[640px] items-end bg-[url('/boda/boda_5.jpeg')] bg-fixed bg-cover bg-center sm:min-h-[720px]"
+        aria-label="Pareja feliz y una invitación de boda elegante"
+        className="relative flex min-h-[640px] items-end bg-[url('/boda/boda_1.jpeg')] bg-fixed bg-cover bg-center sm:min-h-[720px]"
       >
         <div className="absolute inset-0 bg-gradient-to-t from-[#18271e]/75 via-[#18271e]/15 to-[#18271e]/25" />
         <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-20 pt-36 text-white sm:px-10 sm:pb-24 lg:px-16">
