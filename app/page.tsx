@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ArrowRight, Check, Flower2, Sparkles, ShieldCheck, Smartphone, Music2, PanelsRightBottom } from "lucide-react";
 import { motion } from "framer-motion";
+import ContactForm from "@/components/public/ContactForm";
 
 export default function LandingPage() {
   return (
@@ -23,6 +24,7 @@ export default function LandingPage() {
           <div className="hidden gap-8 text-[11px] uppercase tracking-[0.2em] text-[#49645c] md:flex">
             <Link href="#features" className="transition hover:text-[#b54c39]">Tu invitación</Link>
             <Link href="#precios" className="transition hover:text-[#b54c39]">Precios</Link>
+            <Link href="#contact" className="transition hover:text-[#b54c39]">Contacto</Link>
             <Link href="/xv" className="transition hover:text-[#b54c39]">Ver colección</Link>
           </div>
         </motion.nav>
@@ -258,6 +260,8 @@ export default function LandingPage() {
           </div>
         </div>
       </motion.section>
+
+      <ContactForm />
 
       {/* --- FOOTER --- */}
       <motion.footer
